@@ -14,8 +14,8 @@ const NavBar = () => {
 
   return (
     <>
-      <nav className="sticky z-50  top-0 bg-white border-gray-200 shadow">
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto  ">
+      <nav className="sticky z-50  top-0  border-gray-200 px-5  backdrop-blur-xl bg-white/80" >
+        <div className="flex flex-wrap items-center justify-between  ">
           <Link to="/" className="flex items-center">
             <span className="self-center text-2xl font-semibold whitespace-nowrap   text-black p-3 rounded my-2">
               UrbanBazar

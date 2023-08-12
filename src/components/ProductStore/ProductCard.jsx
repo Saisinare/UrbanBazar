@@ -17,12 +17,12 @@ const ProductCard = () => {
               2250 &#8377;
             </div>
             <div className="w-full justify-center flex items-center ">
-              <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-black text-gray-100">
+              <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-black text-gray-100 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm ">
                 Buy Now
               </button>
             </div>
             <div className="w-full justify-center flex items-center ">
-              <button className="btn btn-sm w-11/12 rounded-xl border-2 border-black text-black bg-transparent hover:text-white ">
+              <button className="btn btn-sm py-1 w-11/12 rounded-xl border-2 border-black text-black bg-transparent hover:text-white hover:bg-gray-900 transition-all duration-500 ease-in-out font-semibold text-sm">
                 Add To Cart
               </button>
             </div>

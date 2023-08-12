@@ -12,7 +12,7 @@ const Categories = () => {
   return (
     <>
       <div class=" w-100 h-auto p-2 flex flex-col justify-center">
-        <div className="font-semibold font-sans text-3xl py-5 text-green-900">
+        <div className="font-semibold font-sans text-3xl py-5 pl-3 text-green-900">
           Categories
           </div>
           <div className="flex">

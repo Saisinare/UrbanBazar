@@ -22,8 +22,12 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
-  seller: {
+  subcategory:{
     type: String,
+  },
+  seller: {
+    type: mongoose.Types.ObjectId,
+    ref:'User',
     required: true,
   },
   brand: {

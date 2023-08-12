@@ -1,6 +1,5 @@
 const express = require('express')
-const app = express()
-const port = 8000 
+const app = express() 
 const db = require('./db')
 const auth = require('./routes/auth')
 const cors = require('cors')
@@ -17,6 +16,6 @@ app.use(auth)
 app.use(productRoutes)
 app.use('/seller',sellerRoutes)
 db.connectDb();
-app.listen(port,()=>{
+app.listen(process.env.PORT,()=>{
     console.log('server connected')
 })

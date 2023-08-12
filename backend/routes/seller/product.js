@@ -3,7 +3,7 @@ const Router = express.Router();
 const productController = require('../../controller/seller/productController')
 const isAuth = require('../../middleware/isAuh')
 
-Router.get('/api/product',isAuth,productController.getProducts)
+Router.get('/api/products',isAuth,productController.getProducts)
 
 Router.get('/api/product/:productId',isAuth,productController.getProduct)
 
