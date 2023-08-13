@@ -2,12 +2,12 @@ import React from 'react';
 
 const PreviewSection = (props) => {
     return (
-        <div className='w-1/3 h-11/12   flex items-center justify-center '>
+        <div className='w-1/3 h-fit  flex items-center py-3 pb-10 rounded-lg justify-center flex-col bg-gray-200 '>
+          <h1 className='text-xl font-semibold pb-5'>Card Preview </h1>
             <div className=" h- p-1  w-3/4 flex hover:p-0 transition-all ease-in-out duration-500 overflow-hidden ">
           <div className=" h-full w-full bg-white rounded-xl overflow-hidden  pb-3 ">
-            <div className="pro-img w-full flex h-72 bg-slate-200 overflow-hidden">
-
-              <img src="file:///d%3A/sai/code/reactjs/UrbanBazar/public/img/home/shoe.jpg" className="h-fit" alt='img' />
+            <div className="pro-img  w-full flex items-center justify-center h-72 overflow-hidden" >
+              <img src="../img/home/shoe.jpg" className=" " alt='img' />
             </div>
             <div className=" h-8 w-full text-black font-semibold p-2 text-lg">
               {props.title}

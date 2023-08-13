@@ -15,7 +15,7 @@ const Addproduct = (props) => {
 
   return (
     <>
-      <div className="h-screen p-6 px-20 pt-6 bg-gradient-to-r from-slate-100 to-gray-100 flex">
+      <div className="h-fit p-6 px-20 pt-6 bg-gradient-to-r from-slate-100 to-gray-100 flex">
         <AddProductForm
           setfile={setfile}
           settitle={settitle}
