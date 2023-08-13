@@ -27,7 +27,7 @@ const AddProductForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    
     let formData = {
       title: props.title,
       description: props.description,
@@ -36,7 +36,7 @@ const AddProductForm = (props) => {
       category: props.category,
       subcategory: props.subcategory,
       brand: props.brand,
-      product_quantity: props.product_quantity,
+      product_quantity: props.quantity,
     };
     axios
       .post("http://localhost:8000/seller/api/product", formData, {
@@ -91,12 +91,15 @@ const AddProductForm = (props) => {
           <label className="font-semibold text-black" htmlFor="price">
             Price
           </label>
+          <div>
           <input
             onChange={handleChange}
             type="text"
             name="price"
             className="border-none shadow rounded-sm outline-none  backdrop-blur-2xl text-sm px-3 py-1 "
           />
+          <span className="pl-3 font-semibold">INR</span> 
+          </div>
         </div>
         <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-start">
           <div className="form-field pt-2 w-1/3 py-5">
@@ -160,7 +163,7 @@ const AddProductForm = (props) => {
           />
         </div>
         <div className="form-field pt-2 w-5/6  py-5 flex justify-end ">
-        <button type="submit" className="btn border bg-gradient-to-t from-black to-slate-900 text-gray-100 rounded-md font-semibold p-3">
+        <button type="submit" className="btn border bg-gradient-to-t from-black to-slate-900 text-gray-100 rounded-xl font-semibold p-3">
           Add New Product
         </button>
         </div>
