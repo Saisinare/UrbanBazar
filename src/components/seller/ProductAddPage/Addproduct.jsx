@@ -1,13 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import AddProductForm from "./AddProductForm";
+import PreviewSection from "./PreviewSection";
 
-const Addproduct = () => {
+const Addproduct = (props) => {
+  let intitalvale = ' '
+  const [file, setfile] = useState();
+  const [title, settitle] = useState(intitalvale);
+  const [description, setdescription] = useState(intitalvale);
+  const [price, setprice] = useState(intitalvale);
+  const [category, setcategory] = useState(intitalvale);
+  const [subcategory, setsubcategory] = useState(intitalvale);
+  const [brand, setbrand] = useState(intitalvale);
+  const [quantity, setquantity] = useState(intitalvale);
+
   return (
     <>
-    <div className="px-20 pt-6 bg-gradient-to-t from-white to-slate-50">
-      <AddProductForm />
-    </div>
-    <div className="h-10 w-screen bottom-0 sticky backdrop-blur-2xl bg-gray-300/40"></div>
+      <div className="h-screen p-6 px-20 pt-6 bg-gradient-to-r from-slate-100 to-gray-100 flex">
+        <AddProductForm
+          setfile={setfile}
+          settitle={settitle}
+          setdescription={setdescription}
+          setprice={setprice}
+          setcategory={setcategory}
+          setsubcategory={setsubcategory}
+          setbrand={setbrand}
+          setquantity={setquantity}
+
+          title={title}
+          price={price}
+          description={description}
+          file={file}
+          category={category}
+          subcategory={subcategory}
+          brand={brand}
+          quantity={quantity}
+        />
+        <PreviewSection
+          title={title}
+          price={price}
+          description={description}
+          file={file}
+          category={category}
+          subcategory={subcategory}
+          brand={brand}
+          quantity={quantity}
+        />
+      </div>
     </>
   );
 };
