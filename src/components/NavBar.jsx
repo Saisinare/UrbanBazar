@@ -8,13 +8,13 @@ const NavBar = () => {
   const userstate = useSelector((state=> state.user))
   const [token, setToken] = useState();
 
+  
   useEffect(() => {
     setToken(Cookies.get("token"));
   }, [token]);
-
   return (
     <>
-      <nav className="sticky z-50  top-0  border-gray-200 px-5  backdrop-blur-xl bg-white/80" >
+      <nav className="sticky z-50  top-0  border-gray-200 px-5 py-0  backdrop-blur-2xl bg-white/70" >
         <div className="flex flex-wrap items-center justify-between  ">
           <Link to="/" className="flex items-center">
             <span className="self-center text-2xl font-semibold whitespace-nowrap   text-black p-3 rounded my-2">
@@ -70,6 +70,9 @@ const NavBar = () => {
                     src="icons/cart.png"
                     alt="cart"
                   ></img>
+                </Link>
+                <Link to={"seller/addProduct"}>
+                  add Product
                 </Link>
                 <Link to={"/profile"}>
                   <img

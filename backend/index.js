@@ -7,8 +7,11 @@ const productRoutes = require('./routes/user/products')
 const sellerRoutes = require('./routes/seller/product')
 const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv')
-
-app.use(cors())
+const corsOptions = {
+    origin:"http://localhost:3000",
+    credentials: true
+}
+app.use(cors(corsOptions))
 app.use(cookieParser())
 dotenv.config()
 app.use(express.json())

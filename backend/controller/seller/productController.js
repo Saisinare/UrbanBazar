@@ -34,11 +34,12 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.postProduct = async (req, res) => {
-  const userId = req.userId;
+  const userId = "64c5ddb327a13259a836ef54";
+  const image = req.file.filename
   const product = new Product({
     title: req.body.title,
     description: req.body.description,
-    image: req.body.image,
+    image: image,
     price: req.body.price,
     category: req.body.category,
     subcategory: req.body.subcategory,
