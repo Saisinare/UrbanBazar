@@ -1,6 +1,4 @@
 import React, { useEffect } from "react";
-import ProductCard from "./ProductCard";
-import FilterSection from "./FilterSection";
 import ProductSection from "./ProductSection";
 import { useSelector } from "react-redux";
 const ProductsPage = () => {
@@ -10,7 +8,6 @@ const ProductsPage = () => {
   })
   return (
     <div className="flex h-full bg-white">
-        <FilterSection/>
         <ProductSection/>
     </div>
   );

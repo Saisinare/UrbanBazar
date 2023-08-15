@@ -6,7 +6,7 @@ const Addproduct = (props) => {
   let intitalvale = ' '
   const [file, setfile] = useState();
   const [title, settitle] = useState(intitalvale);
-  const [description, setdescription] = useState(intitalvale);
+  const [description, setdescription] = useState([]);
   const [price, setprice] = useState(intitalvale);
   const [category, setcategory] = useState(intitalvale);
   const [subcategory, setsubcategory] = useState(intitalvale);

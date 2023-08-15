@@ -3,18 +3,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
     "./node_modules/flowbite/**/*.js",
-    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}"
+    "node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}",
   ],
-  theme: {
-    extend: {
-      keyframes: {
-        popdown: {
-          '0%, 100%': { transform: 'rotate(-3deg)' },
-          '50%': { transform: 'rotate(3deg)' },
-        }
-      }
-    },
-  },
-  plugins: [require("tw-elements/dist/plugin.cjs")],
-}
-
+  theme: {},
+};

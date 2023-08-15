@@ -79,19 +79,20 @@ const NavBar = () => {
                     alt="cart"
                   ></img>cart
                 </Link >
-                <Link to={"/profile"} className="flex justify-center hover:bg-slate-300 items-center text-sm font-semibold px-2 rounded-lg transition-all duration-300 ease-in">
+                <Link to={"/profile"} className="flex justify-center hover:bg-slate-300 items-center text-sm font-semibold px-2 rouded-full transition-all duration-300 ease-in">
                   <img
                     className="  h-10 p-1.5 cursor-pointer scale-90 "
                     src="../icons/user.png"
                     alt="user"
-                  ></img>Profile
+                  ></img>
                 </Link>
               </>
             ) : (
               <Link to={"/login"}>
+
             <button
               type="button"
-              className="text-gray-600 bg-green-500 font-sans font-bold px-5 py-1.5  text-center  transition-all duration-500 ease-in-out rounded-lg text-md hover:bg-green-700 "
+              className="text-gray-500 shadow-lg shadow-green-300  bg-green-500  transition-all duration-300 ease-in-out hover:bg-green-500/80  rounded-lg text-sm px-6 py-2 text-center font-bold mx-1 "
             >
               Login
             </button>

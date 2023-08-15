@@ -8,13 +8,13 @@ const sellerRoutes = require('./routes/seller/product')
 const userRoutes = require('./routes/user/userRoutes')
 const cookieParser = require('cookie-parser')
 const dotenv = require('dotenv')
+const path = require('path')
 const corsOptions = {
     origin:"http://localhost:3000",
     credentials: true
 }
-const path = require('path')
-app.use('/productImg',express.static(path.join(__dirname,'uploads')))
 app.use(cors(corsOptions))
+app.use(express.static(path.join(__dirname,'uploaded_img')))
 app.use(cookieParser())
 dotenv.config()
 app.use(express.json())

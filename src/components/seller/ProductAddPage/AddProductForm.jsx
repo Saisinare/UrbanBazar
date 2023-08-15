@@ -20,7 +20,11 @@ const AddProductForm = (props) => {
     if (targetName === "title") {
       props.settitle(form.title.value);
     } else if (targetName === "description") {
-      props.setdescription(form.description.value);
+      let points = form.description.value.split('\n')
+      points.forEach(point => {
+        point=point.trim()
+      });
+      props.setdescription(points);
     } else if (targetName === "price") {
       props.setprice(form.price.value);
     } else if (targetName === "image") {
@@ -74,8 +78,7 @@ const AddProductForm = (props) => {
         <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
           <label className="font-semibold text-black" htmlFor="title">
             Product Name
-            <p className="pt-2 font-bold text-sm font-body text-secondary-500">
-              {" "}
+            <p className="pt-2  text-sm text-gray-400">
               Identification For Product
             </p>
           </label>
@@ -92,20 +95,21 @@ const AddProductForm = (props) => {
           <label className="font-semibold text-black" htmlFor="description">
             Description
           </label>{" "}
-          <p className="font-bold text-sm font-body text-secondary-500">
-            Detailed Information About Product
+          <p className="pt-2  text-sm font-semibold text-gray-400">
+            Give Five Key Points Each Point Will Separated By New Line
           </p>
           <br />
           <textarea
             onChange={handleChange}
             name="description"
+            rows={5}
             className="border-none shadow rounded-lg outline-none bg-white/80 backdrop-blur-2xl w-full p-3 text-sm font-semibold text-gray-700"
           />
         </div>
         <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
           <label className="font-semibold text-black" htmlFor="image">
             Image
-            <p className="font-bold text-sm font-body text-secondary-500">
+            <p className="pt-2  text-sm text-gray-400">
             For Easy Recognization 
           </p>
           </label>
@@ -114,13 +118,13 @@ const AddProductForm = (props) => {
             onChange={handleChange}
             type="file"
             name="image"
-            className="border-none rounded-lg outline-none shadow  backdrop-blur-2xl text-sm p-2 w-60 bg-white "
+            className="border-none rounded-lg outline-none shadow  backdrop-blur-2xl text-sm p-2 w-60 h-fit bg-white "
           />
         </div>
         <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
           <label className="font-semibold text-black" htmlFor="price">
             Price
-            <p className="font-bold text-sm font-body text-secondary-500">
+            <p className="pt-2  text-sm text-gray-400">
             For Purchasing 
           </p>
           </label>
@@ -138,7 +142,7 @@ const AddProductForm = (props) => {
           <div className="form-field pt-2 w-1/3 py-5">
             <label className="font-semibold text-black" htmlFor="category">
               Category
-              <p className="font-bold text-sm font-body text-secondary-500">
+              <p className="pt-2  text-sm text-gray-400">
             For Easy Filterization 
           </p>
             </label>
@@ -159,7 +163,7 @@ const AddProductForm = (props) => {
           <div className="form-field pt-2 w-1/3 py-5">
             <label className="font-semibold text-black" htmlFor="subcategory">
               Sub Category
-              <p className="font-bold text-sm font-body text-secondary-500">
+              <p className="pt-2  text-sm text-gray-400">
               For Easy Filterization
           </p>
             </label>
@@ -180,7 +184,7 @@ const AddProductForm = (props) => {
         <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
           <label className="font-semibold text-black" htmlFor="brand">
             Brand
-            <p className="font-bold text-sm font-body text-secondary-500">
+            <p className="pt-2  text-sm text-gray-400">
               For Ranking
           </p>
           </label>
@@ -198,7 +202,7 @@ const AddProductForm = (props) => {
             htmlFor="product_quantity"
           >
             Quantity
-            <p className="font-bold text-sm font-body text-secondary-500">
+            <p className="pt-2  text-sm text-gray-400">
               How Many Copies Of Product Available 
           </p>
           </label>

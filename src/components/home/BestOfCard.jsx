@@ -1,11 +1,33 @@
 import React, { useEffect, useState } from "react";
-import BestOfItem from "./BestOfItem";
+
 import ProductCard from "../ProductStore/ProductCard";
 import axios from "axios";
 
 const BestOfCard = (props) => {
-  const  [products, setproducts] = useState()
   
+  const  [products, setproducts] = useState([])
+
+  useEffect(() => {
+    const category = props.title.toLowerCase()
+    // axios.get(`http://localhost:8000/products?category=${category}`)
+    axios.get(`http://localhost:8000/products?limit=5`)
+      .then(response => {
+
+          const productArr = [];
+
+          for (const key in response.data.products) {
+            if (response.data.products.hasOwnProperty(key)) {
+              productArr.push(
+                response.data.products[key]
+              );
+            }
+          }
+          setproducts(productArr);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+    },[])
 
   return (
     <>
@@ -15,11 +37,12 @@ const BestOfCard = (props) => {
         </h1>
       </div>
       <div class="w-full p-2 mb-2 h-auto flex justify-center ">
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
-        <ProductCard/>
+          {
+            products.map(product=>{
+              return <ProductCard key={product._id} id={product._id} title ={product.title} price={product.price} image={product.image} category={props.title} />
+            })
+          }
+        
       </div>
     </>
   );

@@ -71,9 +71,9 @@ exports.putProduct = async (req, res) => {
   if (req.body.price) updatedProduct.price = req.body.price;
   if (req.body.image) updatedProduct.image = req.body.image;
   if (req.body.category) updatedProduct.category = req.body.category;
-  if (req.body.category) updatedProduct.subcategory = req.body.subcategory;
-  if (req.body.category) updatedProduct.brand = req.body.brand;
-  if (req.body.category) updatedProduct.quantity = req.body.quantity;
+  if (req.body.subcategory) updatedProduct.subcategory = req.body.subcategory;
+  if (req.body.brand) updatedProduct.brand = req.body.brand;
+  if (req.body.product_quantity) updatedProduct.product_quantity = req.body.product_quantity;
 
   try {
     const product = await Product.findByIdAndUpdate(productId, updatedProduct);

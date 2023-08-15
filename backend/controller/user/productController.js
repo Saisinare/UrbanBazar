@@ -18,7 +18,13 @@ exports.getProducts = async (req, res) => {
     }
   }
   try {
-    const products = await Product.find(filter);
+    let products;
+    if(req.query.limit){
+      let limit = parseInt(req.query.limit)
+      products = await Product.find(filter).limit(limit);
+    }else{
+      products = await Product.find(filter);
+    }
     res.status(200).json({ products: products });
   } catch (err) {
     console.log(err);
