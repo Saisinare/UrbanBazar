@@ -26,8 +26,8 @@ const Product = (props) => {
         <div className="w-full h-1/4 overflow-hidden text-clip flex  p-3 flex-col">
             <h1 className="text-black font-bold">{props.product.product.title}</h1>
         </div>
-        <div className="w-full h-1/4  p-3">{props.product.product.price}</div>
-        <div className="w-full h-1/4  p-3 ">{props.product.product.description[0]}</div>
+        <div className="w-full h-1/5  p-3">{props.product.product.price}</div>
+        <div className="w-full h-1/5  p-3 ">{props.product.product.description[0]}</div>
         <div className="w-full h-1/4  p-3 ">{props.product.quantity}</div>
         </div>
       </div>
