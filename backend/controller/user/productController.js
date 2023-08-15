@@ -72,14 +72,18 @@ exports.postAddtoCart = async (req, res) => {
 
 exports.deleteFromCart = async (req,res)=>{
     const userId = req.userId;
+    const productId = new mongoose.Types.ObjectId(req.params.productId)
     try {
         const user = await User.findById(userId);
         if (user) {
             user.cart  = user.cart.filter(product=>{
-                return product.product === req.query.productId 
+                return product.product.toString() !== productId.toString() 
             })
-            await user.save()
-            res.status(200).json({ msg: "deleted From Cart To Cart" });
+            await user.save().then(response=>{
+              res.status(200).json({ msg: "deleted From Cart " , cart:user.cart});
+            }).catch(err=>{
+              console.log(err)
+            })
         } else {
           res.status(400).json({ msg: "Not Found" });
         }

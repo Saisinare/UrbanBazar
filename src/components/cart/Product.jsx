@@ -1,6 +1,20 @@
+import axios from "axios";
 import React from "react";
 
 const Product = (props) => {
+  const handleDelete = ()=>{
+    
+    axios.delete(`http://localhost:8000/api/cart/${props.product.product._id}`, { withCredentials: true }).then(response=>{
+      let cartarr = props.cart
+      cartarr = cartarr.filter(product=>{
+        return product.product._id !== props.product.product._id 
+      })
+      console.log(cartarr)
+      props.setcart(cartarr)
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
   return (
     <div className="w-full h-52 flex flex-col mb-3 shadow-md bg-white -black">
 
@@ -27,6 +41,7 @@ const Product = (props) => {
       <button
               type="button"
               class="text-white font-bold hover:text-black px-3 flex items-center bg-gradient-to-r from-gray-900  to-black   rounded-md"
+              onClick={handleDelete}
             >
               Remove 
             </button>
