@@ -1,19 +1,20 @@
 import React from "react";
 
-const Product = () => {
+const Product = (props) => {
   return (
     <div className="w-full h-52 flex flex-col mb-3 shadow-md bg-white -black">
+
       <div className="h-3/4  flex ">
         <div className="w-1/5 flex h-full  justify-center items-center">
-            <img src="icons/user.png" className=" w-full  max-w-full max-h-full" alt="" />
+            <img src={`http://localhost:8000/products/${props.product.product.image}`} className=" w-full  max-w-full max-h-full" alt="" />
         </div>
         <div className="w-4/5 flex flex-col">
         <div className="w-full h-1/4 overflow-hidden text-clip flex  p-3 flex-col">
-            <h1 className="text-black font-bold">title Lorem ipsum dolor</h1>
+            <h1 className="text-black font-bold">{props.product.product.title}</h1>
         </div>
-        <div className="w-full h-1/4  p-3">Price</div>
-        <div className="w-full h-1/4  p-3 ">Description</div>
-        <div className="w-full h-1/4  p-3 ">Quantity</div>
+        <div className="w-full h-1/4  p-3">{props.product.product.price}</div>
+        <div className="w-full h-1/4  p-3 ">{props.product.product.description[0]}</div>
+        <div className="w-full h-1/4  p-3 ">{props.product.quantity}</div>
         </div>
       </div>
       <div className="h-1/4 w-full  flex  px-3 py-1 justify-end">

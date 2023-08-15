@@ -38,9 +38,7 @@ exports.postSignup = async (req, res) => {
       mobileNo: req.body.mobileNo,
       password: hashedPassword,
       isSeller:false,
-      cart:{
-        products:[]
-      }
+      cart:[]
     });
     const data = {
       id: user._id,
@@ -78,7 +76,7 @@ exports.postSignup = async (req, res) => {
     const { email } = req.body;
     const { password } = req.body;
   
-    User.findOne({ email: email }).populate('cart.products').then((user) => {
+    User.findOne({ email: email }).populate('cart').then((user) => {
       if (user) {
         const hashpassword = user.password;
         bycrypt

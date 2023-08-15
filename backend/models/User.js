@@ -28,17 +28,15 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  isSeller: { 
-    type: Boolean
-   },
-  cart: {
-    products: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-      },
-    ],
+  isSeller: {
+    type: Boolean,
   },
+  cart: [
+    {
+      product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+      quantity: Number
+    },
+  ],
 });
 const User = mongoose.model("User", userSchema);
 User.createIndexes();

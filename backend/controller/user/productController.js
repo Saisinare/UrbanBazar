@@ -46,8 +46,8 @@ exports.getCartProducts = async (req, res) => {
   const userId = req.userId
 
   try {
-    const user= await User.findById(userId).populate('cart.products');
-    res.status(200).json({ products:user.cart.products });
+    const user= await User.findById(userId).populate('cart.product');
+    res.status(200).json({ cart:user.cart });
   } catch (err) {
     console.log(err);
   }
@@ -59,7 +59,7 @@ exports.postAddtoCart = async (req, res) => {
   try {
     const user = await User.findById(userId);
     if (user) {
-        user.cart.products.push(productId)
+        user.cart.push({product:productId,quantity:0})
         await user.save()
         res.status(200).json({ msg: "Added To Cart" });
     } else {
@@ -75,8 +75,8 @@ exports.deleteFromCart = async (req,res)=>{
     try {
         const user = await User.findById(userId);
         if (user) {
-            user.cart.products  = user.cart.products.filter(product=>{
-                return product === req.query.productId 
+            user.cart  = user.cart.filter(product=>{
+                return product.product === req.query.productId 
             })
             await user.save()
             res.status(200).json({ msg: "deleted From Cart To Cart" });

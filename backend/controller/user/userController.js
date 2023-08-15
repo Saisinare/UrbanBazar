@@ -4,7 +4,7 @@ const User = require("../../models/User");
 exports.getUser = async(req,res)=>{
   const userId = req.userId
   try{
-    const user = await User.findById(userId).select('-password -_id -__v')
+    const user = await User.findById(userId).select('-password -_id -__v -cart')
     if(user){
       res.status(200).json({msg:"User Retrive SuccessFully",user:user})
     }else{
