@@ -12,7 +12,7 @@ const Addproduct = (props) => {
   const [subcategory, setsubcategory] = useState(intitalvale);
   const [brand, setbrand] = useState(intitalvale);
   const [quantity, setquantity] = useState(intitalvale);
-
+  const [preimage, setpreimage] = useState(intitalvale)
   return (
     <>
       <div className="h-fit p-6 px-20 pt-6 bg-gradient-to-r from-slate-100 to-gray-100 flex">
@@ -25,6 +25,7 @@ const Addproduct = (props) => {
           setsubcategory={setsubcategory}
           setbrand={setbrand}
           setquantity={setquantity}
+          setpreimage={setpreimage}
 
           title={title}
           price={price}
@@ -34,7 +35,7 @@ const Addproduct = (props) => {
           subcategory={subcategory}
           brand={brand}
           quantity={quantity}
-        />
+          />
         <PreviewSection
           title={title}
           price={price}
@@ -44,7 +45,8 @@ const Addproduct = (props) => {
           subcategory={subcategory}
           brand={brand}
           quantity={quantity}
-        />
+          preimage={preimage}
+          />
       </div>
     </>
   );

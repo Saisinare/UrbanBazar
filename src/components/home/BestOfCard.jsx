@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import BestOfItem from "./BestOfItem";
 import ProductCard from "../ProductStore/ProductCard";
+import axios from "axios";
 
 const BestOfCard = (props) => {
+  const  [products, setproducts] = useState()
+  
+
   return (
     <>
       <div class={`w-full p-2  h-16 flex justify-start items-center pl-4 `}>

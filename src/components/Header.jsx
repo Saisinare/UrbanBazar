@@ -13,13 +13,10 @@ const Header = () => {
           <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">Shop</div>
         </Link>
         <Link to='/'>
-          <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">Deal & Offers</div>
+          <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">My Orders</div>
         </Link>
         <Link to='/'>
           <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">Customer Support </div>
-        </Link>
-        <Link to='/'>
-          <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">My Orders</div>
         </Link>
         <Link to='/'>
           <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">Contact Us</div>

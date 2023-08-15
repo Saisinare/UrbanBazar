@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from './components/NavBar';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import Home from './components/home/Home';
 import Cart from './components/cart/Cart';
 import Profile from './components/profile/Profile';
@@ -13,8 +13,8 @@ import Header from './components/Header';
 
 function App() {
   const user = useSelector(state=>state.user)
-  
   return (
+    
     <>
     <BrowserRouter>
     {(user.isLogin)&&<Header/>}

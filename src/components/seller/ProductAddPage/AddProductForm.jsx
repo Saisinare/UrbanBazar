@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 
 const AddProductForm = (props) => {
+
   const [curentsubcategory,setcurentsubcategory]=useState([]);
   const handleChange = (e) => {
     const targetName = e.target.name;
@@ -24,6 +25,12 @@ const AddProductForm = (props) => {
       props.setprice(form.price.value);
     } else if (targetName === "image") {
       props.setfile(form.elements.image.files[0]);
+      const file = form.elements.image.files[0]
+      const reader = new FileReader()
+      reader.onload = function(e){
+        props.setpreimage(e.target.result)
+      }
+      reader.readAsDataURL(file)
     } else if (targetName === "product_quantity") {
       props.setquantity(form.product_quantity.value);
     } else if (targetName === "category") {
@@ -138,12 +145,15 @@ const AddProductForm = (props) => {
             <select
               name="category"
               id="category"
-              className="text-sm px-10 pl-2 mt-3"
+              className="text-sm px-10 pl-2 mt-3 p-2 border-none shadow font-semibold text-gray-600"
               onChange={handleChange}
             >
-              <option value="electronics">Electronics</option>
+            <option hidden>Select Category</option>
+              <option value="electronics" >Electronics</option>
               <option value="fashion">Fashion</option>
               <option value="appliances">Appliances</option>
+              <option value="groceries">Groceries</option>
+              <option value="Travel">Travel</option>
             </select>
           </div>
           <div className="form-field pt-2 w-1/3 py-5">
@@ -156,11 +166,11 @@ const AddProductForm = (props) => {
             <select
               name="subcategory"
               id="subcategory"
-              className="text-sm mt-3 px-10 pl-2"
+              className="text-sm flex mt-3 pr-10 font-semibold text-gray-600 p-2 border-none shadow"
               onChange={handleChange}
             >
+              <option hidden>Select Subcategory</option>
               
-              <option >"</option>
               {curentsubcategory.map(subcat=>{
                 return <option value={subcat}>{subcat}</option>
               })}

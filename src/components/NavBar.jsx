@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "./Modal";
 import { setLogin } from "../redux/slice/user";
 
 
 const NavBar = () => {
   const userstate = useSelector((state=> state.user))
   const [token, setToken] = useState();
-
+  const location = useLocation()
+  const userState  = useSelector(state=>state.user)
   
   const dispatch = useDispatch()
   useEffect(() => {
+    console.log(userState)
     setToken(Cookies.get("token"));
     if(Cookies.get('login')){
       dispatch(setLogin(true))
+      
     }
   }, [token]);
   return (
@@ -73,14 +75,14 @@ const NavBar = () => {
                 <Link to={"/cart"} className="flex justify-center items-center font-semibold hover:bg-slate-300 px-4 transition-all duration-200 ease-in rounded-md mx-2">
                   <img
                     className=" mr-1 h-11 py-2.5 cursor-pointer  rounded"
-                    src="icons/cart.png"
+                    src="../icons/cart.png"
                     alt="cart"
                   ></img>cart
                 </Link >
                 <Link to={"/profile"} className="flex justify-center hover:bg-slate-300 items-center text-sm font-semibold px-2 rounded-lg transition-all duration-300 ease-in">
                   <img
                     className="  h-10 p-1.5 cursor-pointer scale-90 "
-                    src="icons/user.png"
+                    src="../icons/user.png"
                     alt="user"
                   ></img>Profile
                 </Link>

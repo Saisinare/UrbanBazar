@@ -12,6 +12,8 @@ const corsOptions = {
     origin:"http://localhost:3000",
     credentials: true
 }
+const path = require('path')
+app.use('/productImg',express.static(path.join(__dirname,'uploads')))
 app.use(cors(corsOptions))
 app.use(cookieParser())
 dotenv.config()
