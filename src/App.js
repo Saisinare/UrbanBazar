@@ -9,6 +9,7 @@ import Signup from './components/Signup';
 import ProductsPage from './components/ProductStore/ProductsPage';
 import { useSelector } from 'react-redux';
 import Addproduct from './components/seller/ProductAddPage/Addproduct';
+import Header from './components/Header';
 
 function App() {
   const user = useSelector(state=>state.user)
@@ -16,6 +17,8 @@ function App() {
   return (
     <>
     <BrowserRouter>
+    {(user.isLogin)&&<Header/>}
+    
     <NavBar/>
     <Routes>
       <Route exact path='/' element={
@@ -33,7 +36,7 @@ function App() {
       <Route exact path='/signup' element={
       <Signup/>
       }></Route>
-      <Route exact path='/products' element={
+      <Route exact path='/shop' element={
       <ProductsPage/>
       }></Route>
       <Route exact path='/seller/addProduct' element={<Addproduct/>}>

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import Modal from "./Modal";
+import { setLogin } from "../redux/slice/user";
 
 
 const NavBar = () => {
@@ -9,12 +11,16 @@ const NavBar = () => {
   const [token, setToken] = useState();
 
   
+  const dispatch = useDispatch()
   useEffect(() => {
     setToken(Cookies.get("token"));
+    if(Cookies.get('login')){
+      dispatch(setLogin(true))
+    }
   }, [token]);
   return (
     <>
-      <nav className="sticky z-50  top-0  border-gray-200 px-5 py-0  backdrop-blur-2xl bg-white/70" >
+      <nav className="sticky z-20  top-0  border-gray-200 px-5 py-0  backdrop-blur-2xl bg-white/70" >
         <div className="flex flex-wrap items-center justify-between  ">
           <Link to="/" className="flex items-center">
             <span className="self-center text-2xl font-semibold whitespace-nowrap   text-black p-3 rounded my-2">
@@ -25,13 +31,13 @@ const NavBar = () => {
             <input
               type="text"
               id="search-navbar"
-              className="block w-11/12 p-2  text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 
-      "
+              className="block w-11/12 p-2  text-sm text-gray-900 border-gray-200 rounded-lg bg-gray-50/80 backdrop-blur-lg opacity-80 outline-none shadow"
+              style={{outline:"none"}}
               placeholder="Search For Your Favoirate Item "
             />
             <button
               type="button"
-              className="text-white bg-gradient-to-r from-gray-700  to-black hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2 text-center mx-1"
+              className="text-white bg-gradient-to-l transition-all duration-300 ease-in-out  from-black/90 to-slate-900/90 hover:bg-black/80  font-medium rounded-lg text-sm px-5 py-2 text-center mx-1 "
             >
               Search
             </button>
@@ -64,29 +70,26 @@ const NavBar = () => {
             </button>
             {userstate.isLogin ? (
               <>
-                <Link to={"/cart"}>
+                <Link to={"/cart"} className="flex justify-center items-center font-semibold hover:bg-slate-300 px-4 transition-all duration-200 ease-in rounded-md mx-2">
                   <img
-                    className=" mx-4 h-11 p-2.5 cursor-pointer  rounded hover:bg-gray-100"
+                    className=" mr-1 h-11 py-2.5 cursor-pointer  rounded"
                     src="icons/cart.png"
                     alt="cart"
-                  ></img>
-                </Link>
-                <Link to={"seller/addProduct"}>
-                  add Product
-                </Link>
-                <Link to={"/profile"}>
+                  ></img>cart
+                </Link >
+                <Link to={"/profile"} className="flex justify-center hover:bg-slate-300 items-center text-sm font-semibold px-2 rounded-lg transition-all duration-300 ease-in">
                   <img
-                    className=" mx-4 mt-1 shadow h-10 p-1.5 cursor-pointer  rounded-full hover:bg-gray-100"
+                    className="  h-10 p-1.5 cursor-pointer scale-90 "
                     src="icons/user.png"
-                    alt="cart"
-                  ></img>
+                    alt="user"
+                  ></img>Profile
                 </Link>
               </>
             ) : (
               <Link to={"/login"}>
             <button
               type="button"
-              className="text-black bg-transparent border-2 border-green-950 focus:ring-4 focus:outline-none focus:ring-blue-300 text-sm font-sans font-bold rounded-sm px-5 py-1.5 text-center mx-1 hover:bg-gradient-to-t from-black to-slate-900 hover:text-white transition-all duration-500 ease-in-out shadow bg-green-200"
+              className="text-gray-600 bg-green-500 font-sans font-bold px-5 py-1.5  text-center  transition-all duration-500 ease-in-out rounded-lg text-md hover:bg-green-700 "
             >
               Login
             </button>
@@ -150,6 +153,7 @@ const NavBar = () => {
             </div>
           </div>
         </div>
+    
       </nav>
     </>
   );

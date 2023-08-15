@@ -20,21 +20,22 @@ const userSchema = new Schema({
   },
   address: {
     type: String,
-    required: true,
   },
   pincode: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
     required: true,
   },
+  isSeller: { 
+    type: Boolean
+   },
   cart: {
     products: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref:'Product'
+        ref: "Product",
       },
     ],
   },

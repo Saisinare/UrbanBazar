@@ -36,9 +36,8 @@ exports.postSignup = async (req, res) => {
       username: req.body.username,
       email: req.body.email,
       mobileNo: req.body.mobileNo,
-      address: req.body.address,
-      pincode: req.body.pincode,
       password: hashedPassword,
+      isSeller:false,
       cart:{
         products:[]
       }

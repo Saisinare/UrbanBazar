@@ -6,7 +6,7 @@ const ProductCard = () => {
     <>
       <div className=" h-fit p-1 w-1/4 flex hover:p-0 transition-all ease-in-out duration-500 overflow-hidden ">
         <Link>
-          <div className=" h-full w-full bg-white rounded-xl overflow-hidden  pb-3 ">
+          <div className=" h-full w-full bg-white rounded-xl overflow-hidden border shadow pb-3 ">
             <div className="pro-img w-full flex h-72 bg-slate-400  overflow-hidden">
               <img src="img/home/shoe.jpg" className="h-fit" alt="shoes" />
             </div>
@@ -17,7 +17,7 @@ const ProductCard = () => {
               2250 &#8377;
             </div>
             <div className="w-full justify-center flex items-center ">
-              <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-black text-gray-100 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm ">
+              <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-green-900 text-gray-100 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm ">
                 Buy Now
               </button>
             </div>
