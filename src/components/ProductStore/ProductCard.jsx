@@ -1,8 +1,16 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductCard = (props) => {
-  console.log(props.id)
+  const handleAddCart = ()=>{
+    
+    axios.post(`http://localhost:8000/cart/add/${props.id}`,{},{withCredentials:true}).then(response=>{
+      console.log(response)
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
   return (
     <>
       <div className=" h-fit p-1 w-1/5 flex  transition-all ease-in-out duration-500 overflow-hidden ">
@@ -23,7 +31,7 @@ const ProductCard = (props) => {
               </button>
             </div>
             <div className="w-full justify-center flex items-center ">
-              <button className="btn btn-sm py-1 w-11/12 rounded-xl border border-black text-black bg-transparent hover:text-white hover:bg-gray-900 transition-all duration-500 ease-in-out font-semibold text-sm">
+              <button onClick={handleAddCart} className="btn btn-sm py-1 w-11/12 rounded-xl border border-black text-black bg-transparent hover:text-white hover:bg-gray-900 transition-all duration-500 ease-in-out font-semibold text-sm">
                 Add To Cart
               </button>
             </div>

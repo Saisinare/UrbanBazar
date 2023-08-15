@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
+import { useSelector } from "react-redux";
 
 
 const Header = () => {
+  const userState = useSelector(state=>state.user)
     const [modal, setmodal] = useState(false)
   return (
     <>
@@ -23,7 +25,7 @@ const Header = () => {
         </Link>
         </div>
         <div className="swiching items-center justify-center  flex h-full w-auto text-green-600">
-            <button onClick={()=>{setmodal(true)}}> Become A Seller</button>
+            <button onClick={()=>{setmodal(true)}}> {((userState.user)&&(userState.user.isSeller))?"seller Mode":"Become A Seller"}</button>
         </div>
       </div>
       {modal&&<Modal setmodal={setmodal} />}  

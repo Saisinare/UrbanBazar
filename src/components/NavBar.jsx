@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
-import { setLogin } from "../redux/slice/user";
+import { setLogin, setUser } from "../redux/slice/user";
+import axios from "axios";
 
 
 const NavBar = () => {
@@ -14,6 +15,15 @@ const NavBar = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     console.log(userState)
+    axios('http://localhost:8000/api/user',{withCredentials:true}).then(response=>{
+      if(response.data){
+        dispatch(setUser(response.data.user))
+        console.log(response.data.user)
+      }
+    }).catch(err=>{
+      console.log(err)
+    })
+    console.log(userState)
     setToken(Cookies.get("token"));
     if(Cookies.get('login')){
       dispatch(setLogin(true))
@@ -22,7 +32,9 @@ const NavBar = () => {
   }, [token]);
   return (
     <>
+    
       <nav className="sticky z-20  top-0  border-gray-200 px-5 py-0  backdrop-blur-2xl bg-white/70" >
+
         <div className="flex flex-wrap items-center justify-between  ">
           <Link to="/" className="flex items-center">
             <span className="self-center text-2xl font-semibold whitespace-nowrap   text-black p-3 rounded my-2">
