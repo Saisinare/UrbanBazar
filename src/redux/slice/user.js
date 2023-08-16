@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLogin: false,
   user: null,
+  SellerMode:false,
 };
 
 const userSlice = createSlice({
@@ -15,7 +16,10 @@ const userSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
     },
+    setSellerMode:(state,action)=>{
+      state.SellerMode = action.payload
+    }
   }
 });
-export const {setLogin,setUser} = userSlice.actions
+export const {setLogin,setUser,setSellerMode} = userSlice.actions
 export default userSlice.reducer;

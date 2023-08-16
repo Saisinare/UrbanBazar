@@ -1,8 +1,9 @@
 import React from 'react';
 import Categories from './Categories';
 import BestOfSection from './BestOfSection';
-import Footer from './Footer';
+
 import OfferBanner from './OfferSlider';
+import Footer from '../Footer';
 const Home = () => {
     return (
         <div className='px-5 '>

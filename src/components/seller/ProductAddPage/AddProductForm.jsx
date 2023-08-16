@@ -1,44 +1,55 @@
 import axios from "axios";
-import React, { useState } from "react";
-
-
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const AddProductForm = (props) => {
-
-  const [curentsubcategory,setcurentsubcategory]=useState([]);
+  const location = useLocation();
+  const [curentsubcategory, setcurentsubcategory] = useState([]);
   const handleChange = (e) => {
     const targetName = e.target.name;
     const form = document.querySelector("form");
     const subcategories = {
-      fashion: ['shirts', 'shoes', 'pants', 'hats', 'dresses'],
-      electronics: ['mobiles', 'headphones', 'laptop', 'tv', 'cameras'],
-      appliances: ['refrigerator', 'washing machine', 'microwave', 'blender', 'vacuum cleaner'],
-      groceries: ['fruits', 'vegetables', 'dairy', 'canned goods', 'snacks'],
-      travel: ['flights', 'hotels', 'car rentals', 'vacation packages', 'cruises']
+      fashion: ["shirts", "shoes", "pants", "hats", "dresses"],
+      electronics: ["mobiles", "headphones", "laptop", "tv", "cameras"],
+      appliances: [
+        "refrigerator",
+        "washing machine",
+        "microwave",
+        "blender",
+        "vacuum cleaner",
+      ],
+      groceries: ["fruits", "vegetables", "dairy", "canned goods", "snacks"],
+      travel: [
+        "flights",
+        "hotels",
+        "car rentals",
+        "vacation packages",
+        "cruises",
+      ],
     };
-    
+
     if (targetName === "title") {
       props.settitle(form.title.value);
     } else if (targetName === "description") {
-      let points = form.description.value.split('\n')
-      points.forEach(point => {
-        point=point.trim()
+      let points = form.description.value.split("\n");
+      points.forEach((point) => {
+        point = point.trim();
       });
       props.setdescription(points);
     } else if (targetName === "price") {
       props.setprice(form.price.value);
     } else if (targetName === "image") {
       props.setfile(form.elements.image.files[0]);
-      const file = form.elements.image.files[0]
-      const reader = new FileReader()
-      reader.onload = function(e){
-        props.setpreimage(e.target.result)
-      }
-      reader.readAsDataURL(file)
+      const file = form.elements.image.files[0];
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        props.setpreimage(e.target.result);
+      };
+      reader.readAsDataURL(file);
     } else if (targetName === "product_quantity") {
       props.setquantity(form.product_quantity.value);
     } else if (targetName === "category") {
-      setcurentsubcategory(subcategories[form.category.value])
+      setcurentsubcategory(subcategories[form.category.value]);
       props.setcategory(form.category.value);
     } else if (targetName === "subcategory") {
       props.setsubcategory(form.subcategory.value);
@@ -69,6 +80,37 @@ const AddProductForm = (props) => {
         console.log(response);
       });
   };
+  useEffect(() => {
+    const form = document.querySelector('form')
+    if (location.state && location.state.id) {
+      axios
+        .get(`http://localhost:8000/product/${location.state.id}`)
+        .then((response) => {
+          if(response.data){
+            const Editproduct = response.data.products
+            form.elements.title.value = Editproduct.title
+            form.elements.description.value = Editproduct.description
+            form.elements.price.value = Editproduct.price
+            form.elements.product_quantity.value = Editproduct.product_quantity
+            form.elements.category.value = Editproduct.category
+            form.elements.subcategory.value = Editproduct.subcategory
+            form.elements.brand.value = Editproduct.brand
+
+            props.settitle(Editproduct.title);
+            props.setdescription(Editproduct.description);
+            props.setprice(Editproduct.price);
+            props.setquantity(Editproduct.product_quantity);
+            props.setcategory(Editproduct.category);
+            props.setsubcategory(Editproduct.subcategory);
+            props.setbrand(Editproduct.brand);
+            console.log(Editproduct.title)
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, []);
   return (
     <div className=" w-2/3 ">
       <div className=" h-16 w-64  border-gray-300 flex items-end pb-2">
@@ -110,8 +152,8 @@ const AddProductForm = (props) => {
           <label className="font-semibold text-black" htmlFor="image">
             Image
             <p className="pt-2  text-sm text-gray-400">
-            For Easy Recognization 
-          </p>
+              For Easy Recognization
+            </p>
           </label>
 
           <input
@@ -124,9 +166,7 @@ const AddProductForm = (props) => {
         <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
           <label className="font-semibold text-black" htmlFor="price">
             Price
-            <p className="pt-2  text-sm text-gray-400">
-            For Purchasing 
-          </p>
+            <p className="pt-2  text-sm text-gray-400">For Purchasing</p>
           </label>
           <div>
             <input
@@ -143,8 +183,8 @@ const AddProductForm = (props) => {
             <label className="font-semibold text-black" htmlFor="category">
               Category
               <p className="pt-2  text-sm text-gray-400">
-            For Easy Filterization 
-          </p>
+                For Easy Filterization
+              </p>
             </label>
             <select
               name="category"
@@ -152,8 +192,8 @@ const AddProductForm = (props) => {
               className="text-sm px-10 pl-2 mt-3 p-2 border-none shadow font-semibold text-gray-600"
               onChange={handleChange}
             >
-            <option hidden>Select Category</option>
-              <option value="electronics" >Electronics</option>
+              <option hidden>Select Category</option>
+              <option value="electronics">Electronics</option>
               <option value="fashion">Fashion</option>
               <option value="appliances">Appliances</option>
               <option value="groceries">Groceries</option>
@@ -164,8 +204,8 @@ const AddProductForm = (props) => {
             <label className="font-semibold text-black" htmlFor="subcategory">
               Sub Category
               <p className="pt-2  text-sm text-gray-400">
-              For Easy Filterization
-          </p>
+                For Easy Filterization
+              </p>
             </label>
             <select
               name="subcategory"
@@ -174,19 +214,17 @@ const AddProductForm = (props) => {
               onChange={handleChange}
             >
               <option hidden>Select Subcategory</option>
-              
-              {curentsubcategory.map(subcat=>{
-                return <option value={subcat}>{subcat}</option>
+
+              {curentsubcategory.map((subcat) => {
+                return <option value={subcat}>{subcat}</option>;
               })}
-            </select>                                                 
+            </select>
           </div>
         </div>
         <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
           <label className="font-semibold text-black" htmlFor="brand">
             Brand
-            <p className="pt-2  text-sm text-gray-400">
-              For Ranking
-          </p>
+            <p className="pt-2  text-sm text-gray-400">For Ranking</p>
           </label>
           <br />
           <input
@@ -203,8 +241,8 @@ const AddProductForm = (props) => {
           >
             Quantity
             <p className="pt-2  text-sm text-gray-400">
-              How Many Copies Of Product Available 
-          </p>
+              How Many Copies Of Product Available
+            </p>
           </label>
           <br />
           <input

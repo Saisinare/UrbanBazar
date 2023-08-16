@@ -11,11 +11,20 @@ const ProductCard = (props) => {
       console.log(err)
     })
   }
+  const hadleDelete = ()=>{
+    
+    axios.delete(`http://localhost:8000/seller/api/product/${props.id}`,{withCredentials:true}).then(response=>{
+      console.log(response)
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
   return (
     <>
-      <div className=" h-fit p-1 w-1/5 flex  transition-all ease-in-out duration-500 overflow-hidden ">
+      <div className=" h-fit p-1 w-1/5 flex   transition-all ease-in-out duration-500 overflow-hidden ">
+        <div className="bg-black rounded-xl" style={{backgroundImage:`url("http://localhost:8000/products/${props.image}")`}}>
         <Link>
-          <div className=" h-full w-full bg-white rounded-xl overflow-hidden border shadow pb-3 ">
+          <div className=" h-full w-full  rounded-xl overflow-hidden border shadow pb-3 ">
             <div className="pro-img w-full flex h-72 bg-slate-400  overflow-hidden ">
               <img src={`http://localhost:8000/products/${props.image}`} className="h-fit hover:scale-105 transition-all duration-500 ease-in-out hover:rotate-1" alt="shoes" />
             </div>
@@ -25,18 +34,21 @@ const ProductCard = (props) => {
             <div className=" h-10 w-full text-black font-semibold mb-3 p-2 text-2xl">
               {props.price} &#8377;
             </div>
+              <Link to={(props.forSeller)?'/seller/editProduct':'/product'} state={{id:props.id}}> 
             <div className="w-full justify-center flex items-center ">
-              <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-green-900 text-gray-100 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm ">
-                Buy Now
+              <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-green-500 text-gray-500 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm ">
+                {(props.forSeller)?'Edit':'Buy Now'}
               </button>
             </div>
+              </Link>
             <div className="w-full justify-center flex items-center ">
-              <button onClick={handleAddCart} className="btn btn-sm py-1 w-11/12 rounded-xl border border-black text-black bg-transparent hover:text-white hover:bg-gray-900 transition-all duration-500 ease-in-out font-semibold text-sm">
-                Add To Cart
+              <button onClick={(!props.forSeller) ? handleAddCart : hadleDelete} className={`btn btn-sm py-1 w-11/12 rounded-xl border border-gray-400  bg-transparent hover:text-white hover:bg-gray-900 transition-all duration-500 ease-in-out font-semibold text-sm`}>
+                {(props.forSeller)?'Delete':'Add To Cart'}
               </button>
             </div>
           </div>
         </Link>
+        </div>
       </div>
     </>
   );

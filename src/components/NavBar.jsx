@@ -5,36 +5,30 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogin, setUser } from "../redux/slice/user";
 import axios from "axios";
 
-
 const NavBar = () => {
-  const userstate = useSelector((state=> state.user))
+  const userstate = useSelector((state) => state.user);
   const [token, setToken] = useState();
-  const location = useLocation()
-  const userState  = useSelector(state=>state.user)
-  
-  const dispatch = useDispatch()
+
+  const dispatch = useDispatch();
   useEffect(() => {
-    console.log(userState)
-    axios('http://localhost:8000/api/user',{withCredentials:true}).then(response=>{
-      if(response.data){
-        dispatch(setUser(response.data.user))
-        console.log(response.data.user)
-      }
-    }).catch(err=>{
-      console.log(err)
-    })
-    console.log(userState)
+    axios("http://localhost:8000/api/user", { withCredentials: true })
+      .then((response) => {
+        if (response.data) {
+          dispatch(setUser(response.data.user));
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setToken(Cookies.get("token"));
-    if(Cookies.get('login')){
-      dispatch(setLogin(true))
-      
+    if (Cookies.get("login")) {
+      dispatch(setLogin(true));
     }
   }, [token]);
   return (
     <>
-    
-      <nav className="sticky z-20  top-0  border-gray-200 px-5 py-0  backdrop-blur-2xl bg-white/70" >
-
+      <nav className="sticky z-20  top-0  border-gray-200 px-5 py-0  backdrop-blur-2xl bg-white/70">
         <div className="flex flex-wrap items-center justify-between  ">
           <Link to="/" className="flex items-center">
             <span className="self-center text-2xl font-semibold whitespace-nowrap   text-black p-3 rounded my-2">
@@ -46,7 +40,7 @@ const NavBar = () => {
               type="text"
               id="search-navbar"
               className="block w-11/12 p-2  text-sm text-gray-900 border-gray-200 rounded-lg bg-gray-50/80 backdrop-blur-lg opacity-80 outline-none shadow"
-              style={{outline:"none"}}
+              style={{ outline: "none" }}
               placeholder="Search For Your Favoirate Item "
             />
             <button
@@ -84,14 +78,23 @@ const NavBar = () => {
             </button>
             {userstate.isLogin ? (
               <>
-                <Link to={"/cart"} className="flex justify-center items-center font-semibold hover:bg-slate-300 px-4 transition-all duration-200 ease-in rounded-md mx-2">
-                  <img
-                    className=" mr-1 h-11 py-2.5 cursor-pointer  rounded"
-                    src="../icons/cart.png"
-                    alt="cart"
-                  ></img>cart
-                </Link >
-                <Link to={"/profile"} className="flex justify-center hover:bg-slate-300 items-center text-sm font-semibold px-2 rouded-full transition-all duration-300 ease-in">
+                {!userstate.SellerMode && (
+                  <Link
+                    to={"/cart"}
+                    className="flex justify-center items-center font-semibold hover:bg-slate-300 px-4 transition-all duration-200 ease-in rounded-md mx-2"
+                  >
+                    <img
+                      className=" mr-1 h-11 py-2.5 cursor-pointer  rounded"
+                      src="../icons/cart.png"
+                      alt="cart"
+                    ></img>
+                    cart
+                  </Link>
+                )}
+                <Link
+                  to={"/profile"}
+                  className="flex justify-center hover:bg-slate-300 items-center text-sm font-semibold px-2 rouded-full transition-all duration-300 ease-in"
+                >
                   <img
                     className="  h-10 p-1.5 cursor-pointer scale-90 "
                     src="../icons/user.png"
@@ -101,14 +104,13 @@ const NavBar = () => {
               </>
             ) : (
               <Link to={"/login"}>
-
-            <button
-              type="button"
-              className="text-gray-500 shadow-lg shadow-green-300  bg-green-500  transition-all duration-300 ease-in-out hover:bg-green-500/80  rounded-lg text-sm px-6 py-2 text-center font-bold mx-1 "
-            >
-              Login
-            </button>
-            </Link>
+                <button
+                  type="button"
+                  className="text-gray-500 shadow-lg shadow-green-300  bg-green-500  transition-all duration-300 ease-in-out hover:bg-green-500/80  rounded-lg text-sm px-6 py-2 text-center font-bold mx-1 "
+                >
+                  Login
+                </button>
+              </Link>
             )}
 
             <button
@@ -168,7 +170,6 @@ const NavBar = () => {
             </div>
           </div>
         </div>
-    
       </nav>
     </>
   );

@@ -23,4 +23,5 @@ Router.post('/api/product',isAuth,upload.single('image'),productController.postP
 
 Router.put('/api/product/:productId',isAuth,productController.putProduct)
 
+Router.delete('/api/product/:productId',isAuth,productController.deleteProduct)
 module.exports = Router

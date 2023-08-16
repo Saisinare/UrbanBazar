@@ -4,6 +4,7 @@ const Product = require("../../models/Product");
 
 exports.getProducts = async (req, res) => {
   const userId = req.userId;
+
   try {
     const products = await Product.find({ seller: userId });
     if (products) {
@@ -34,7 +35,7 @@ exports.getProduct = async (req, res) => {
 };
 
 exports.postProduct = async (req, res) => {
-  const userId = "64c5ddb327a13259a836ef54";
+  const userId = req.userId
   const image = req.file.filename
   const product = new Product({
     title: req.body.title,
@@ -91,3 +92,19 @@ exports.putProduct = async (req, res) => {
     console.log(err);
   }
 };
+
+exports.deleteProduct = async (req,res)=>{
+  const productId = req.params.productId
+  const userId = req.userId
+  try{
+    const product = await Product.findOneAndDelete({_id:productId,seller:userId})
+    if(product){
+      res.status(200).json({msg:"product delete successfully"})
+    }else{
+      res.status(400).json({msg:"product delete Failed"})
+    }
+  }catch(err){
+    console.log(err)
+  }
+
+}
