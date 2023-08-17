@@ -12,7 +12,7 @@ const Header = () => {
   const handleSwitch = (e) => {
     if (e.target.checked) {
       dispatch(setSellerMode(true));
-      navigate('/seller/dashboard')
+      navigate('/seller/products')
     } else {
       dispatch(setSellerMode(false));
       navigate('/')

@@ -21,11 +21,11 @@ const ProductCard = (props) => {
   }
   return (
     <>
-      <div className=" h-fit p-1 w-1/5 flex   transition-all ease-in-out duration-500 overflow-hidden ">
-        <div className="bg-black rounded-xl" style={{backgroundImage:`url("http://localhost:8000/products/${props.image}")`}}>
+      <div className=" h-fit p-1 w-1/5 flex  transition-all ease-in-out duration-500 overflow-hidden ">
+        <div className="rounded-xl bg-cover bg-no-repeat " style={{backgroundImage:`url("http://localhost:8000/products/${props.image}")`}}>
         <Link>
-          <div className=" h-full w-full  rounded-xl overflow-hidden border shadow pb-3 ">
-            <div className="pro-img w-full flex h-72 bg-slate-400  overflow-hidden ">
+          <div className=" h-full w-full  rounded-xl overflow-hidden border shadow pb-3 bg-white/80  backdrop-blur-md  ">
+            <div className="pro-img w-full flex h-72   overflow-hidden ">
               <img src={`http://localhost:8000/products/${props.image}`} className="h-fit hover:scale-105 transition-all duration-500 ease-in-out hover:rotate-1" alt="shoes" />
             </div>
             <div className=" h-8 w-full text-black font-semibold p-2 text-lg">
