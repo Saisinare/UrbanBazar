@@ -81,10 +81,10 @@ const NavBar = () => {
                 {!userstate.SellerMode && (
                   <Link
                     to={"/cart"}
-                    className="flex justify-center items-center font-semibold hover:bg-slate-300 px-4 transition-all duration-200 ease-in rounded-md mx-2"
+                    className="flex py-2 justify-center items-center font-semibold hover:bg-green-200 px-4 transition-all duration-200 ease-in rounded-md mx-2"
                   >
                     <img
-                      className=" mr-1 h-11 py-2.5 cursor-pointer  rounded"
+                      className=" mr-1 h-6  cursor-pointer  rounded"
                       src="../icons/cart.png"
                       alt="cart"
                     ></img>
@@ -93,10 +93,10 @@ const NavBar = () => {
                 )}
                 <Link
                   to={"/profile"}
-                  className="flex justify-center hover:bg-slate-300 items-center text-sm font-semibold px-2 rouded-full transition-all duration-300 ease-in"
+                  className="flex justify-center rounded-full overflow-hidden hover:bg-green-200 items-center text-sm font-semibold transition-all duration-300 ease-in p-1"
                 >
                   <img
-                    className="  h-10 p-1.5 cursor-pointer scale-90 "
+                    className="  h-6 cursor-pointer  rounded-full"
                     src="../icons/user.png"
                     alt="user"
                   ></img>

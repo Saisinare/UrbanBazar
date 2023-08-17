@@ -197,7 +197,7 @@ const AddProductForm = (props) => {
               <option value="fashion">Fashion</option>
               <option value="appliances">Appliances</option>
               <option value="groceries">Groceries</option>
-              <option value="Travel">Travel</option>
+              <option value="travel">Travel</option>
             </select>
           </div>
           <div className="form-field pt-2 w-1/3 py-5">

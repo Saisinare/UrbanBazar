@@ -24,7 +24,7 @@ const MyProductsPage = () => {
         console.log(err);
       });
 
-  }, [productState]);
+  }, []);
   return (
     <>
       <div className="w-screen min-h-screen h-fit">

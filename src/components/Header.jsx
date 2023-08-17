@@ -1,11 +1,12 @@
-import React, {  useState } from "react";
-import { Link, useNavigate,} from "react-router-dom";
+import React, {  useEffect, useState } from "react";
+import { Link, useLocation, useNavigate,} from "react-router-dom";
 import Modal from "./Modal";
 import { useDispatch, useSelector } from "react-redux";
 import { setSellerMode } from "../redux/slice/user";
 
 const Header = () => {
   const userState = useSelector((state) => state.user);
+  const location = useLocation()
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
@@ -20,30 +21,33 @@ const Header = () => {
   };
 
   const [modal, setmodal] = useState(false);
+
+
+
   return (
     <>
       <div className="top-0 w-screen h-16 px-10 bg-gray-100 flex items-center font-semibold justify-between z-40">
         <div className="list flex">
           <Link to={`${userState.SellerMode ? "seller/dashboard" : "/shop"}`}>
-            <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">
+            <div className={`item px-3 ${(!userState.SellerMode)?(location.pathname==='/shop') && 'text-green-700':(location.pathname==='/seller/dashboard') && 'text-green-700' }  hover:text-green-700 transition-all duration-300 ease-linear`}>
             {(userState.SellerMode)? "Dashboard" : "Shop" }
             </div>
           </Link>
           <Link to={`${userState.SellerMode ? "seller/products" : "/orders"}`}>
-            <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">
+            <div className={`item px-3 ${(!userState.SellerMode)?(location.pathname==='/orders') && 'text-green-700':(location.pathname==='/seller/products') && 'text-green-700' } hover:text-green-700 transition-all duration-300 ease-linear`}>
             {(userState.SellerMode)? "My Products" : "My Orders" }
             </div>
           </Link>
           <Link
             to={`${userState.SellerMode ? "seller/addproduct" : "/support"}`}
           >
-            <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">
+            <div className={`item px-3 ${(!userState.SellerMode)?(location.pathname==='/support') && 'text-green-700':(location.pathname==='/seller/addproduct') && 'text-green-700' } hover:text-green-700 transition-all duration-300 ease-linear`}>
             {(userState.SellerMode)? "Add Product" : "Customer Support" }
             </div>
           </Link>
           {!userState.SellerMode && (
-            <Link to="/">
-              <div className="item px-3 hover:text-green-700 transition-all duration-300 ease-linear">
+            <Link to="/contact">
+              <div className={`item px-3 ${(!userState.SellerMode)&&(location.pathname==='/contact') && 'text-green-700' } hover:text-green-700 transition-all duration-300 ease-linear`}>
                 Contact Us
               </div>
             </Link>
