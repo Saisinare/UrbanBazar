@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ProductCard from "../../ProductStore/ProductCard";
+import ProductCard from "../../Shop/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setProducts } from "../../../redux/slice/products";

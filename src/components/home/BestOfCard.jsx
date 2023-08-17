@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import ProductCard from "../ProductStore/ProductCard";
+import ProductCard from "../Shop/ProductCard";
 import axios from "axios";
 
 const BestOfCard = (props) => {

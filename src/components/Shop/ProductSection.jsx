@@ -26,9 +26,10 @@ const ProductSection = (props) => {
 
   return (
     <div className="flex w-full flex-wrap bg-slate-200 p-2">
-      {products.map((product) => {
+      {products.map((product,index) => {
         return (
           <ProductCard
+            index = {index}
             id={product._id}
             key={product._id}
             title={product.title}

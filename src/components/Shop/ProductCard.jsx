@@ -3,8 +3,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductCard = (props) => {
+
   const handleAddCart = ()=>{
-    
     axios.post(`http://localhost:8000/cart/add/${props.id}`,{},{withCredentials:true}).then(response=>{
       console.log(response)
     }).catch(err=>{
@@ -12,17 +12,19 @@ const ProductCard = (props) => {
     })
   }
   const hadleDelete = ()=>{
-    
     axios.delete(`http://localhost:8000/seller/api/product/${props.id}`,{withCredentials:true}).then(response=>{
       console.log(response)
     }).catch(err=>{
       console.log(err)
     })
   }
+
+
+
   return (
     <>
-      <div className=" h-fit p-1 w-1/5 flex  transition-all ease-in-out duration-500 overflow-hidden ">
-        <div className="rounded-xl bg-cover bg-no-repeat " style={{backgroundImage:`url("http://localhost:8000/products/${props.image}")`}}>
+      <div className={`h-fit p-1 w-1/5 flex  transition-all ease-in-out duration-500 overflow-hidden `}>
+        <div className="rounded-xl bg-cover bg-no-repeat " style={{backgroundImage:`url("http://localhost:8000/products/${props.image}")`}} >
         <Link>
           <div className=" h-full w-full  rounded-xl overflow-hidden border shadow pb-3 bg-white/80  backdrop-blur-md  ">
             <div className="pro-img w-full flex h-72   overflow-hidden ">

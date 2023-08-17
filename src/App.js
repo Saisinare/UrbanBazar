@@ -6,7 +6,7 @@ import Cart from "./components/cart/Cart";
 import Profile from "./components/profile/Profile";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import ProductsPage from "./components/ProductStore/ProductsPage";
+import ProductsPage from "./components/Shop/ProductsPage";
 import { useSelector } from "react-redux";
 import Addproduct from "./components/seller/ProductAddPage/Addproduct";
 import Header from "./components/Header";
