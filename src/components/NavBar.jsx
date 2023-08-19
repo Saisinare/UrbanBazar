@@ -5,12 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogin, setUser } from "../redux/slice/user";
 import axios from "axios";
 import { setProducts } from "../redux/slice/products";
+import Filter from "./Filters/Filter";
 
 const NavBar = () => {
   const userstate = useSelector((state) => state.user);
   const [token, setToken] = useState();
   const [input, setinput] = useState("");
   const dispatch = useDispatch();
+  const location = useLocation()
   useEffect(() => {
     setProducts([])
     axios("http://localhost:8000/api/user", { withCredentials: true })
@@ -37,13 +39,32 @@ const NavBar = () => {
   };
   return (
     <>
-      <nav className="sticky z-20  top-0  border-gray-200 px-5 py-0  backdrop-blur-2xl bg-white/70">
-        <div className="flex flex-wrap items-center justify-between  ">
+      <nav className="sticky z-20  top-1 rounded  border-gray-200 px-5 py-1  backdrop-blur-2xl bg-white/70 m-2 ml-3">
+        <div className="flex flex-wrap items-center justify-between">
+          <div className="flex items-center ">
           <Link to="/" className="flex items-center">
-            <span className="self-center text-2xl font-semibold whitespace-nowrap   text-black p-3 rounded my-2">
-              UrbanBazar
+            <span className="text-2xl font-semibold  text-black p-3  border-gray-500 my-2">
+              UrbanBazar 
             </span>
           </Link>
+          <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`}>
+            <div className={`item px-3 ${(!userstate.SellerMode)?(location.pathname==='/shop') && 'text-green-700':(location.pathname==='/seller/dashboard') && 'text-green-700' }  hover:text-green-700 transition-all duration-300 ease-linear font-semibold`}>
+            {(userstate.SellerMode)? "Dashboard" : "Shop" }
+            </div>
+          </Link>
+          <Link to={`${userstate.SellerMode ? "seller/products" : "/orders"}`}>
+            <div className={`item font-semibold px-3 ${(!userstate.SellerMode)?(location.pathname==='/orders') && 'text-green-700':(location.pathname==='/seller/products') && 'text-green-700' } hover:text-green-700 transition-all duration-300 ease-linear`}>
+            {(userstate.SellerMode)? "My Products" : "My Orders" }
+            </div>
+          </Link>
+          <Link
+            to={`${userstate.SellerMode ? "seller/addproduct" : "/support"}`}
+          >
+            <div className={`item font-semibold px-3 ${(!userstate.SellerMode)?(location.pathname==='/support') && 'text-green-700':(location.pathname==='/seller/addproduct') && 'text-green-700' } hover:text-green-700 transition-all duration-300 ease-linear`}>
+            {(userstate.SellerMode)? "Add Product" : "Customer Support" }
+            </div>
+          </Link>
+          </div>
           <div className="relative hidden md:flex w-4/12 items-center search">
             <input
               type="text"
@@ -56,15 +77,16 @@ const NavBar = () => {
             <i className="fa fa-search text-sm relative -ml-9 p-2 text-neutral-500 hover:text-green-700 transition-all duration-200 ease-linear"></i>
             {input !== "" && (
               <i
-                className="fa fa-close text-sm relative -ml-14 p-2 text-neutral-500 hover:text-red-700 transition-all duration-200 ease-linear"
-                onClick={clearInput}
+              className="fa fa-close text-sm relative -ml-14 p-2 text-neutral-500 hover:text-red-700 transition-all duration-200 ease-linear"
+              onClick={clearInput}
               ></i>
-            )}
-
+              )}
+            
             {input !== "" && (
               <div className=" w-11/12 rounded-md h-44 bg-gray-50  border  backdrop-blur-3xl absolute mt-56"></div>
-            )}
+              )}
           </div>
+              <button className=" font-bold"><i className="fa-solid fa-filter font-sans mr-1"></i>Filters</button>
           <div className="flex md:order-2">
             <button
               type="button"
@@ -95,10 +117,10 @@ const NavBar = () => {
                 {!userstate.SellerMode && (
                   <Link
                     to={"/cart"}
-                    className="flex py-2 justify-center items-center font-semibold hover:bg-green-200 px-4 transition-all duration-200 ease-in rounded-md mx-2"
+                    className="flex  justify-center items-center font-semibold pr-4 pl-1 transition-all duration-200 ease-in mx-2 border  border-black text-md rounded-xl"
                   >
                     <img
-                      className=" mr-1 h-6  cursor-pointer  rounded"
+                      className=" mr-1 h-6  cursor-pointer  rounded scale-75"
                       src="../icons/cart.png"
                       alt="cart"
                     ></img>
@@ -184,6 +206,7 @@ const NavBar = () => {
             </div>
           </div>
         </div>
+        <Filter/>
       </nav>
     </>
   );

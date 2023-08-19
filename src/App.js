@@ -12,13 +12,14 @@ import Addproduct from "./components/seller/ProductAddPage/Addproduct";
 import Header from "./components/Header";
 import MyProductsPage from "./components/seller/MyProducts/MyProductsPage";
 import ProductPage from "./components/ProductPage/ProductPage";
+import PurchasePage from "./components/purchasePage/PurchasePage";
 
 function App() {
   const user = useSelector((state) => state.user);
   return (
     <>
       <BrowserRouter>
-        {user.isLogin && <Header />}
+        {/* {user.isLogin && <Header />} */}
 
         <NavBar />
         <Routes>
@@ -49,6 +50,12 @@ function App() {
             path="/product/:productId"
             element={<ProductPage/>}
           ></Route>
+          <Route
+            exact
+            path="/purchase/:productId"
+            element={<PurchasePage/>}
+          ></Route>
+          
         </Routes>
       </BrowserRouter>
     </>

@@ -27,9 +27,9 @@ const Header = () => {
   return (
     <>
       <div className="top-0 w-screen h-16 px-10 bg-gray-100 flex items-center font-semibold justify-between z-40">
-        <div className="list flex">
+        <div className="list flex ">
           <Link to={`${userState.SellerMode ? "seller/dashboard" : "/shop"}`}>
-            <div className={`item px-3 ${(!userState.SellerMode)?(location.pathname==='/shop') && 'text-green-700':(location.pathname==='/seller/dashboard') && 'text-green-700' }  hover:text-green-700 transition-all duration-300 ease-linear`}>
+            <div className={`item px-3 ${(!userState.SellerMode)?(location.pathname==='/shop') && 'text-green-700':(location.pathname==='/seller/dashboard') && 'text-green-700' }  hover:text-green-700 transition-all duration-300 ease-linear `}>
             {(userState.SellerMode)? "Dashboard" : "Shop" }
             </div>
           </Link>

@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Footer from "../Footer";
 
 const ProductPage = () => {
@@ -26,13 +26,8 @@ const ProductPage = () => {
     <>
       <div
         className="rounded-xl bg-cover bg-no-repeat "
-        style={{
-          backgroundImage: `url("http://localhost:8000/products/${
-            product && product.image
-          }")`,
-        }}
       >
-        <div className="flex h-fit w-screen p-10  font-sans bg-white/70 backdrop-blur-2xl justify-center ">
+        <div className="flex h-fit w-screen p-10  font-sans bg-white/70 backdrop-blur-2xl justify-center items-center ">
           <div className="image-section h-96  flex items-center w-fit">
             <img
               src={`${
@@ -42,7 +37,7 @@ const ProductPage = () => {
               alt=""
             />
           </div>
-          <div className="detail-section w-3/4 pt-20 p-10">
+          <div className="detail-section w-3/4 pt-0 p-10">
             <h1 className="font-bold font-sans text-5xl">{`${
               product && `${product.title}`
             }`}</h1>
@@ -50,20 +45,23 @@ const ProductPage = () => {
               <i className="fa fa-star text-yellow-500"></i>
               {product && product.review != 0 ? "review" : " No Rating Yet"}
             </p>
-            <p className=" font-semibold text-3xl ">
+            <p className=" font-semibold text-3xl font-sans">
               {" "}
               ₹ {`${product && `${parseInt(product.price)} `}`}
             </p>
-            <ul className=" list-disc">
+            <div className=" mt-10 min-w-fit w-5/6 pr-5 border-2 border-gray-400 rounded py-5 ">
+              <h1 className="font-bold text-md px-5 py-2">Key Features</h1>
+            <ul className="pl-10">
               {product &&
                 product.description.map((keypoint, index) => {
                   return (
-                    <li key={index} className=" text-gray-500">
+                    <li key={index} className=" text-gray-500 list-disc font-semibold">
                       {keypoint}
                     </li>
                   );
                 })}
             </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -84,12 +82,16 @@ const ProductPage = () => {
           </div>
         </div>
         <div className="flex">
+          <Link to='/purchase/:productId'>
           <button className="btn bg-gray-200 border border-black p-2 px-6 flex items-center font-semibold font-sans text-sm rounded-md mx-2">
             Add To Cart
           </button>
+          </Link>
+          <Link to={`/purchase/${ product && `${product._id}`}`} state={`${ product && `${product._id}`}`}>
           <button className="btn bg-green-500 p-2 px-6 flex items-center font-semibold font-sans text-sm rounded-md text-gray-700">
             Buy Now
           </button>
+          </Link>
         </div>
       </div>
     </>
