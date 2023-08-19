@@ -4,13 +4,15 @@ import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { setLogin, setUser } from "../redux/slice/user";
 import axios from "axios";
+import { setProducts } from "../redux/slice/products";
 
 const NavBar = () => {
   const userstate = useSelector((state) => state.user);
   const [token, setToken] = useState();
-
+  const [input, setinput] = useState("");
   const dispatch = useDispatch();
   useEffect(() => {
+    setProducts([])
     axios("http://localhost:8000/api/user", { withCredentials: true })
       .then((response) => {
         if (response.data) {
@@ -26,6 +28,13 @@ const NavBar = () => {
       dispatch(setLogin(true));
     }
   }, [token]);
+  const clearInput = (e) => {
+    const inputParent = e.target.parentElement;
+    setinput('')
+  };
+  const handleInputChange = (e) => {
+    setinput(e.target.value);
+  };
   return (
     <>
       <nav className="sticky z-20  top-0  border-gray-200 px-5 py-0  backdrop-blur-2xl bg-white/70">
@@ -35,22 +44,27 @@ const NavBar = () => {
               UrbanBazar
             </span>
           </Link>
-          <div className="relative hidden md:flex w-4/12 items-center ">
+          <div className="relative hidden md:flex w-4/12 items-center search">
             <input
               type="text"
               id="search-navbar"
-              className="block w-11/12 p-2  text-sm text-gray-900 border-gray-200 rounded-lg bg-gray-50/80 backdrop-blur-lg opacity-80 outline-none shadow"
-              style={{ outline: "none" }}
-              placeholder="Search For Your Favoirate Item "
+              className="block w-11/12 p-2 text-sm font-semibold text-gray-900 border-gray-200 rounded-md bg-gray-50/80 backdrop-blur-lg opacity-80  focus:border-none"
+              placeholder="What Are You Looking For ? "
+              value={input}
+              onChange={handleInputChange}
             />
-            <button
-              type="button"
-              className="text-white bg-gradient-to-l transition-all duration-300 ease-in-out  from-black/90 to-slate-900/90 hover:bg-black/80  font-medium rounded-lg text-sm px-5 py-2 text-center mx-1 "
-            >
-              Search
-            </button>
-          </div>
+            <i className="fa fa-search text-sm relative -ml-9 p-2 text-neutral-500 hover:text-green-700 transition-all duration-200 ease-linear"></i>
+            {input !== "" && (
+              <i
+                className="fa fa-close text-sm relative -ml-14 p-2 text-neutral-500 hover:text-red-700 transition-all duration-200 ease-linear"
+                onClick={clearInput}
+              ></i>
+            )}
 
+            {input !== "" && (
+              <div className=" w-11/12 rounded-md h-44 bg-gray-50  border  backdrop-blur-3xl absolute mt-56"></div>
+            )}
+          </div>
           <div className="flex md:order-2">
             <button
               type="button"

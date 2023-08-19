@@ -45,13 +45,6 @@ const Header = () => {
             {(userState.SellerMode)? "Add Product" : "Customer Support" }
             </div>
           </Link>
-          {!userState.SellerMode && (
-            <Link to="/contact">
-              <div className={`item px-3 ${(!userState.SellerMode)&&(location.pathname==='/contact') && 'text-green-700' } hover:text-green-700 transition-all duration-300 ease-linear`}>
-                Contact Us
-              </div>
-            </Link>
-          )}
         </div>
         <div className="swiching items-center justify-center  flex h-full w-auto text-green-600">
           <button

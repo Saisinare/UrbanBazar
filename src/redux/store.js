@@ -4,7 +4,6 @@ import loginReducer from "./slice/login";
 import userReducer from "./slice/user"
 import productsReducer from "./slice/products";
 
-
 const store = configureStore({
     reducer:{
         signup:signupReducer,

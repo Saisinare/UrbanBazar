@@ -18,14 +18,12 @@ const ProductCard = (props) => {
       console.log(err)
     })
   }
-
-
-
   return (
     <>
+
       <div className={`h-fit p-1 w-1/5 flex  transition-all ease-in-out duration-500 overflow-hidden `}>
+        <Link to={`/product/${props.id}`} state={{id:props.id}}>
         <div className="rounded-xl bg-cover bg-no-repeat " style={{backgroundImage:`url("http://localhost:8000/products/${props.image}")`}} >
-        <Link>
           <div className=" h-full w-full  rounded-xl overflow-hidden border shadow pb-3 bg-white/80  backdrop-blur-md  ">
             <div className="pro-img w-full flex h-72   overflow-hidden ">
               <img src={`http://localhost:8000/products/${props.image}`} className="h-fit hover:scale-105 transition-all duration-500 ease-in-out hover:rotate-1" alt="shoes" />
@@ -49,8 +47,8 @@ const ProductCard = (props) => {
               </button>
             </div>
           </div>
-        </Link>
         </div>
+        </Link>
       </div>
     </>
   );

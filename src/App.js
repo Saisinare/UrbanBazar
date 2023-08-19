@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 import Addproduct from "./components/seller/ProductAddPage/Addproduct";
 import Header from "./components/Header";
 import MyProductsPage from "./components/seller/MyProducts/MyProductsPage";
+import ProductPage from "./components/ProductPage/ProductPage";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -27,6 +28,7 @@ function App() {
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/signup" element={<Signup />}></Route>
           <Route exact path="/shop" element={<ProductsPage />}></Route>
+          <Route exact path="/shop/:cateogry" element={<ProductsPage />}></Route>
           <Route
             exact
             path="/seller/addproduct"
@@ -41,6 +43,11 @@ function App() {
             exact
             path="/seller/editProduct"
             element={<Addproduct />}
+          ></Route>
+          <Route
+            exact
+            path="/product/:productId"
+            element={<ProductPage/>}
           ></Route>
         </Routes>
       </BrowserRouter>
