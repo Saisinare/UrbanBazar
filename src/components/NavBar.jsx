@@ -6,11 +6,14 @@ import { setLogin, setUser } from "../redux/slice/user";
 import axios from "axios";
 import { setProducts } from "../redux/slice/products";
 import Filter from "./Filters/Filter";
+import ProfileCard from "./profile/ProfileCard";
 
 const NavBar = () => {
   const userstate = useSelector((state) => state.user);
   const [token, setToken] = useState();
   const [input, setinput] = useState("");
+  const [FilterVisible, setFilterVisible] = useState(false);
+
   const dispatch = useDispatch();
   const location = useLocation()
   useEffect(() => {
@@ -37,6 +40,10 @@ const NavBar = () => {
   const handleInputChange = (e) => {
     setinput(e.target.value);
   };
+
+  const handleFilterClick = (e)=>{
+    setFilterVisible(!FilterVisible)
+  }
   return (
     <>
       <nav className="sticky z-20  top-1 rounded  border-gray-200 px-5 py-1  backdrop-blur-2xl bg-white/70 m-2 ml-3">
@@ -86,7 +93,7 @@ const NavBar = () => {
               <div className=" w-11/12 rounded-md h-44 bg-gray-50  border  backdrop-blur-3xl absolute mt-56"></div>
               )}
           </div>
-              <button className=" font-bold"><i className="fa-solid fa-filter font-sans mr-1"></i>Filters</button>
+          {location.pathname == '/shop' &&<button className=" font-bold" onClick={handleFilterClick}><i className="fa-solid fa-filter font-sans mr-1"></i>Filters</button>}
           <div className="flex md:order-2">
             <button
               type="button"
@@ -117,10 +124,10 @@ const NavBar = () => {
                 {!userstate.SellerMode && (
                   <Link
                     to={"/cart"}
-                    className="flex  justify-center items-center font-semibold pr-4 pl-1 transition-all duration-200 ease-in mx-2 border  border-black text-md rounded-xl"
+                    className="flex  justify-center items-center font-semibold pr-4  transition-all duration-200 ease-in mx-2 border  border-green-500 text-md rounded-xl hover:border-black hover:text-green-500"
                   >
                     <img
-                      className=" mr-1 h-6  cursor-pointer  rounded scale-75"
+                      className=" mr-1 h-8  cursor-pointer rounded-lg scale-75 bg-green-500 p-1.5"
                       src="../icons/cart.png"
                       alt="cart"
                     ></img>
@@ -131,12 +138,14 @@ const NavBar = () => {
                   to={"/profile"}
                   className="flex justify-center rounded-full overflow-hidden hover:bg-green-200 items-center text-sm font-semibold transition-all duration-300 ease-in p-1"
                 >
+                          
                   <img
                     className="  h-6 cursor-pointer  rounded-full"
                     src="../icons/user.png"
                     alt="user"
                   ></img>
                 </Link>
+                <ProfileCard/>
               </>
             ) : (
               <Link to={"/login"}>
@@ -206,7 +215,8 @@ const NavBar = () => {
             </div>
           </div>
         </div>
-        <Filter/>
+        {(location.pathname == '/shop' && FilterVisible) && <Filter/>}
+
       </nav>
     </>
   );

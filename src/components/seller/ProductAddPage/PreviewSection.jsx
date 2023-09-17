@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 
 const PreviewSection = (props) => {
-  
+  useEffect(()=>{
+    console.log(props.preimage)
+  },[])
   return (
     <div className="w-1/3 h-fit  flex items-center py-3 pb-10 rounded-lg justify-center flex-col bg-gray-200 top-24 bottom-30 sticky transition-all duration-300 ease-in-out">
       <h1 className="text-xl font-semibold pb-5">Card Preview </h1>

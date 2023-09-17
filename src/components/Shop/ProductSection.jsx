@@ -11,12 +11,8 @@ const ProductSection = (props) => {
   const location = useLocation();
   useEffect(() => {
     axios
-      .get(
-        `http://localhost:8000/products${
-          location.state
-            ? location.state.category && `?category=${location.state.category}`
-            : ""
-        }`
+    .get(
+      `http://localhost:8000/products${`?category=${productsState.filter}`}`
       )
       .then((response) => {
         dispatch(setProducts(response.data.products));
@@ -24,28 +20,24 @@ const ProductSection = (props) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, []);
+  }, [productsState.filter]);
 
   return (
     <div className="flex w-full flex-wrap bg-slate-200 p-2">
-      {productsState && 
-            productsState.products.map((product, index) => {
-              return (
-                (
-                  <ProductCard
-                    index={index}
-                    id={product._id}
-                    key={product._id}
-                    title={product.title}
-                    price={product.price}
-                    image={product.image}
-                    category={props.title}
-                  />
-                )
-              );
-            })
-      }
-
+      {productsState &&
+        productsState.products.map((product, index) => {
+          return (
+            <ProductCard
+              index={index}
+              id={product._id}
+              key={product._id}
+              title={product.title}
+              price={product.price}
+              image={product.image}
+              category={props.title}
+            />
+          );
+        })}
     </div>
   );
 };

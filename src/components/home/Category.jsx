@@ -1,9 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { setFilters } from "../../redux/slice/products";
+import { useDispatch } from "react-redux";
 
 const Category = (props) => {
+  const dispatch = useDispatch()
+  const updateFilter = ()=>{
+    dispatch(setFilters(props.title.toLowerCase()))
+  }
   return (
-    <div className="flex flex-col w-64 h-auto transition-all p-1 ">
+    <div className="flex flex-col w-64 h-auto transition-all p-1 " onClick={updateFilter}>
       <Link to={`/shop/${props.title.toLowerCase()}`} state={{category:props.title.toLowerCase()}}>
       <div
         class="transition-all duration-500 ease-in-out bg-transparent backgroud bg-top cursor-pointer bg-no-repeat bg-cover hover:bg-left flex h-60  hover:scale-105  p-3 rounded-xl bg-gray-800 mx-2 text-white items-start justify-center "

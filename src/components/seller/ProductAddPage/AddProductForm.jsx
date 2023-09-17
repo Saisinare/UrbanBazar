@@ -60,7 +60,6 @@ const AddProductForm = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     let formData = {
       title: props.title,
       description: props.description,
@@ -89,13 +88,12 @@ const AddProductForm = (props) => {
           if(response.data){
             const Editproduct = response.data.products
             form.elements.title.value = Editproduct.title
-            form.elements.description.value = Editproduct.description
+            form.elements.description.value = Editproduct.description.join('\n')
             form.elements.price.value = Editproduct.price
             form.elements.product_quantity.value = Editproduct.product_quantity
             form.elements.category.value = Editproduct.category
             form.elements.subcategory.value = Editproduct.subcategory
             form.elements.brand.value = Editproduct.brand
-
             props.settitle(Editproduct.title);
             props.setdescription(Editproduct.description);
             props.setprice(Editproduct.price);
