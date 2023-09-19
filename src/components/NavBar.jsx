@@ -93,7 +93,7 @@ const NavBar = () => {
               <div className=" w-11/12 rounded-md h-44 bg-gray-50  border  backdrop-blur-3xl absolute mt-56"></div>
               )}
           </div>
-          {location.pathname == '/shop' &&<button className=" font-bold" onClick={handleFilterClick}><i className="fa-solid fa-filter font-sans mr-1"></i>Filters</button>}
+          {location.pathname.includes('/shop') &&<button className=" font-bold" onClick={handleFilterClick}><i className="fa-solid fa-filter font-sans mr-1"></i>Filters</button>}
           <div className="flex md:order-2">
             <button
               type="button"
@@ -215,7 +215,7 @@ const NavBar = () => {
             </div>
           </div>
         </div>
-        {(location.pathname == '/shop' && FilterVisible) && <Filter/>}
+        {(location.pathname.includes('/shop') && FilterVisible) && <Filter/>}
 
       </nav>
     </>

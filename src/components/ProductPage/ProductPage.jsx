@@ -4,8 +4,20 @@ import { Link, useLocation } from "react-router-dom";
 import Footer from "../Footer";
 
 const ProductPage = () => {
+
+  const handleAddCart = ()=>{
+    axios.post(`http://localhost:8000/cart/add/${location.state.id}`,{},{withCredentials:true}).then(response=>{
+      console.log(response)
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+
   const [product, setproduct] = useState();
   const location = useLocation();
+
+
+
   useEffect(() => {
     axios
       .get(`http://localhost:8000/product/${location.state.id}`)
@@ -13,7 +25,7 @@ const ProductPage = () => {
         if (response.data) {
           if (response.data.products) {
             setproduct(response.data.products);
-            console.log();
+            console.log(product);
           }
         }
       })
@@ -22,11 +34,15 @@ const ProductPage = () => {
       });
     console.log(product);
   }, []);
+
+
+
   return (
     <>
       <div
         className="rounded-xl bg-cover bg-no-repeat "
       >
+        
         <div className="flex h-fit w-screen p-10  font-sans bg-white/70 backdrop-blur-2xl justify-center items-center ">
           <div className="image-section h-96  flex items-center w-fit">
             <img
@@ -82,8 +98,8 @@ const ProductPage = () => {
           </div>
         </div>
         <div className="flex">
-          <Link to='/purchase/:productId'>
-          <button className="btn bg-gray-200 border border-black p-2 px-6 flex items-center font-semibold font-sans text-sm rounded-md mx-2">
+          <Link to='/cart'>
+          <button className="btn bg-gray-200 border border-black p-2 px-6 flex items-center font-semibold font-sans text-sm rounded-md mx-2" onClick={handleAddCart}>
             Add To Cart
           </button>
           </Link>

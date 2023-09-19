@@ -1,18 +1,22 @@
 import React, { useEffect } from "react";
 import ProductSection from "./ProductSection";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Footer from "../Footer";
+import { clearfil } from "../../redux/slice/products";
+import { useLocation } from "react-router-dom";
 const ProductsPage = () => {
-  let userState = useSelector(state=>state.user)
-  useEffect(()=>{
-    console.log(userState)
-  })
+  const dispatch = useDispatch();
+  const location = useLocation();
+  let userState = useSelector((state) => state.user);
+  useEffect(() => {
+    if (location.pathname == "/shop") dispatch(clearfil());
+  });
   return (
     <>
-    <div className="flex h-full bg-white">
-        <ProductSection/>
-    </div>
-    <Footer/>
+      <div className="flex h-full bg-white">
+        <ProductSection />
+      </div>
+      <Footer />
     </>
   );
 };

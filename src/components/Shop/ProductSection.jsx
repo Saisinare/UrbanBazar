@@ -10,9 +10,23 @@ const ProductSection = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   useEffect(() => {
+    let filterString = ''
+    for(let fil in productsState.filters){
+
+      if(productsState.filters[fil]!=''){
+        if(filterString==''){
+          filterString += '?'
+        }
+        else{
+          filterString += '&'
+        }
+        filterString+=fil+'='+productsState.filters[fil]
+      }
+    }
+    console.log(filterString)
     axios
-    .get(
-      `http://localhost:8000/products${`?category=${productsState.filter}`}`
+      .get(
+        `http://localhost:8000/products${filterString}`
       )
       .then((response) => {
         dispatch(setProducts(response.data.products));
@@ -20,7 +34,7 @@ const ProductSection = (props) => {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [productsState.filter]);
+  }, [productsState.filters]);
 
   return (
     <div className="flex w-full flex-wrap bg-slate-200 p-2">

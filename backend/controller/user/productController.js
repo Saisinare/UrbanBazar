@@ -24,6 +24,7 @@ exports.getProducts = async (req, res) => {
       products = await Product.find(filter).limit(limit);
     }else{
       products = await Product.find(filter);
+      console.log(products)
     }
     res.status(200).json({ products: products });
   } catch (err) {
@@ -62,6 +63,7 @@ exports.postAddtoCart = async (req, res) => {
         user.cart.push({product:productId,quantity:0})
         await user.save()
         res.status(200).json({ msg: "Added To Cart" });
+        console.log('product added into cart ')
     } else {
       res.status(400).json({ msg: "Not Found" });
     }
