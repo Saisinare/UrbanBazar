@@ -72,6 +72,25 @@ exports.postAddtoCart = async (req, res) => {
   }
 };
 
+exports.getSearchResult = (req,res)=>{
+  const keyword = req.query.keyword 
+  console.log(keyword)
+  Product.find({
+    $or: [
+      { title: { $regex: keyword, $options: 'i' } },
+      { description: { $regex: keyword, $options: 'i' } },
+      { category: { $regex: keyword, $options: 'i' } },
+      { subcategory: { $regex: keyword, $options: 'i' } },
+      { brand: { $regex: keyword, $options: 'i' } },
+    ]
+  }).then(products=>{
+    res.status(200).json({success:true,products:products});
+  }).catch(err=>{
+    res.status(404).json({success:false,err:err});
+
+  })
+}
+
 exports.deleteFromCart = async (req,res)=>{
     const userId = req.userId;
     const productId = new mongoose.Types.ObjectId(req.params.productId)

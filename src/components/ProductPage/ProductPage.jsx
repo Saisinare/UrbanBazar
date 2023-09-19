@@ -33,7 +33,7 @@ const ProductPage = () => {
         console.log(err);
       });
     console.log(product);
-  }, []);
+  }, [location.pathname]);
 
 
 

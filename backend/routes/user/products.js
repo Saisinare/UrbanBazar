@@ -7,5 +7,5 @@ Router.get('/product/:productId',productController.getProduct)
 Router.get('/cart/products',isAuth,productController.getCartProducts)
 Router.post('/cart/add/:productId',isAuth,productController.postAddtoCart)
 Router.delete('/api/cart/:productId',isAuth,productController.deleteFromCart)
-
+Router.get('/search',productController.getSearchResult)
 module.exports = Router;

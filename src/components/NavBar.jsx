@@ -13,7 +13,8 @@ const NavBar = () => {
   const [token, setToken] = useState();
   const [input, setinput] = useState("");
   const [FilterVisible, setFilterVisible] = useState(false);
-
+  const [searchResult,setSearchResult] = useState([])
+  const[resultDiv,setResultDiv] = useState(false)
   const dispatch = useDispatch();
   const location = useLocation()
   useEffect(() => {
@@ -32,13 +33,25 @@ const NavBar = () => {
     if (Cookies.get("login")) {
       dispatch(setLogin(true));
     }
-  }, [token]);
+  }, [token,searchResult]);
+
   const clearInput = (e) => {
     const inputParent = e.target.parentElement;
     setinput('')
   };
+
+  const hideDiv = ()=>{
+    setResultDiv(false)
+  }
+
   const handleInputChange = (e) => {
+    setResultDiv(true)
     setinput(e.target.value);
+    axios.get(`http://localhost:8000/search?keyword=${e.target.value}`).then(products=>{
+      setSearchResult(products.data.products)
+    }).catch(err=>{
+      console.log(err)
+    })
   };
 
   const handleFilterClick = (e)=>{
@@ -89,8 +102,12 @@ const NavBar = () => {
               ></i>
               )}
             
-            {input !== "" && (
-              <div className=" w-11/12 rounded-md h-44 bg-gray-50  border  backdrop-blur-3xl absolute mt-56"></div>
+            {input !== "" && resultDiv && (
+              <div className=" w-11/12 rounded-md h-44 bg-gray-50 overflow-hidden  border  backdrop-blur-3xl absolute mt-56">
+                {searchResult.map(product=>{
+                  return <Link to={`product/${product._id}` } state={{id:product._id}} onClick={hideDiv}><div className=" w-full h-1/6 text-sm px-2  flex items-center font-bold hover:bg-slate-200 cursor-pointer" id={product._id}>{product.title}</div></Link>
+                })}
+              </div>
               )}
           </div>
           {location.pathname.includes('/shop') &&<button className=" font-bold" onClick={handleFilterClick}><i className="fa-solid fa-filter font-sans mr-1"></i>Filters</button>}
@@ -117,7 +134,7 @@ const NavBar = () => {
                   d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
                 />
               </svg>
-              <span className="sr-only">Search</span>
+              <span className="sr-only">Search </span>
             </button>
             {userstate.isLogin ? (
               <>
