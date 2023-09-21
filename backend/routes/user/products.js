@@ -3,6 +3,7 @@ const Router = express.Router();
 const productController = require('../../controller/user/productController')
 const isAuth = require('../../middleware/isAuh')
 Router.get('/products',productController.getProducts)
+Router.get('/checkout',isAuth,productController.getCheckout)
 Router.get('/product/:productId',productController.getProduct)
 Router.get('/cart/products',isAuth,productController.getCartProducts)
 Router.post('/cart/add/:productId',isAuth,productController.postAddtoCart)
