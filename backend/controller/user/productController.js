@@ -159,18 +159,19 @@ exports.getCheckout = async (req, res) => {
         name:item.product.title ,
         description: item.product.description[0],
       })
-      let productprice = parseInt(item.product.price)*10;
-      console.log(productprice)
+      let productprice = parseInt(item.product.price);
       const price = await Strip.prices.create({
         product: product.id,
-        unit_amount: productprice,
+        unit_amount: parseInt(productprice)*100,
         currency: "inr",
       });
-      items.push({price:price.id,quantity:item.product.product_quantity})
+      items.push({price:price.id,quantity:item.quantity})
+      console.log(item.product)
     })
-     console.log(items)
     const productResult = await Promise.all(productPromises)
 
+    console.log(items)
+    
     const session = await Strip.checkout.sessions.create({
       line_items:items,
         mode: 'payment',
