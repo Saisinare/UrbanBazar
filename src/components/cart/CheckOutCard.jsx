@@ -1,5 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { setcheckoutsessionId } from "../../redux/slice/products";
+import { useDispatch, useSelector } from "react-redux";
+import Cookies from "js-cookie";
 
 const CheckOutCard = () => {
   
@@ -8,8 +11,11 @@ const CheckOutCard = () => {
   const [deliveryCharge,setdeliveryCharge] = useState(0)
   const [tax,settax] = useState(0)
   const [productsPrice,setProductsPrice] = useState(0)
-
+  const [sessionId,setSessionId] = useState('')
+  const productsState = useSelector((state) => state.products);
+  const dispatch = useDispatch()
   useEffect(() => {
+    console.log(productsState)
     axios
       .get("http://localhost:8000/cart/products", { withCredentials: true })
       .then((response) => {
@@ -27,11 +33,18 @@ const CheckOutCard = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [productsState.checkoutSessionId]);
+
 
 
   const handleClick = ()=>{
     axios.get('http://localhost:8000/checkout',{withCredentials:true}).then(res=>{
+      if(res.data && res.data.session_id){
+      dispatch(setcheckoutsessionId(res.data.session_id));
+      Cookies.set('chekoutsessionId',res.data.session_id)
+      return res
+      }
+    }).then(res=>{
        window.location.href = res.data.url;
     }).catch(err=>{
       console.log(err)

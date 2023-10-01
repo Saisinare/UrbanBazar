@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-const initialvalute = { products: [],filters:{category:'',maxPrice:'',minPrice:''}};
+const initialvalute = { products: [],filters:{category:'',maxPrice:'',minPrice:''},checkoutSessionId:''};
 const ProductSlice = createSlice({
   name: "products",
   initialState: initialvalute,
@@ -23,9 +23,12 @@ const ProductSlice = createSlice({
       state.filters.minPrice = ''
       state.filters.maxPrice = ''
       state.filters.category = ''
+    },
+    setcheckoutsessionId:(state,action)=>{
+      state.checkoutSessionId = action.payload
     }
   },
 });
 
-export const { setProducts, setFilters,setcatfil,setmaxpFil,setminpFil,clearfil } = ProductSlice.actions;
+export const { setProducts, setFilters,setcatfil,setmaxpFil,setminpFil,clearfil,setcheckoutsessionId } = ProductSlice.actions;
 export default ProductSlice.reducer;

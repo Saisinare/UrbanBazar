@@ -7,6 +7,8 @@ Router.get('/checkout',isAuth,productController.getCheckout)
 Router.get('/product/:productId',productController.getProduct)
 Router.get('/cart/products',isAuth,productController.getCartProducts)
 Router.post('/cart/add/:productId',isAuth,productController.postAddtoCart)
+Router.post('/order',isAuth,productController.postOrder)
+Router.get('/orders',isAuth,productController.getOrders)
 Router.delete('/api/cart/:productId',isAuth,productController.deleteFromCart)
 Router.get('/search',productController.getSearchResult)
 module.exports = Router;

@@ -13,6 +13,8 @@ import Header from "./components/Header";
 import MyProductsPage from "./components/seller/MyProducts/MyProductsPage";
 import ProductPage from "./components/ProductPage/ProductPage";
 import PurchasePage from "./components/purchasePage/PurchasePage";
+import Success from "./components/Success";
+import Orders from "./components/Orders/Orders";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -54,6 +56,16 @@ function App() {
             exact
             path="/purchase/:productId"
             element={<PurchasePage/>}
+          ></Route>
+          <Route
+            exact
+            path="/success"
+            element={<Success/>}
+          ></Route>
+          <Route
+            exact
+            path="/orders"
+            element={<Orders/>}
           ></Route>
           
         </Routes>

@@ -13,11 +13,16 @@ export const login = createAsyncThunk('login',async(user)=>{
 })
 
 
-const initialState= { isLoading: false, data: null , isError:false}
+const initialState= { isLoading: false, data: null , isError:false , isLogin:false}
 
 const loginSlice = createSlice({
     name:'login',
     initialState,
+    reducers:{
+        setlogin:(state,action)=>{
+            state.isLogin = action.payload
+        }
+    },
     extraReducers:(builder) => {
         builder.addCase(login.rejected,(state,action)=>{
             state.isLoading = false;
@@ -30,8 +35,10 @@ const loginSlice = createSlice({
             state.isLoading = false;
             state.isError = false;
             state.data = action.payload;
+            state.isLogin = true
         })
     }
 })
 
+export const {setlogin} = loginSlice.actions
 export default loginSlice.reducer;

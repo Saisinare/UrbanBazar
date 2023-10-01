@@ -5,20 +5,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { setLogin, setUser } from "../redux/slice/user";
 import axios from "axios";
 import { setProducts } from "../redux/slice/products";
+import Profile from "./profile/Profile";
 import Filter from "./Filters/Filter";
-import ProfileCard from "./profile/ProfileCard";
+import { setlogin } from "../redux/slice/login";
 
 const NavBar = () => {
   const userstate = useSelector((state) => state.user);
   const [token, setToken] = useState();
   const [input, setinput] = useState("");
   const [FilterVisible, setFilterVisible] = useState(false);
-  const [searchResult,setSearchResult] = useState([])
-  const[resultDiv,setResultDiv] = useState(false)
+  const [searchResult, setSearchResult] = useState([]);
+  const [resultDiv, setResultDiv] = useState(false);
   const dispatch = useDispatch();
-  const location = useLocation()
+  const location = useLocation();
+  const [profileCard, setprofileCard] = useState(false);
+
   useEffect(() => {
-    setProducts([])
+    setProducts([]);
     axios("http://localhost:8000/api/user", { withCredentials: true })
       .then((response) => {
         if (response.data) {
@@ -33,84 +36,133 @@ const NavBar = () => {
     if (Cookies.get("login")) {
       dispatch(setLogin(true));
     }
-  }, [token,searchResult]);
+  }, [token, searchResult, userstate.isLogin]);
 
   const clearInput = (e) => {
     const inputParent = e.target.parentElement;
-    setinput('')
+    setinput("");
   };
 
-  const hideDiv = ()=>{
-    setResultDiv(false)
-  }
+  const hideDiv = () => {
+    setResultDiv(false);
+  };
 
   const handleInputChange = (e) => {
-    setResultDiv(true)
+    setResultDiv(true);
     setinput(e.target.value);
-    axios.get(`http://localhost:8000/search?keyword=${e.target.value}`).then(products=>{
-      setSearchResult(products.data.products)
-    }).catch(err=>{
-      console.log(err)
-    })
+    axios
+      .get(`http://localhost:8000/search?keyword=${e.target.value}`)
+      .then((products) => {
+        setSearchResult(products.data.products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const handleFilterClick = (e)=>{
-    setFilterVisible(!FilterVisible)
-  }
+  const toggleProfileCard = () => {
+    setprofileCard(!profileCard);
+  };
+
+  const handleFilterClick = (e) => {
+    setFilterVisible(!FilterVisible);
+  };
   return (
     <>
       <nav className="sticky z-20  top-1 rounded  border-gray-200 px-5 py-1  backdrop-blur-2xl bg-white/70 m-2 ml-3">
         <div className="flex flex-wrap items-center justify-between">
           <div className="flex items-center ">
-          <Link to="/" className="flex items-center">
-            <span className="text-2xl font-semibold  text-black p-3  border-gray-500 my-2">
-              UrbanBazar 
-            </span>
-          </Link>
-          <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`}>
-            <div className={`item px-3 ${(!userstate.SellerMode)?(location.pathname==='/shop') && 'text-green-700':(location.pathname==='/seller/dashboard') && 'text-green-700' }  hover:text-green-700 transition-all duration-300 ease-linear font-semibold`}>
-            {(userstate.SellerMode)? "Dashboard" : "Shop" }
-            </div>
-          </Link>
-          <Link to={`${userstate.SellerMode ? "seller/products" : "/orders"}`}>
-            <div className={`item font-semibold px-3 ${(!userstate.SellerMode)?(location.pathname==='/orders') && 'text-green-700':(location.pathname==='/seller/products') && 'text-green-700' } hover:text-green-700 transition-all duration-300 ease-linear`}>
-            {(userstate.SellerMode)? "My Products" : "My Orders" }
-            </div>
-          </Link>
-          <Link
-            to={`${userstate.SellerMode ? "seller/addproduct" : "/support"}`}
-          >
-            <div className={`item font-semibold px-3 ${(!userstate.SellerMode)?(location.pathname==='/support') && 'text-green-700':(location.pathname==='/seller/addproduct') && 'text-green-700' } hover:text-green-700 transition-all duration-300 ease-linear`}>
-            {(userstate.SellerMode)? "Add Product" : "Customer Support" }
-            </div>
-          </Link>
-          </div>
-          <div className="relative hidden md:flex w-4/12 items-center search">
-            <input
-              type="text"
-              id="search-navbar"
-              className="block w-11/12 p-2 text-sm font-semibold text-gray-900 border-gray-200 rounded-md bg-gray-50/80 backdrop-blur-lg opacity-80  focus:border-none"
-              placeholder="What Are You Looking For ? "
-              value={input}
-              onChange={handleInputChange}
-            />
-            <i className="fa fa-search text-sm relative -ml-9 p-2 text-neutral-500 hover:text-green-700 transition-all duration-200 ease-linear"></i>
-            {input !== "" && (
-              <i
-              className="fa fa-close text-sm relative -ml-14 p-2 text-neutral-500 hover:text-red-700 transition-all duration-200 ease-linear"
-              onClick={clearInput}
-              ></i>
-              )}
-            
-            {input !== "" && resultDiv && (
-              <div className=" w-11/12 rounded-md h-44 bg-gray-50 overflow-hidden  border  backdrop-blur-3xl absolute mt-56">
-                {searchResult.map(product=>{
-                  return <Link to={`product/${product._id}` } state={{id:product._id}} onClick={hideDiv}><div className=" w-full h-1/6 text-sm px-2  flex items-center font-bold hover:bg-slate-200 cursor-pointer" id={product._id}>{product.title}</div></Link>
-                })}
+            <Link to="/" className="flex items-center">
+              <span className="text-2xl font-semibold  text-black p-3  border-gray-500 my-2">
+                UrbanBazar
+              </span>
+            </Link>
+            <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`}>
+              <div
+                className={`item px-3 ${
+                  !userstate.SellerMode
+                    ? location.pathname === "/shop" && "text-green-700"
+                    : location.pathname === "/seller/dashboard" &&
+                      "text-green-700"
+                }  hover:text-green-700 transition-all duration-300 ease-linear font-semibold`}
+              >
+                {userstate.SellerMode ? "Dashboard" : "Shop"}
               </div>
-              )}
+            </Link>
+            <Link
+              to={`${userstate.SellerMode ? "seller/products" : "/orders"}`}
+            >
+              <div
+                className={`item font-semibold px-3 ${
+                  !userstate.SellerMode
+                    ? location.pathname === "/orders" && "text-green-700"
+                    : location.pathname === "/seller/products" &&
+                      "text-green-700"
+                } hover:text-green-700 transition-all duration-300 ease-linear`}
+              >
+                {userstate.SellerMode ? "My Products" : "My Orders"}
+              </div>
+            </Link>
+            <Link
+              to={`${userstate.SellerMode ? "seller/addproduct" : "/support"}`}
+            >
+              <div
+                className={`item font-semibold px-3 ${
+                  !userstate.SellerMode
+                    ? location.pathname === "/support" && "text-green-700"
+                    : location.pathname === "/seller/addproduct" &&
+                      "text-green-700"
+                } hover:text-green-700 transition-all duration-300 ease-linear`}
+              >
+                {userstate.SellerMode ? "Add Product" : "Customer Support"}
+              </div>
+            </Link>
           </div>
-          {location.pathname.includes('/shop') &&<button className=" font-bold" onClick={handleFilterClick}><i className="fa-solid fa-filter font-sans mr-1"></i>Filters</button>}
+          {!userstate.SellerMode && (
+            <div className="relative hidden md:flex w-4/12 items-center search">
+              <input
+                type="text"
+                id="search-navbar"
+                className="block w-11/12 p-2 text-sm font-semibold text-gray-900 border-gray-200 rounded-md bg-gray-50/80 backdrop-blur-lg opacity-80  focus:border-none"
+                placeholder="What Are You Looking For ? "
+                value={input}
+                onChange={handleInputChange}
+              />
+              <i className="fa fa-search text-sm relative -ml-9 p-2 text-neutral-500 hover:text-green-700 transition-all duration-200 ease-linear"></i>
+              {input !== "" && (
+                <i
+                  className="fa fa-close text-sm relative -ml-14 p-2 text-neutral-500 hover:text-red-700 transition-all duration-200 ease-linear"
+                  onClick={clearInput}
+                ></i>
+              )}
+
+              {input !== "" && resultDiv && (
+                <div className=" w-11/12 rounded-md h-44 bg-gray-50 overflow-hidden  border  backdrop-blur-3xl absolute mt-56">
+                  {searchResult.map((product) => {
+                    return (
+                      <Link
+                        to={`product/${product._id}`}
+                        state={{ id: product._id }}
+                        onClick={hideDiv}
+                      >
+                        <div
+                          className=" w-full h-1/6 text-sm px-2  flex items-center font-bold hover:bg-slate-200 cursor-pointer"
+                          id={product._id}
+                        >
+                          {product.title}
+                        </div>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+          {location.pathname.includes("/shop") && (
+            <button className=" font-bold" onClick={handleFilterClick}>
+              <i className="fa-solid fa-filter font-sans mr-1"></i>Filters
+            </button>
+          )}
           <div className="flex md:order-2">
             <button
               type="button"
@@ -136,7 +188,7 @@ const NavBar = () => {
               </svg>
               <span className="sr-only">Search </span>
             </button>
-            {userstate.isLogin ? (
+            {userstate.isLogin === true ? (
               <>
                 {!userstate.SellerMode && (
                   <Link
@@ -151,24 +203,23 @@ const NavBar = () => {
                     cart
                   </Link>
                 )}
-                <Link
-                  to={"/profile"}
+                <div
+                  onClick={toggleProfileCard}
                   className="flex justify-center rounded-full overflow-hidden hover:bg-green-200 items-center text-sm font-semibold transition-all duration-300 ease-in p-1"
                 >
-                          
                   <img
                     className="  h-6 cursor-pointer  rounded-full"
                     src="../icons/user.png"
                     alt="user"
                   ></img>
-                </Link>
-                <ProfileCard/>
+                </div>
+                {profileCard && <Profile />}
               </>
             ) : (
               <Link to={"/login"}>
                 <button
                   type="button"
-                  className="text-gray-500 shadow-lg shadow-green-300  bg-green-500  transition-all duration-300 ease-in-out hover:bg-green-500/80  rounded-lg text-sm px-6 py-2 text-center font-bold mx-1 "
+                  className="text-gray-500   bg-green-500  transition-all duration-300 ease-in-out hover:bg-green-500/80  rounded-lg text-sm px-6 py-2 text-center font-bold mx-1 "
                 >
                   Login
                 </button>
@@ -232,8 +283,18 @@ const NavBar = () => {
             </div>
           </div>
         </div>
-        {(location.pathname.includes('/shop') && FilterVisible) && <Filter/>}
-
+        {location.pathname.includes("/shop") && FilterVisible && <Filter />}
+        {/* <div className=" font-bold text-sm flex  items-center gap-2">
+        <label class="relative inline-flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            class="sr-only peer"
+            id="seller-switch "
+          />
+          <div class="w-11 h-5 border-2  p-1    rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-5 after:transition-all  peer-checked:bg-green-600"></div>
+        </label>
+        become seller
+        </div> */}
       </nav>
     </>
   );

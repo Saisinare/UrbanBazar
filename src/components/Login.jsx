@@ -21,7 +21,7 @@ const Login = () => {
   useEffect(() => {
     console.log(logistate);
     if (logistate.data) {
-      if (logistate.data.success) {
+      if (logistate.isLogin) {
         dispatch(setLogin(true))
         dispatch(setUser(logistate.data.user))
         Cookies.set("login", true, { secure: true });
