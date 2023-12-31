@@ -11,4 +11,9 @@ Router.post('/order',isAuth,productController.postOrder)
 Router.get('/orders',isAuth,productController.getOrders)
 Router.delete('/api/cart/:productId',isAuth,productController.deleteFromCart)
 Router.get('/search',productController.getSearchResult)
+Router.get('/buy/:productId',isAuth,productController.getBuy);
+Router.put('/cart/item/changeQuantity',isAuth,productController.putChangeQuantity)
+Router.get('/order/:productId',isAuth,productController.getOrder)
+Router.post('/review',isAuth,productController.postReview)
+Router.get('/review/:productId',productController.getReview)
 module.exports = Router;

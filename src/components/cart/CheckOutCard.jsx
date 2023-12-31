@@ -45,6 +45,7 @@ const CheckOutCard = () => {
       return res
       }
     }).then(res=>{
+      console.log(res.data.url)
        window.location.href = res.data.url;
     }).catch(err=>{
       console.log(err)
@@ -52,8 +53,8 @@ const CheckOutCard = () => {
   }
 
   return (
-    <div className=" sticky top-20 flex h-auto w-5/12 item-center justify-center pt-5">
-      <div class="flex flex-col h-auto w-11/12 p-6  bg-white border border-green-500 rounded-lg shadow">
+    <div className=" sticky top-20 flex h-fit w-5/12 item-center justify-center pt-5">
+      <div class="flex flex-col h-auto w-11/12 p-5  bg-white border  rounded-lg shadow">
         <form>
           <div class="relative">
             <input
@@ -69,7 +70,7 @@ const CheckOutCard = () => {
             </button>
           </div>
         </form>
-        <div className="details h-56 p-5 px-11  text-gray-800 font-semibold">
+        <div className="details h-56 py-5 px-1 text-gray-800 font-semibold">
             <div className="data w-full flex justify-between">
                 <div className="label">Product Cost</div>
                 <div className="value">{productsPrice}₹</div>

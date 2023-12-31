@@ -5,7 +5,7 @@ import ProductsCard from "./ProductsCard";
 
 const Mycart = () => {
   return (
-    <div className="flex w-11/12">
+    <div className="flex w-11/12 h-screen">
         <ProductsCard/>
         <CheckOutCard/>
     </div>

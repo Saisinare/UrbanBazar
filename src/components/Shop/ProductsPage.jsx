@@ -16,7 +16,6 @@ const ProductsPage = () => {
       <div className="flex h-full bg-white">
         <ProductSection />
       </div>
-      <Footer />
     </>
   );
 };

@@ -15,6 +15,8 @@ import ProductPage from "./components/ProductPage/ProductPage";
 import PurchasePage from "./components/purchasePage/PurchasePage";
 import Success from "./components/Success";
 import Orders from "./components/Orders/Orders";
+import ProfilePage from "./components/profile/ProfilePage";
+import Footer from "./components/Footer";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -27,7 +29,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/cart" element={<Cart />}></Route>
-          <Route exact path="/profile" element={<Profile />}></Route>
+          <Route exact path="/profile" element={<ProfilePage />}></Route>
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/signup" element={<Signup />}></Route>
           <Route exact path="/shop" element={<ProductsPage />}></Route>
@@ -69,6 +71,7 @@ function App() {
           ></Route>
           
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </>
   );

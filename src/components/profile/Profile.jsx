@@ -3,12 +3,11 @@ import React from "react";
 import { setLogin, setSellerMode } from "../../redux/slice/user";
 import { useDispatch, useSelector } from "react-redux";
 import { setlogin } from "../../redux/slice/login";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const userState = useSelector((state) => state.user);
 
   const handleSwitch = (e) => {
@@ -34,9 +33,11 @@ const Profile = () => {
           Hello <span className="text-blue-600">Sai</span>
           <span />
         </div>
+        <Link to={'/profile'}>
         <div className="w-full p-3 hover:text-green-600 cursor-pointer">
           View Profile
         </div>
+        </Link>
         <div className="w-full p-3  cursor-pointer flex justify-between ">
           <p>Seller Mode</p>
           <label class="relative inline-flex items-center cursor-pointer">

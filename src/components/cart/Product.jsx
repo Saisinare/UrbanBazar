@@ -1,7 +1,8 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 
 const Product = (props) => {
+  const [qt, setqt] = useState(props.product.quantity);
   const handleDelete = () => {
     axios
       .delete(`http://localhost:8000/api/cart/${props.product.product._id}`, {
@@ -19,6 +20,36 @@ const Product = (props) => {
         console.log(err);
       });
   };
+
+  const handleButtonChange = (val) => {
+    setqt(qt + val);
+    axios
+      .put(
+        "http://localhost:8000/cart/item/changeQuantity",
+        { productId: props.product.product._id, qt: val },
+        { withCredentials: true }
+      )
+      .then((res) => {
+        console.log(res);
+      });
+  };
+  const handleChange = (val) => {
+    if (isNaN(val)) {
+    setqt(0)
+    }
+    else{
+      setqt(val);
+      axios
+        .put(
+          "http://localhost:8000/cart/item/changeQuantity",
+          { productId: props.product.product._id, qt: val },
+          { withCredentials: true }
+        )
+        .then((res) => {
+          console.log(res);
+        });
+      }
+  };
   return (
     <div className="h-24 flex flex-col mb-3 justify-center w-4/5 rounded-lg overflow-hidden bg-gradient-to-tl from-slate-100 to-gray-100  border border-green-300">
       <div className="h-full  flex  backdrop-blur-lg">
@@ -35,8 +66,36 @@ const Product = (props) => {
               {props.product.product.title}
             </h1>
           </div>
-          <div className="w-full h-1/5  p-3 font-semibold">{props.product.product.price}</div>
-          <div className="w-full h-1/4  p-3 font-semibold text-gray-600">Quantity : {props.product.quantity}</div>
+          <div className="w-full h-1/5  p-3 font-semibold">
+            {props.product.product.price}
+          </div>
+          <div className="w-full h-1/4  p-3 font-semibold ">
+            Quantity :{" "}
+            <button
+              className=" cursor-pointer"
+              onClick={() => {
+                handleButtonChange(-1);
+              }}
+              >
+              -
+            </button>
+            <input
+              type="text"
+              className=" border-0  h-5 w-10 text-center bg-transparent"
+              value={qt}
+              onChange={(e) => {
+                handleChange(parseInt(e.target.value));
+              }}
+            />
+            <buttons
+                className=" cursor-pointer"
+              onClick={() => {
+                handleButtonChange(1);
+              }}
+            >
+              +
+            </buttons>
+          </div>
         </div>
         <div className="h-full w-1/4  flex  px-3 py-1 justify-end items-end">
           <button
