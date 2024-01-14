@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const ProductCard = (props) => {
   const handleAddCart = () => {
 
@@ -14,10 +13,7 @@ const ProductCard = (props) => {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log("this is props")
-        console.log(props)
-        console.log("this is props")
-        console.log(response);
+        props.handleCartToast();
       })
       .catch((err) => {
         console.log(err);
@@ -25,9 +21,12 @@ const ProductCard = (props) => {
   };
   const hadleDelete = () => {
     axios
-      .delete(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/product/${props.id}`, {
-        withCredentials: true,
-      })
+      .delete(
+        `${process.env.REACT_APP_BACKEND_API_URL}/seller/api/product/${props.id}`,
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log(response);
       })
@@ -38,7 +37,9 @@ const ProductCard = (props) => {
 
   const handleBuy = () => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/buy/${props.id}`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/buy/${props.id}`, {
+        withCredentials: true,
+      })
       .then((res) => {
         if (res.data && res.data.session_id) {
           Cookies.set("chekoutsessionId", res.data.session_id);

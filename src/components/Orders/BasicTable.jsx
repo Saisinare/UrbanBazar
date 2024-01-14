@@ -1,15 +1,42 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReviewModal from "./ReviewModal";
+import { Dialog, Slide } from "@mui/material";
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const BasicTable = () => {
+  const handleInvoice = (id) => {
+    axios
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/orders/invoice/${id}`, {
+        withCredentials: true,
+        responseType: "arraybuffer", // Use 'arraybuffer' instead of 'Blob'
+      })
+      .then((res) => {
+        const blob = new Blob([res.data], { type: "application/pdf" });
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `${id}.pdf`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const [orders, setorders] = useState([]);
   const [shippingDates, setshippingDates] = useState([]);
   const [reviewModalState, setreviewModalState] = useState(false);
   const [reviewModalproduct, setreviewModalproduct] = useState();
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/orders`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/orders`, {
+        withCredentials: true,
+      })
       .then((res) => {
         setorders(res.data.orders);
         setshippingDates(res.data.ShippingDates);
@@ -23,6 +50,19 @@ const BasicTable = () => {
     setreviewModalproduct(product);
     console.log(reviewModalState);
   };
+
+  const [open, setOpen] = React.useState(false);
+  const [currentOrder, setcurrentOrder] = useState({});
+
+  const handleClickOpen = (item) => {
+    setcurrentOrder(item);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  useEffect(() => {}, [currentOrder]);
   return (
     <div className=" flex flex-col gap-1 h-fit">
       {orders.map((item, index) => {
@@ -54,9 +94,101 @@ const BasicTable = () => {
               <div className=" w-2/5 h-full text-xl font-semibold flex flex-col justify-between pb-10 items-start">
                 Will be Arrive at {shippingDates[index]}
                 <div className="flex gap-2">
-                  <button className=" text-sm border-green-300 hover:bg-green-300 transition-all duration-75 ease-linear border-2 rounded-md px-3  py-2">
+                  <button
+                    className=" text-sm border-green-300 hover:bg-green-300 transition-all duration-75 ease-linear border-2 rounded-md px-3  py-2"
+                    onClick={() => {
+                      handleClickOpen(item);
+                    }}
+                  >
                     View Orders Detail
                   </button>
+                  <React.Fragment>
+                    <Dialog
+                      fullScreen
+                      open={open}
+                      onClose={handleClose}
+                      TransitionComponent={Transition}
+                    >
+                      <div className=" w-full flex justify-between items-center px-3  p-2 pl-8 backdrop-blur-lg opacity-95 border-b sticky top-0 bg-white">
+                        <h1 className=" font-bold">
+                          Order Id #{currentOrder != {} && currentOrder._id}
+                        </h1>
+                        <button
+                          onClick={handleClose}
+                          className=" text-2xl font-bold font-sans"
+                        >
+                          X
+                        </button>
+                      </div>
+                      <div className="h-fit p-5 px-8 border-b">
+                        <h1 className=" font-bold text-xl">Order Items</h1>
+                        <div className=" flex mt-5  flex-row flex-wrap gap-5">
+                          {currentOrder.items &&
+                            currentOrder.items.map((item) => {
+                              return (
+                                <div className=" w-1/3 h-36 border-b border-t flex">
+                                  <img
+                                    src={`${process.env.REACT_APP_BACKEND_API_URL}/products/${item.product.image}`}
+                                    alt=""
+                                    className=" h-36"
+                                  />
+                                  <div className=" text-sm font-semibold p-3">
+                                    <div className=" font-bold text-lg">
+                                      {item.product.title}
+                                    </div>
+                                    <div className=" mt-3">
+                                      Per Product {item.product.price} Rs
+                                    </div>
+                                    <div>{item.quantity} Quantities</div>
+                                    <div>{item.amountTotal} Rs</div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                        </div>
+                      </div>
+                      <div className=" h-fit p-5 px-8 ">
+                        <h1 className=" font-bold text-xl">Order Status</h1>
+                        <div className=" w-full h-44  mt-5 flex pr-10">
+                          <div className=" w-1/4 h-full  flex items-center justify-center flex-col">
+                            <img
+                              src={`${process.env.REACT_APP_BACKEND_API_URL}/icons/shipped.png`}
+                              alt="Done"
+                              className=" h-32"
+                            />
+                            <h1 className=" font-bold"> Delivered </h1>
+                          </div>
+                          <div className=" w-3/4 border-t border-b h-full p-5">
+                            <h1 className=" font-bold"> Order Summary </h1>
+                            <div className=" flex flex-col font-semibold text-sm mt-3  gap-1">
+                              <div className=" flex justify-between">
+                                <p>Ordered Date</p>
+                                <p>{item.orderDate.split("T")[0]}</p>
+                              </div>
+                              <div className=" flex justify-between">
+                                <p>Delivery Date</p>
+                                <p>{item.ShipppingDate.split("T")[0]}</p>
+                              </div>
+                              <div className=" flex justify-between">
+                                <p>Total Amount</p>
+                                <p>{currentOrder.totalAmount} Rs</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className=" w-full flex justify-end p-10">
+                          <div
+                            className=" font-semibold text-sm cursor-pointer hover:text-green-600"
+                            onClick={() => {
+                              currentOrder != {} && handleInvoice(currentOrder._id);
+                            }}
+                          >
+                            Generate Invoice
+                          </div>
+                        </div>
+                      </div>
+                    </Dialog>
+                  </React.Fragment>
 
                   {item.items.length == 1 && item.Status == "delivered" && (
                     <button
@@ -70,7 +202,12 @@ const BasicTable = () => {
                   )}
                 </div>
                 <div className=" text-base">
-                  <button className=" text-sm hover:text-green-500   rounded-md px-2  py-1">
+                  <button
+                    className=" text-sm hover:text-green-500   rounded-md px-2  py-1"
+                    onClick={() => {
+                      handleInvoice(item._id);
+                    }}
+                  >
                     Generate invoice
                   </button>
                 </div>

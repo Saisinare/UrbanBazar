@@ -10,7 +10,7 @@ const ProductSection = (props) => {
   const productsState = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const location = useLocation();
-  const showToast = ()=>{
+  const handleCartToast = ()=>{
     toast.success("Product Added To The Cart");
   }
   useEffect(() => {
@@ -54,11 +54,11 @@ const ProductSection = (props) => {
               price={product.price}
               image={product.image}
               category={props.title}
-              showToast={showToast}
+              handleCartToast={handleCartToast}
             />
           );
         })}
-        <Toaster/>
+        <Toaster richColors position="bottom-center"/>
     </div>
   );
 };

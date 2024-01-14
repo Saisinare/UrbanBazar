@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 
 import ProductCard from "../Shop/ProductCard";
 import axios from "axios";
+import { Toaster, toast } from "sonner";
 
 const BestOfCard = (props) => {
   const [products, setproducts] = useState([]);
-
+  const handleCartToast = ()=>{
+    toast.success("Product Added To the Cart")
+  }
   useEffect(() => {
     const category = props.title.toLowerCase();
     axios
@@ -42,10 +45,12 @@ const BestOfCard = (props) => {
               price={product.price}
               image={product.image}
               category={props.title}
+              handleCartToast= {handleCartToast}
             />
           );
         })}
       </div>
+      <Toaster richColors position="bottom-center"/>
     </>
   );
 };

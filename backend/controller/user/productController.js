@@ -2,11 +2,12 @@ const { default: mongoose } = require("mongoose");
 const Product = require("../../models/Product");
 const User = require("../../models/User");
 const Review = require("../../models/Review");
-
+const fs = require('fs')
 const Order = require("../../models/Order");
 const dotenv = require("dotenv");
 const { default: Stripe } = require("stripe");
 const moment = require("moment");
+const pdfKit = require("pdfkit");
 dotenv.config();
 const Strip = require("stripe")(process.env.STRIP_PRIVATE_KEY);
 
@@ -418,4 +419,43 @@ exports.getReview = async (req, res) => {
     res.status(500).json({ msg: "internal server error" });
     console.log(err);
   }
+};
+
+
+exports.getOrderInvoice = (req, res) => {
+  const userId = req.userId;
+  const orderId = req.params.orderId;
+
+  Order.findOne({ _id: orderId, customer: userId }).populate("items.product").then(order => {
+    if (!order) {
+      return res.status(404).json({ error: "Order not found" });
+    }
+
+    const doc = new pdfKit();
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename=${orderId + "-" + Date.now()}.pdf`);
+
+    // Pipe the PDF content directly to the response
+    doc.pipe(res);
+
+    doc.fontSize(14).text("Invoice Id:- " + orderId);
+    doc.text("Order Date:-" + order.orderDate);
+    doc.text("Shipping Date:-" + order.ShipppingDate);
+    doc.text("Items");
+    doc.text("---------------------------------------");
+
+    order.items.forEach(product => {
+      doc.text(product.product.title + ":-" + product.amountTotal);
+    });
+
+    doc.text("---------------------------------------");
+    doc.text("Total Amount:-" + order.totalAmount);
+
+    // Finalize the PDF and end the response
+    doc.end();
+  }).catch(err => {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  });
 };
