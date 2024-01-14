@@ -36,6 +36,10 @@ const ProductCard = (props) => {
    })
   }
 
+  const handleEdit = ()=>{
+    console.log("Edit Clicked")
+  }
+
   return (
     <>
 
@@ -54,12 +58,13 @@ const ProductCard = (props) => {
             </div>
 
               </Link>
-
+            <Link to={"/seller/editProduct"} state={{id:props.id}}>
             <div className="w-full justify-center flex items-center ">
-              <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-green-500 text-gray-500 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm " onClick={(!props.forSeller)&& handleBuy}>
+              <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-green-500 text-gray-500 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm " onClick={(!props.forSeller)?handleBuy:handleEdit}>
                 {(props.forSeller)?'Edit':'Buy Now'}
               </button>
             </div>
+            </Link>
 
             <div className="w-full justify-center flex items-center ">
               <button onClick={(!props.forSeller) ? handleAddCart : hadleDelete} className={`btn btn-sm py-1 w-11/12 rounded-xl border border-gray-400  bg-transparent hover:text-white hover:bg-gray-900 transition-all duration-500 ease-in-out font-semibold text-sm`}>

@@ -13,16 +13,25 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
+  fullname:{
+    type:String,
+  },
   mobileNo: {
     type: String,
     required: true,
     unique: true,
   },
-  address: {
+  country: {
     type: String,
   },
   pincode: {
     type: String,
+  },
+  state:{
+    type:String,
+  },
+  localAddress:{
+    type:String,
   },
   password: {
     type: String,
@@ -37,6 +46,9 @@ const userSchema = new Schema({
       quantity: Number
     },
   ],
+  profilePhoto:{
+    type:String
+  }
 });
 const User = mongoose.model("User", userSchema);
 User.createIndexes();

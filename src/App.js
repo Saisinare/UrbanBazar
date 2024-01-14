@@ -17,6 +17,7 @@ import Success from "./components/Success";
 import Orders from "./components/Orders/Orders";
 import ProfilePage from "./components/profile/ProfilePage";
 import Footer from "./components/Footer";
+import Dashboard from "./components/seller/Dashboard/Dashboard";
 
 function App() {
   const user = useSelector((state) => state.user);
@@ -69,7 +70,11 @@ function App() {
             path="/orders"
             element={<Orders/>}
           ></Route>
-          
+          <Route 
+          exact path="/seller/dashboard"
+          element={<Dashboard/>}
+          >
+          </Route>
         </Routes>
         <Footer/>
       </BrowserRouter>

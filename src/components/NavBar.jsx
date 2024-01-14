@@ -103,8 +103,8 @@ const NavBar = () => {
                 {userstate.SellerMode ? "My Products" : "My Orders"}
               </div>
             </Link>
-            <Link
-              to={`${userstate.SellerMode ? "seller/addproduct" : "/support"}`}
+            {userstate.SellerMode && <Link
+              to={"seller/addproduct" }
             >
               <div
                 className={`item font-semibold px-3 ${
@@ -114,9 +114,9 @@ const NavBar = () => {
                       "text-green-700"
                 } hover:text-green-700 transition-all duration-300 ease-linear`}
               >
-                {userstate.SellerMode ? "Add Product" : "Customer Support"}
+                { "Add Product" }
               </div>
-            </Link>
+            </Link>}
           </div>
           {!userstate.SellerMode && (
             <div className="relative hidden md:flex w-4/12 items-center search">
@@ -209,7 +209,7 @@ const NavBar = () => {
                 >
                   <img
                     className="  h-6 cursor-pointer  rounded-full"
-                    src="../icons/user.png"
+                     src="../icons/user.png"
                     alt="user"
                   ></img>
                 </div>

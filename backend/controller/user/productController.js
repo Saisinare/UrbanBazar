@@ -264,7 +264,9 @@ exports.postOrder = async (req, res) => {
       products.push({
         product: product.price.metadata.productId,
         type: product.price.metadata.orderType,
-      });
+        quantity:product.quantity,
+        amountTotal:product.amount_total
+      }); 
     });
 
     console.log(products);

@@ -30,7 +30,7 @@ const Profile = () => {
     <>
       <div className={`flex flex-col h-max fixed  w-60 bg-slate-50 border backdrop-blur-lg rounded-md font-semibold text-sm mt-16 -translate-x-28 ${userState.SellerMode && ' -translate-x-52'} `}>
         <div className="w-full p-3 cursor-pointer">
-          Hello <span className="text-blue-600">Sai</span>
+          Hello <span className="text-blue-600">{userState.user.username}</span>
           <span />
         </div>
         <Link to={'/profile'}>

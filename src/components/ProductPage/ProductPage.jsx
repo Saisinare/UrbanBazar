@@ -152,7 +152,7 @@ const ProductPage = () => {
                   </div>
                   <div className=" w-20 font-semibold">{summ[index]}</div>
                   <div class="w-3/5 flex item-end">
-                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 ">
                       <div
                         class="bg-yellow-500 h-2.5 rounded-full"
                         style={{
