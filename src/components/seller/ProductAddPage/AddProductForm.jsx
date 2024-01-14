@@ -71,7 +71,7 @@ const AddProductForm = (props) => {
       product_quantity: props.quantity,
     };
     axios
-      .post("http://localhost:8000/seller/api/product", formData, {
+      .post(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/product`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -83,7 +83,7 @@ const AddProductForm = (props) => {
     const form = document.querySelector('form')
     if (location.state && location.state.id) {
       axios
-        .get(`http://localhost:8000/product/${location.state.id}`)
+        .get(`${process.env.REACT_APP_BACKEND_API_URL}/product/${location.state.id}`)
         .then((response) => {
           if(response.data){
             const Editproduct = response.data.products

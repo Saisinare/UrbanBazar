@@ -5,7 +5,7 @@ const Modal = (props) => {
   const hadleClick = async () => {
     try {
       const response = await axios.put(
-        "http://localhost:8000/api/user",
+        `${process.env.REACT_APP_BACKEND_API_URL}/api/user`,
         {},
         { withCredentials: true }
       );

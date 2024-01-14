@@ -27,7 +27,7 @@ const NavBar = () => {
   useEffect(() => {
     setProducts([]);
     dispatch(setisWaiting(true));
-    axios("http://localhost:8000/api/user", { withCredentials: true })
+    axios(`${process.env.REACT_APP_BACKEND_API_URL}/api/user`, { withCredentials: true })
       .then((response) => {
         dispatch(setisComplete(true));
         if (response.data) {
@@ -57,7 +57,7 @@ const NavBar = () => {
     setResultDiv(true);
     setinput(e.target.value);
     axios
-      .get(`http://localhost:8000/search?keyword=${e.target.value}`)
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/search?keyword=${e.target.value}`)
       .then((products) => {
         setSearchResult(products.data.products);
       })

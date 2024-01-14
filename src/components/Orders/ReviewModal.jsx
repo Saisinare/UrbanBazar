@@ -21,7 +21,7 @@ const ReviewModal = (props) => {
 
     let data = { productId: props.product._id, rating: rate, review: review};
     axios
-      .post("http://localhost:8000/review", data, {
+      .post(`${process.env.REACT_APP_BACKEND_API_URL}/review`, data, {
         withCredentials: true,
       })
       .then((response) => {
@@ -40,7 +40,7 @@ const ReviewModal = (props) => {
         <div>
           <div className=" flex items-end ">
             <img
-              src={`http://localhost:8000/products/${props.product.image}`}
+              src={`${process.env.REACT_APP_BACKEND_API_URL}/products/${props.product.image}`}
               className=" h-24 rounded-lg m-2"
             />
             <div className="pt-3 font-semibold text-xl mb-3">
@@ -57,7 +57,7 @@ const ReviewModal = (props) => {
                   return (
                     <img
                       className=" h-7 mr-3"
-                      src={`http://127.0.0.1:8000/icons/${
+                      src={`${process.env.REACT_APP_BACKEND_API_URL}/icons/${
                         index < rate ? "fillstar" : "emptystar"
                       }.png`}
                       onClick={() => {

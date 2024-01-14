@@ -12,7 +12,7 @@ const ProductPage = () => {
   const handleAddCart = () => {
     axios
       .post(
-        `http://localhost:8000/cart/add/${location.state.id}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}/cart/add/${location.state.id}`,
         {},
         { withCredentials: true }
       )
@@ -30,7 +30,7 @@ const ProductPage = () => {
 
   const handleBuy = () => {
     axios
-      .get(`http://localhost:8000/buy/${location.state.id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/buy/${location.state.id}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -55,7 +55,7 @@ const ProductPage = () => {
   const [ratingStats, setratingStats] = useState({});
   useEffect(() => {
     axios
-      .get(`http://localhost:8000/product/${location.state.id}`)
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/product/${location.state.id}`)
       .then((response) => {
         if (response.data) {
           if (response.data.products) {
@@ -69,7 +69,7 @@ const ProductPage = () => {
       });
 
       axios
-      .get(`http://localhost:8000/review/${location.state.id}`)
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/review/${location.state.id}`)
       .then((res) => {
         console.log(res);
         if (res.data && res.data.reviews) {
@@ -92,7 +92,7 @@ const ProductPage = () => {
           <div className="image-section h-96  flex items-center w-fit">
             <img
               src={`${
-                product && `http://localhost:8000/products/${product.image}`
+                product && `${process.env.REACT_APP_BACKEND_API_URL}/products/${product.image}`
               }`}
               className=" h-full rounded"
               alt=""
@@ -217,7 +217,7 @@ const ProductPage = () => {
         <div className="w-2/3 h-full text-black font-sans font-semibold p-3 flex items-center ">
           <img
             src={`${
-              product && `http://localhost:8000/products/${product.image}`
+              product && `${process.env.REACT_APP_BACKEND_API_URL}/products/${product.image}`
             }`}
             className=" h-full"
             alt=""

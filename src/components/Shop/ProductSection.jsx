@@ -28,9 +28,10 @@ const ProductSection = (props) => {
       }
     }
     console.log(filterString)
+    console.log(`${process.env.REACT_APP_BACKEND_API_URL}/products${filterString}`)
     axios
       .get(
-        `http://localhost:8000/products${filterString}`
+        `${process.env.REACT_APP_BACKEND_API_URL}/products${filterString}`
       )
       .then((response) => {
         dispatch(setProducts(response.data.products));

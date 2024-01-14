@@ -9,7 +9,7 @@ const ProductCard = (props) => {
 
     axios
       .post(
-        `http://localhost:8000/cart/add/${props.id}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}/cart/add/${props.id}`,
         {},
         { withCredentials: true }
       )
@@ -25,7 +25,7 @@ const ProductCard = (props) => {
   };
   const hadleDelete = () => {
     axios
-      .delete(`http://localhost:8000/seller/api/product/${props.id}`, {
+      .delete(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/product/${props.id}`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -38,7 +38,7 @@ const ProductCard = (props) => {
 
   const handleBuy = () => {
     axios
-      .get(`http://localhost:8000/buy/${props.id}`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/buy/${props.id}`, { withCredentials: true })
       .then((res) => {
         if (res.data && res.data.session_id) {
           Cookies.set("chekoutsessionId", res.data.session_id);
@@ -66,7 +66,7 @@ const ProductCard = (props) => {
         <div
           className="rounded-xl bg-cover bg-no-repeat "
           style={{
-            backgroundImage: `url("http://localhost:8000/products/${props.image}")`,
+            backgroundImage: `url("${process.env.REACT_APP_BACKEND_API_URL}/products/${props.image}")`,
           }}
         >
           <div className=" h-full w-full  rounded-xl overflow-hidden border shadow pb-3 bg-white/80  backdrop-blur-md  ">
@@ -76,7 +76,7 @@ const ProductCard = (props) => {
             >
               <div className="pro-img w-full flex h-72   overflow-hidden ">
                 <img
-                  src={`http://localhost:8000/products/${props.image}`}
+                  src={`${process.env.REACT_APP_BACKEND_API_URL}/products/${props.image}`}
                   className="h-fit hover:scale-105 transition-all duration-500 ease-in-out hover:rotate-1"
                   alt="shoes"
                 />

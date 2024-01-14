@@ -9,7 +9,7 @@ const BasicTable = () => {
   const [reviewModalproduct, setreviewModalproduct] = useState();
   useEffect(() => {
     axios
-      .get("http://localhost:8000/orders", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/orders`, { withCredentials: true })
       .then((res) => {
         setorders(res.data.orders);
         setshippingDates(res.data.ShippingDates);
@@ -40,7 +40,7 @@ const BasicTable = () => {
                     if (index < 3) {
                       return (
                         <img
-                          src={`http://localhost:8000/products/${product.product.image}`}
+                          src={`${process.env.REACT_APP_BACKEND_API_URL}/products/${product.product.image}`}
                           className=" h-32 rounded-2xl m-2"
                         />
                       );

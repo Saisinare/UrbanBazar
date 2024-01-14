@@ -10,7 +10,7 @@ const ProfilePage = () => {
   const updateData = {};
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/user", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/api/user`, { withCredentials: true })
       .then((res) => {
         console.log(res);
         setuser(res.data.user);
@@ -29,7 +29,7 @@ const ProfilePage = () => {
     const formData = new FormData();
     formData.append("profile", file);
     const res = await axios.post(
-      "http://localhost:8000/user/profile/photo",
+      `${process.env.REACT_APP_BACKEND_API_URL}/user/profile/photo`,
       formData,
       { withCredentials: true }
     );
@@ -40,7 +40,7 @@ const ProfilePage = () => {
 
   const handleInputChange = async (title, val) => {
     updateData[title] = val;
-    const res = await axios.put("http://localhost:8000/user", updateData, {
+    const res = await axios.put(`${process.env.REACT_APP_BACKEND_API_URL}/user`, updateData, {
       withCredentials: true,
     });
   };
@@ -55,7 +55,7 @@ const ProfilePage = () => {
                 <img
                   src={
                     profile != ""
-                      ? "http://localhost:8000/user_profile/" + profile
+                      ? `${process.env.REACT_APP_BACKEND_API_URL}/user_profile/` + profile
                       : "../icons/user.png"
                   }
                   alt="user"

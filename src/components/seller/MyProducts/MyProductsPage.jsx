@@ -10,7 +10,7 @@ const MyProductsPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     axios
-      .get("http://localhost:8000/seller/api/products", {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/products`, {
         withCredentials: true,
       })
       .then((response) => {

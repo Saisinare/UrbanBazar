@@ -18,7 +18,7 @@ const Dashboard = () => {
     setyearValue(e.target.value);
     axios
       .get(
-        "http://localhost:8000/seller/api/statistics/revenue/" + e.target.value,
+        `${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics/revenue/` + e.target.value,
         { withCredentials: true }
       )
       .then((res) => {
@@ -44,7 +44,7 @@ const Dashboard = () => {
     setyears(yearsArray);
 
     axios
-      .get("http://localhost:8000/seller/api/statistics", {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -60,7 +60,7 @@ const Dashboard = () => {
       });
 
     axios
-      .get("http://localhost:8000/seller/api/statistics/revenue/" + yearValue, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics/revenue/` + yearValue, {
         withCredentials: true,
       })
       .then((res) => {

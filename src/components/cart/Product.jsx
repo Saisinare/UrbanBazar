@@ -5,7 +5,7 @@ const Product = (props) => {
   const [qt, setqt] = useState(props.product.quantity);
   const handleDelete = () => {
     axios
-      .delete(`http://localhost:8000/api/cart/${props.product.product._id}`, {
+      .delete(`${process.env.REACT_APP_BACKEND_API_URL}/api/cart/${props.product.product._id}`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -25,7 +25,7 @@ const Product = (props) => {
     setqt(qt + val);
     axios
       .put(
-        "http://localhost:8000/cart/item/changeQuantity",
+        `${process.env.REACT_APP_BACKEND_API_URL}/cart/item/changeQuantity`,
         { productId: props.product.product._id, qt: val },
         { withCredentials: true }
       )
@@ -41,7 +41,7 @@ const Product = (props) => {
       setqt(val);
       axios
         .put(
-          "http://localhost:8000/cart/item/changeQuantity",
+          `${process.env.REACT_APP_BACKEND_API_URL}/cart/item/changeQuantity`,
           { productId: props.product.product._id, qt: val },
           { withCredentials: true }
         )
@@ -55,7 +55,7 @@ const Product = (props) => {
       <div className="h-full  flex  backdrop-blur-lg">
         <div className="w-1/5 flex h-full  justify-center items-center">
           <img
-            src={`http://localhost:8000/products/${props.product.product.image}`}
+            src={`${process.env.REACT_APP_BACKEND_API_URL}/products/${props.product.product.image}`}
             className=" h-full "
             alt=""
           />

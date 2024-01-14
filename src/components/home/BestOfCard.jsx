@@ -9,7 +9,7 @@ const BestOfCard = (props) => {
   useEffect(() => {
     const category = props.title.toLowerCase();
     axios
-      .get(`http://localhost:8000/products?category=${category}&limit=5`)
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/products?category=${category}&limit=5`)
       .then((response) => {
         const productArr = [];
 

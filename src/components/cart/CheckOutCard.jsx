@@ -17,7 +17,7 @@ const CheckOutCard = () => {
   useEffect(() => {
     console.log(productsState)
     axios
-      .get("http://localhost:8000/cart/products", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/cart/products`, { withCredentials: true })
       .then((response) => {
         if (response.data) {
           setcart(response.data.cart);
@@ -38,7 +38,7 @@ const CheckOutCard = () => {
 
 
   const handleClick = ()=>{
-    axios.get('http://localhost:8000/checkout',{withCredentials:true}).then(res=>{
+    axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/checkout`,{withCredentials:true}).then(res=>{
       if(res.data && res.data.session_id){
       dispatch(setcheckoutsessionId(res.data.session_id));
       Cookies.set('chekoutsessionId',res.data.session_id)

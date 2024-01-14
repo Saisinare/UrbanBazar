@@ -1,7 +1,7 @@
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 export const signup =  createAsyncThunk('signup', async (user)=>{
-    const response = await fetch('http://localhost:8000/user/signup', {
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_API_URL}/user/signup`, {
         method: "POST", 
         headers: {
           "Content-Type": "application/json",

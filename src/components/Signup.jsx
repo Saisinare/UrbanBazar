@@ -16,7 +16,7 @@ const Signup = () => {
       password: e.target.password.value,
     };
     try {
-      const response = await axios.post("http://localhost:8000/user/signup", user);
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_API_URL}/user/signup`, user);
       if (response) {
         if (response.data.sucess) {
           dispatch(setLogin(true))

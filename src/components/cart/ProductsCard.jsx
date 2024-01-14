@@ -6,7 +6,7 @@ const ProductsCard = () => {
   const [cart, setcart] = useState();
   useEffect(() => {
     axios
-      .get("http://localhost:8000/cart/products", { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/cart/products`, { withCredentials: true })
       .then((response) => {
         if (response.data) {
           setcart(response.data.cart);

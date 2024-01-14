@@ -13,7 +13,7 @@ const Success = () => {
     console.log("sessionId =");
     console.log(sessionId);
     axios
-      .post(`http://localhost:8000/order`,{sessionId:sessionId},{
+      .post(`${process.env.REACT_APP_BACKEND_API_URL}/order`,{sessionId:sessionId},{
       withCredentials:true,
       })
       .then((res) => {
