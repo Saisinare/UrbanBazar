@@ -7,9 +7,11 @@ import axios from "axios";
 import { setProducts } from "../redux/slice/products";
 import Profile from "./profile/Profile";
 import Filter from "./Filters/Filter";
-import { setlogin } from "../redux/slice/login";
+import MyLoadingBar from "./MyLoadingBar";
+import { setisComplete, setisWaiting } from "../redux/slice/progressBar";
 
 const NavBar = () => {
+  const [progress, setprogress] = useState(0);
   const userstate = useSelector((state) => state.user);
   const [token, setToken] = useState();
   const [input, setinput] = useState("");
@@ -20,10 +22,14 @@ const NavBar = () => {
   const location = useLocation();
   const [profileCard, setprofileCard] = useState(false);
 
+  const disptach = useDispatch();
+
   useEffect(() => {
     setProducts([]);
+    dispatch(setisWaiting(true));
     axios("http://localhost:8000/api/user", { withCredentials: true })
       .then((response) => {
+        dispatch(setisComplete(true));
         if (response.data) {
           dispatch(setUser(response.data.user));
         }
@@ -69,8 +75,8 @@ const NavBar = () => {
   };
   return (
     <>
-      <nav className="sticky z-20  top-1 rounded  border-gray-200 px-5 py-1  backdrop-blur-2xl bg-white/70 m-2 ml-3">
-        <div className="flex flex-wrap items-center justify-between">
+      <nav className="sticky z-20 top-1  border-gray-200 px-5 py-1  backdrop-blur-2xl rounded-lg bg-white/70 m-2 ml-3">
+        <div className="flex flex-wrap items-center justify-between ">
           <div className="flex items-center ">
             <Link to="/" className="flex items-center">
               <span className="text-2xl font-semibold  text-black p-3  border-gray-500 my-2">
@@ -103,20 +109,20 @@ const NavBar = () => {
                 {userstate.SellerMode ? "My Products" : "My Orders"}
               </div>
             </Link>
-            {userstate.SellerMode && <Link
-              to={"seller/addproduct" }
-            >
-              <div
-                className={`item font-semibold px-3 ${
-                  !userstate.SellerMode
-                    ? location.pathname === "/support" && "text-green-700"
-                    : location.pathname === "/seller/addproduct" &&
-                      "text-green-700"
-                } hover:text-green-700 transition-all duration-300 ease-linear`}
-              >
-                { "Add Product" }
-              </div>
-            </Link>}
+            {userstate.SellerMode && (
+              <Link to={"seller/addproduct"}>
+                <div
+                  className={`item font-semibold px-3 ${
+                    !userstate.SellerMode
+                      ? location.pathname === "/support" && "text-green-700"
+                      : location.pathname === "/seller/addproduct" &&
+                        "text-green-700"
+                  } hover:text-green-700 transition-all duration-300 ease-linear`}
+                >
+                  {"Add Product"}
+                </div>
+              </Link>
+            )}
           </div>
           {!userstate.SellerMode && (
             <div className="relative hidden md:flex w-4/12 items-center search">
@@ -209,7 +215,7 @@ const NavBar = () => {
                 >
                   <img
                     className="  h-6 cursor-pointer  rounded-full"
-                     src="../icons/user.png"
+                    src="../icons/user.png"
                     alt="user"
                   ></img>
                 </div>
@@ -284,18 +290,8 @@ const NavBar = () => {
           </div>
         </div>
         {location.pathname.includes("/shop") && FilterVisible && <Filter />}
-        {/* <div className=" font-bold text-sm flex  items-center gap-2">
-        <label class="relative inline-flex items-center cursor-pointer">
-          <input
-            type="checkbox"
-            class="sr-only peer"
-            id="seller-switch "
-          />
-          <div class="w-11 h-5 border-2  p-1    rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-5 after:transition-all  peer-checked:bg-green-600"></div>
-        </label>
-        become seller
-        </div> */}
       </nav>
+      <MyLoadingBar progress={progress} />
     </>
   );
 };

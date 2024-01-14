@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialvalute = { products: [],filters:{category:'',maxPrice:'',minPrice:''},checkoutSessionId:''};
+
 const ProductSlice = createSlice({
   name: "products",
   initialState: initialvalute,

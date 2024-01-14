@@ -173,9 +173,6 @@ exports.getStatistics = async (req, res) => {
       console.error(err);
       res.status(500).json({ msg: "error" });
     })
-    .finally(() => {
-      
-    });
 };
 
 exports.getRevenueStatistics = async (req, res) => {

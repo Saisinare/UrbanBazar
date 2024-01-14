@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { login } from "../redux/slice/login";
 import Cookies from "js-cookie";
 import {setUser,setLogin} from "../redux/slice/user"
+import { Toaster, toast } from "sonner";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ const Login = () => {
         dispatch(setUser(logistate.data.user))
         Cookies.set("login", true, { secure: true });
         Cookies.set("token", logistate.data.authtoken, { secure: true });
+        toast.success("Login SuccessFull")
       }
     }
   });
@@ -97,6 +99,10 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Toaster richColors
+          position="bottom-center"
+          style={{boxShadow:"none"}}
+          />
     </section>
   );
 };

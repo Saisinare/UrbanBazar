@@ -4,11 +4,15 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { setProducts } from "../../redux/slice/products";
 import { useDispatch, useSelector } from "react-redux";
+import { Toaster, toast } from "sonner";
 
 const ProductSection = (props) => {
   const productsState = useSelector((state) => state.products);
   const dispatch = useDispatch();
   const location = useLocation();
+  const showToast = ()=>{
+    toast.success("Product Added To The Cart");
+  }
   useEffect(() => {
     let filterString = ''
     for(let fil in productsState.filters){
@@ -49,9 +53,11 @@ const ProductSection = (props) => {
               price={product.price}
               image={product.image}
               category={props.title}
+              showToast={showToast}
             />
           );
         })}
+        <Toaster/>
     </div>
   );
 };
