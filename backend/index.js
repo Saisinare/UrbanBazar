@@ -30,5 +30,6 @@ app.use("/seller", sellerRoutes);
 app.use(userRoutes);
 
 app.listen(process.env.PORT, () => {
+  console.log(corsOptions)
   console.log("server connected");
 });
