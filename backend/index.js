@@ -12,7 +12,7 @@ const path = require("path");
 const moment = require("moment");
 const mongoose = require("mongoose");
 const corsOptions = {
-  // origin: "https://urbanbazar.vercel.app",
+  origin: "https://urbanbazar.vercel.app",
   credentials: true,
 };
 app.use(cors(corsOptions));
