@@ -12,7 +12,7 @@ const path = require("path");
 const moment = require("moment");
 const mongoose = require("mongoose");
 const corsOptions = {
-  origin: "https://urbanbazar.vercel.app/",
+  // origin: "https://urbanbazar.vercel.app/",
   credentials: true,
 };
 app.use(cors(corsOptions));
@@ -30,6 +30,5 @@ app.use("/seller", sellerRoutes);
 app.use(userRoutes);
 
 app.listen(process.env.PORT, () => {
-  console.log(corsOptions)
   console.log("server connected");
 });
