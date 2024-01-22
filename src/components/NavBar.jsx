@@ -9,6 +9,7 @@ import Profile from "./profile/Profile";
 import Filter from "./Filters/Filter";
 import MyLoadingBar from "./MyLoadingBar";
 import { setisComplete, setisWaiting } from "../redux/slice/progressBar";
+import jsCookie from "js-cookie";
 
 const NavBar = () => {
   const [progress, setprogress] = useState(0);
@@ -27,7 +28,7 @@ const NavBar = () => {
   useEffect(() => {
     setProducts([]);
     dispatch(setisWaiting(true));
-    axios(`${process.env.REACT_APP_BACKEND_API_URL}/api/user`, { withCredentials: true })
+    axios(`${process.env.REACT_APP_BACKEND_API_URL}/api/user?token=${jsCookie.get("token")}`, { withCredentials: true })
       .then((response) => {
         dispatch(setisComplete(true));
         if (response.data) {

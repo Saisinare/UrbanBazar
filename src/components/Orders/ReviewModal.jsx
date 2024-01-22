@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookie from "js-cookie";
 import React, { useState } from "react";
 const arr = [1, 2, 3, 4, 5];
 
@@ -21,7 +22,7 @@ const ReviewModal = (props) => {
 
     let data = { productId: props.product._id, rating: rate, review: review};
     axios
-      .post(`${process.env.REACT_APP_BACKEND_API_URL}/review`, data, {
+      .post(`${process.env.REACT_APP_BACKEND_API_URL}/review?token=${jsCookie.get("token")}`, data, {
         withCredentials: true,
       })
       .then((response) => {

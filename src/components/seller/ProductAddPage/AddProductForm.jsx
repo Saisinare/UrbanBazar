@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookie from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -71,7 +72,7 @@ const AddProductForm = (props) => {
       product_quantity: props.quantity,
     };
     axios
-      .post(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/product`, formData, {
+      .post(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/product?token=${jsCookie.get("token")}`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })

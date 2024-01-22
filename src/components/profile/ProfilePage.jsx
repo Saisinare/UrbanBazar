@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 
 import axios from "axios";
 import PropertyCard from "./PropertyCard";
+import jsCookie from "js-cookie";
 
 const ProfilePage = () => {
   const [user, setuser] = useState("");
   const [profile, setprofile] = useState("");
 
   const updateData = {};
+
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/api/user`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/api/user?token=${jsCookie.get("token")}`, { withCredentials: true })
       .then((res) => {
         console.log(res);
         setuser(res.data.user);
@@ -29,7 +31,7 @@ const ProfilePage = () => {
     const formData = new FormData();
     formData.append("profile", file);
     const res = await axios.post(
-      `${process.env.REACT_APP_BACKEND_API_URL}/user/profile/photo`,
+      `${process.env.REACT_APP_BACKEND_API_URL}/user/profile/photo?token=${jsCookie.get("token")}`,
       formData,
       { withCredentials: true }
     );
@@ -40,7 +42,7 @@ const ProfilePage = () => {
 
   const handleInputChange = async (title, val) => {
     updateData[title] = val;
-    const res = await axios.put(`${process.env.REACT_APP_BACKEND_API_URL}/user`, updateData, {
+    const res = await axios.put(`${process.env.REACT_APP_BACKEND_API_URL}/user?token=${jsCookie.get("token")}`, updateData, {
       withCredentials: true,
     });
   };

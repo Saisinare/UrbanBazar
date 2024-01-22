@@ -1,11 +1,12 @@
 import axios from "axios";
+import jsCookie from "js-cookie";
 import React from "react";
 
 const Modal = (props) => {
   const hadleClick = async () => {
     try {
       const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_API_URL}/api/user`,
+        `${process.env.REACT_APP_BACKEND_API_URL}/api/user?token=${jsCookie.get("token")}`,
         {},
         { withCredentials: true }
       );

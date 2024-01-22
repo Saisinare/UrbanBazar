@@ -1,14 +1,14 @@
 import axios from "axios";
+import jsCookie from "js-cookie";
 import Cookies from "js-cookie";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const ProductCard = (props) => {
   const handleAddCart = () => {
-
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_API_URL}/cart/add/${props.id}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}/cart/add/${props.id}?token=${jsCookie.get("token")}`,
         {},
         { withCredentials: true }
       )
@@ -22,7 +22,7 @@ const ProductCard = (props) => {
   const hadleDelete = () => {
     axios
       .delete(
-        `${process.env.REACT_APP_BACKEND_API_URL}/seller/api/product/${props.id}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}/seller/api/product/${props.id}?token=${jsCookie.get("token")}`,
         {
           withCredentials: true,
         }
@@ -37,7 +37,7 @@ const ProductCard = (props) => {
 
   const handleBuy = () => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/buy/${props.id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/buy/${props.id}?token=${jsCookie.get("token")}`, {
         withCredentials: true,
       })
       .then((res) => {

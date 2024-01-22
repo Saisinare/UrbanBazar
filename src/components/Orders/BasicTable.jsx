@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import ReviewModal from "./ReviewModal";
 import { Dialog, Slide } from "@mui/material";
+import jsCookie from "js-cookie";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -10,7 +11,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const BasicTable = () => {
   const handleInvoice = (id) => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/orders/invoice/${id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/orders/invoice/${id}?token=${jsCookie.get("token")}`, {
         withCredentials: true,
         responseType: "arraybuffer", // Use 'arraybuffer' instead of 'Blob'
       })
@@ -34,7 +35,7 @@ const BasicTable = () => {
   const [reviewModalproduct, setreviewModalproduct] = useState();
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/orders`, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/orders?token=${jsCookie.get("token")}`, {
         withCredentials: true,
       })
       .then((res) => {

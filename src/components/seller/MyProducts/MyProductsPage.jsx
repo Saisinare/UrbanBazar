@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setProducts } from "../../../redux/slice/products";
 import Footer from "../../Footer";
+import jsCookie from "js-cookie";
 
 const MyProductsPage = () => {
   const productState = useSelector((state) => state.products);
   const dispatch = useDispatch();
   useEffect(() => {
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/products`, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/products?token=${jsCookie.get("token")}`, {
         withCredentials: true,
       })
       .then((response) => {

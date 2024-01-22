@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import jsCookie from "js-cookie";
 
 const ProductPage = () => {
   let stars = [1, 2, 3, 4, 5];
@@ -12,7 +13,7 @@ const ProductPage = () => {
   const handleAddCart = () => {
     axios
       .post(
-        `${process.env.REACT_APP_BACKEND_API_URL}/cart/add/${location.state.id}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}/cart/add/${location.state.id}?token=${jsCookie.get("token")}`,
         {},
         { withCredentials: true }
       )
@@ -29,8 +30,9 @@ const ProductPage = () => {
   const location = useLocation();
 
   const handleBuy = () => {
+
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/buy/${location.state.id}`, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/buy/${location.state.id}?token=${jsCookie.get("token")}`, {
         withCredentials: true,
       })
       .then((res) => {

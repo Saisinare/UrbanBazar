@@ -1,11 +1,12 @@
 import axios from "axios";
+import jsCookie from "js-cookie";
 import React, { useState } from "react";
 
 const Product = (props) => {
   const [qt, setqt] = useState(props.product.quantity);
   const handleDelete = () => {
     axios
-      .delete(`${process.env.REACT_APP_BACKEND_API_URL}/api/cart/${props.product.product._id}`, {
+      .delete(`${process.env.REACT_APP_BACKEND_API_URL}/api/cart/${props.product.product._id}?token=${jsCookie.get("token")}`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -25,7 +26,7 @@ const Product = (props) => {
     setqt(qt + val);
     axios
       .put(
-        `${process.env.REACT_APP_BACKEND_API_URL}/cart/item/changeQuantity`,
+        `${process.env.REACT_APP_BACKEND_API_URL}/cart/item/changeQuantity?token=${jsCookie.get("token")}`,
         { productId: props.product.product._id, qt: val },
         { withCredentials: true }
       )
@@ -41,7 +42,7 @@ const Product = (props) => {
       setqt(val);
       axios
         .put(
-          `${process.env.REACT_APP_BACKEND_API_URL}/cart/item/changeQuantity`,
+          `${process.env.REACT_APP_BACKEND_API_URL}/cart/item/changeQuantity?token=${jsCookie.get("token")}`,
           { productId: props.product.product._id, qt: val },
           { withCredentials: true }
         )

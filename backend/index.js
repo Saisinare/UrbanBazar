@@ -11,14 +11,15 @@ const dotenv = require("dotenv");
 const path = require("path");
 const moment = require("moment");
 const mongoose = require("mongoose");
+dotenv.config();
 const corsOptions = {
   origin: "https://urbanbazar.vercel.app",
   credentials: true,
 };
+app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.static(path.join(__dirname, "uploaded_img")));
-app.use(cookieParser());
-dotenv.config();
+
 db.connectDb();
 
 app.use(express.json());

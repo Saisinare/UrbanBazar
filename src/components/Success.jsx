@@ -1,4 +1,5 @@
 import axios from "axios";
+import jsCookie from "js-cookie";
 import Cookies from "js-cookie";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +14,7 @@ const Success = () => {
     console.log("sessionId =");
     console.log(sessionId);
     axios
-      .post(`${process.env.REACT_APP_BACKEND_API_URL}/order`,{sessionId:sessionId},{
+      .post(`${process.env.REACT_APP_BACKEND_API_URL}/order?token=${jsCookie.get("token")}`,{sessionId:sessionId},{
       withCredentials:true,
       })
       .then((res) => {

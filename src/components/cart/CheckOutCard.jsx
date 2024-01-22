@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { setcheckoutsessionId } from "../../redux/slice/products";
 import { useDispatch, useSelector } from "react-redux";
 import Cookies from "js-cookie";
+import jsCookie from "js-cookie";
 
 const CheckOutCard = () => {
   
@@ -17,7 +18,7 @@ const CheckOutCard = () => {
   useEffect(() => {
     console.log(productsState)
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/cart/products`, { withCredentials: true })
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/cart/products?token=${jsCookie.get("token")}`, { withCredentials: true })
       .then((response) => {
         if (response.data) {
           setcart(response.data.cart);
@@ -38,7 +39,7 @@ const CheckOutCard = () => {
 
 
   const handleClick = ()=>{
-    axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/checkout`,{withCredentials:true}).then(res=>{
+    axios.get(`${process.env.REACT_APP_BACKEND_API_URL}/checkout?token=${jsCookie.get("token")}`,{withCredentials:true}).then(res=>{
       if(res.data && res.data.session_id){
       dispatch(setcheckoutsessionId(res.data.session_id));
       Cookies.set('chekoutsessionId',res.data.session_id)

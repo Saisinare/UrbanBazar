@@ -1,6 +1,7 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { BarChart } from "@mui/x-charts";
 import axios from "axios";
+import jsCookie from "js-cookie";
 import React, { useEffect, useState } from "react";
 
 const Dashboard = () => {
@@ -16,9 +17,10 @@ const Dashboard = () => {
 
   const handleChange = (e) => {
     setyearValue(e.target.value);
+
     axios
       .get(
-        `${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics/revenue/` + e.target.value,
+        `${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics/revenue/` + e.target.value+`?token=${jsCookie.get("token")}`,
         { withCredentials: true }
       )
       .then((res) => {
@@ -44,7 +46,7 @@ const Dashboard = () => {
     setyears(yearsArray);
 
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics`, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics?token=${jsCookie.get("token")}`, {
         withCredentials: true,
       })
       .then((res) => {
@@ -60,7 +62,7 @@ const Dashboard = () => {
       });
 
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics/revenue/` + yearValue, {
+      .get(`${process.env.REACT_APP_BACKEND_API_URL}/seller/api/statistics/revenue/` + yearValue+`?token=${jsCookie.get("token")}`, {
         withCredentials: true,
       })
       .then((res) => {
