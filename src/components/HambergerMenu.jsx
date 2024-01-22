@@ -43,7 +43,7 @@ const HambergerMenu = (props) => {
               onChange={handleSwitch}
               checked={userstate.SellerMode}
             />
-            <div class="w-8 h-4 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all bg-slate-200 hover:bg-slate-300 transition-all ease-in duration-100 peer-checked:bg-green-600"></div>
+            <div class="w-8 h-4 rounded-full peer  peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[3px] after:left-[5px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all bg-slate-200 hover:bg-slate-300 transition-all ease-in duration-100 peer-checked:bg-green-600"></div>
           </label>
         </div>
       </div>
