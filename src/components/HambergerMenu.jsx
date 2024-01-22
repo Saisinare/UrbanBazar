@@ -28,7 +28,7 @@ const HambergerMenu = (props) => {
 
   return (
     <div
-      className={` bg-white px-8 h-screen w-screen fixed z-50   md:hidden transition-all duration-200 ease-linear ${
+      className={` top-20 bg-white px-8 h-screen w-screen fixed z-50   md:hidden transition-all duration-200 ease-linear ${
         props.menu ? " ml-0 opacity-100" : "-ml-96 opacity-0 "
       } `}
     >
