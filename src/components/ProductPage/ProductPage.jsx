@@ -262,7 +262,7 @@ const ProductPage = () => {
             <p>{`${product && product.price}`} ₹ </p>
           </div>
         </div>
-        <div className="flex w-full justify-between px-5">
+        <div className="flex w-full md:justify-end justify-between px-5">
           <Link to="/cart">
             <button
               className="btn bg-gray-200 border border-black p-2 px-6 flex items-center font-semibold font-sans text-sm rounded-md mx-2 "

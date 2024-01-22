@@ -77,9 +77,10 @@ const Dashboard = () => {
 
   return (
     <div className="w-full h-fit px-10  ">
-      <div className=" h-40 w-full py-5 flex  gap-5  ">
-        <div className="h-full w-1/4  border rounded-xl flex overflow-hidden">
-          <div className=" flex w-2/5 h-full rounded-xl justify-center items-center p-3">
+      <div className=" h-fit md:h-40 w-full py-5 flex  gap-5 flex-col md:flex-row ">
+
+        <div className=" h-26 md:h-full md:w-1/4  border rounded-xl flex overflow-hidden">
+        <div className=" flex w-2/5 md:h-full h-26 rounded-xl md:bg-none  justify-center items-center">
             <div className=" text-green-600 text-2xl h-16 w-16 border rounded-3xl bg-slate-200 flex items-center justify-center">
               <i className=" fa fa-money"></i>
             </div>
@@ -91,8 +92,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="h-full w-1/4  border rounded-xl flex overflow-hidden">
-          <div className=" flex w-2/5 h-full rounded-xl justify-center items-center">
+        <div className=" h-26 md:h-full md:w-1/4  border rounded-xl flex overflow-hidden">
+        <div className=" flex w-2/5 md:h-full h-26 rounded-xl md:bg-none  justify-center items-center">
             <div className=" text-green-600 text-2xl h-16 w-16 border rounded-3xl bg-slate-200 flex items-center justify-center">
               <i class="fa fa-cart-shopping"></i>
             </div>
@@ -107,8 +108,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="h-full w-1/4  border rounded-xl flex overflow-hidden">
-          <div className=" flex w-2/5 h-full rounded-xl justify-center items-center">
+        <div className=" h-26 md:h-full md:w-1/4  border rounded-xl flex overflow-hidden">
+        <div className=" flex w-2/5 md:h-full h-26 rounded-xl md:bg-none  justify-center items-center">
             <div className=" text-green-600 text-2xl h-16 w-16 border rounded-3xl bg-slate-200 flex items-center justify-center">
               <i className=" fa-regular fa-user"></i>
             </div>
@@ -122,8 +123,8 @@ const Dashboard = () => {
           </div>
         </div>
 
-        <div className="h-full w-1/4  border rounded-xl flex overflow-hidden">
-          <div className=" flex w-2/5 h-full rounded-xl justify-center items-center">
+        <div className=" h-26 md:h-full md:w-1/4  border rounded-xl flex overflow-hidden">
+        <div className=" flex w-2/5 md:h-full h-26 rounded-xl md:bg-none  justify-center items-center">
             <div className=" text-green-600 text-2xl h-16 w-16 border rounded-3xl bg-slate-200 flex items-center justify-center">
               <i class="fa-solid fa-box"></i>
             </div>
