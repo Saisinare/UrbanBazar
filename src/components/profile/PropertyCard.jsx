@@ -21,7 +21,7 @@ const PropertyCard = (props) => {
   }, [props.value]);
 
   return (
-    <div className=" h-24 rounded-md w-3/6  p-2">
+    <div className=" h-24 rounded-md w-full md:w-3/6  p-2">
       <div className="min-h-5/6 w-full shadow rounded-md p-3 flex text-sm font-semibold  justify-between ">
         <div>
           <div className=" text-green-600">{props.title}</div>

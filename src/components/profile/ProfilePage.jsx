@@ -49,9 +49,9 @@ const ProfilePage = () => {
   return (
     <div className="w-full h-fit top-20">
       <div className=" font-bold px-12 text-base">My Profile</div>
-      <div className="  p-12 pt-10 w-full flex ">
-        <div className="p-12 pt-0 w-full flex shadow bg-slate-50 rounded-xl ">
-          <div className=" w-1/3 h-96 flex items-center justify-center flex-col gap-2  ">
+      <div className="  md:p-12 pt-10 w-full flex ">
+        <div className="p-12 pt-0 w-full flex flex-col md:flex-row shadow bg-slate-50 rounded-xl ">
+          <div className=" w-full md:w-1/3 h-96 flex items-center justify-center flex-col gap-2  ">
             <div className=" flex">
               <div className=" h-40 w-40 rounded-full border flex items-center justify-center overflow-hidden shadow">
                 <img
@@ -81,12 +81,12 @@ const ProfilePage = () => {
               <div>{user.username}</div>
             </div>
           </div>
-          <div className=" w-2/3 p-12">
+          <div className=" w-full md:w-2/3 md:p-12">
             <div className="w-full h-fit">
               <div className=" h-8 rounded-md w-fit text-sm  flex items-center justify-center px-2 gap-2 font-bold">
                 <i class="fa-solid fa-address-card"></i> Personal Details
               </div>
-              <div className="flex-row flex flex-wrap">
+              <div className="flex flex-col md:flex-row  flex-wrap">
                 <PropertyCard
                   title={"Username"}
                   field={"username"}
