@@ -28,7 +28,12 @@ const NavBar = () => {
   useEffect(() => {
     setProducts([]);
     dispatch(setisWaiting(true));
-    axios(`${process.env.REACT_APP_BACKEND_API_URL}/api/user?token=${jsCookie.get("token")}`, { withCredentials: true })
+    axios(
+      `${process.env.REACT_APP_BACKEND_API_URL}/api/user?token=${jsCookie.get(
+        "token"
+      )}`,
+      { withCredentials: true }
+    )
       .then((response) => {
         dispatch(setisComplete(true));
         if (response.data) {
@@ -58,7 +63,9 @@ const NavBar = () => {
     setResultDiv(true);
     setinput(e.target.value);
     axios
-      .get(`${process.env.REACT_APP_BACKEND_API_URL}/search?keyword=${e.target.value}`)
+      .get(
+        `${process.env.REACT_APP_BACKEND_API_URL}/search?keyword=${e.target.value}`
+      )
       .then((products) => {
         setSearchResult(products.data.products);
       })
@@ -84,46 +91,51 @@ const NavBar = () => {
                 UrbanBazar
               </span>
             </Link>
-            <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`}>
-              <div
-                className={`item px-3 ${
-                  !userstate.SellerMode
-                    ? location.pathname === "/shop" && "text-green-700"
-                    : location.pathname === "/seller/dashboard" &&
-                      "text-green-700"
-                }  hover:text-green-700 transition-all duration-300 ease-linear font-semibold`}
+            <div className=" hidden md:flex ">
+              <Link
+                to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`}
               >
-                {userstate.SellerMode ? "Dashboard" : "Shop"}
-              </div>
-            </Link>
-            <Link
-              to={`${userstate.SellerMode ? "seller/products" : "/orders"}`}
-            >
-              <div
-                className={`item font-semibold px-3 ${
-                  !userstate.SellerMode
-                    ? location.pathname === "/orders" && "text-green-700"
-                    : location.pathname === "/seller/products" &&
-                      "text-green-700"
-                } hover:text-green-700 transition-all duration-300 ease-linear`}
+                <div
+                  className={`item px-3 ${
+                    !userstate.SellerMode
+                      ? location.pathname === "/shop" && "text-green-700"
+                      : location.pathname === "/seller/dashboard" &&
+                        "text-green-700"
+                  }  hover:text-green-700 transition-all duration-300 ease-linear font-semibold`}
+                >
+                  {userstate.SellerMode ? "Dashboard" : "Shop"}
+                </div>
+              </Link>
+              <Link
+                to={`${userstate.SellerMode ? "seller/products" : "/orders"}`}
               >
-                {userstate.SellerMode ? "My Products" : "My Orders"}
-              </div>
-            </Link>
-            {userstate.SellerMode && (
-              <Link to={"seller/addproduct"}>
                 <div
                   className={`item font-semibold px-3 ${
                     !userstate.SellerMode
-                      ? location.pathname === "/support" && "text-green-700"
-                      : location.pathname === "/seller/addproduct" &&
+                      ? location.pathname === "/orders" && "text-green-700"
+                      : location.pathname === "/seller/products" &&
                         "text-green-700"
                   } hover:text-green-700 transition-all duration-300 ease-linear`}
                 >
-                  {"Add Product"}
+                  {userstate.SellerMode ? "My Products" : "My Orders"}
                 </div>
               </Link>
-            )}
+
+              {userstate.SellerMode && (
+                <Link to={"seller/addproduct"}>
+                  <div
+                    className={`item font-semibold px-3 ${
+                      !userstate.SellerMode
+                        ? location.pathname === "/support" && "text-green-700"
+                        : location.pathname === "/seller/addproduct" &&
+                          "text-green-700"
+                    } hover:text-green-700 transition-all duration-300 ease-linear`}
+                  >
+                    {"Add Product"}
+                  </div>
+                </Link>
+              )}
+            </div>
           </div>
           {!userstate.SellerMode && (
             <div className="relative hidden md:flex w-4/12 items-center search">
@@ -171,36 +183,12 @@ const NavBar = () => {
             </button>
           )}
           <div className="flex md:order-2">
-            <button
-              type="button"
-              data-collapse-toggle="navbar-search"
-              aria-controls="navbar-search"
-              aria-expanded="false"
-              className="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1"
-            >
-              <svg
-                className="w-5 h-5"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-              <span className="sr-only">Search </span>
-            </button>
             {userstate.isLogin === true ? (
               <>
                 {!userstate.SellerMode && (
                   <Link
                     to={"/cart"}
-                    className="flex  justify-center items-center font-semibold pr-4  transition-all duration-200 ease-in mx-2 border  border-green-500 text-md rounded-xl hover:border-black hover:text-green-500"
+                    className="flex  justify-center items-center font-semibold pr-4  transition-all duration-200 ease-in mx-2 border  border-green-500 text-md rounded-xl hover:border-black hover:text-green-500 " 
                   >
                     <img
                       className=" mr-1 h-8  cursor-pointer rounded-lg scale-75 bg-green-500 p-1.5"
@@ -212,7 +200,7 @@ const NavBar = () => {
                 )}
                 <div
                   onClick={toggleProfileCard}
-                  className="flex justify-center rounded-full overflow-hidden hover:bg-green-200 items-center text-sm font-semibold transition-all duration-300 ease-in p-1"
+                  className="hidden md:flex justify-center rounded-full overflow-hidden hover:bg-green-200 items-center text-sm font-semibold transition-all duration-300 ease-in p-1  "
                 >
                   <img
                     className="  h-6 cursor-pointer  rounded-full"
