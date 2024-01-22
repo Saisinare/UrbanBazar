@@ -18,7 +18,7 @@ const ProductsCard = () => {
       });
   }, []);
   return (
-    <div className="flex w-7/12 h-auto flex-col p-5 pl-16">
+    <div className="flex w-full md:w-7/12 h-auto flex-col px-3 md:p-5 md:pl-16 ">
       {cart && cart.map((product) => {
         return <Product product={product} cart = {cart} setcart ={setcart} />;
       })}

@@ -54,7 +54,7 @@ const CheckOutCard = () => {
   }
 
   return (
-    <div className=" sticky top-20 flex h-fit w-5/12 item-center justify-center pt-5">
+    <div className=" sticky top-20 flex h-fit md:w-5/12 w-full item-center justify-center pt-5">
       <div class="flex flex-col h-auto w-11/12 p-5  bg-white border  rounded-lg shadow">
         <form>
           <div class="relative">

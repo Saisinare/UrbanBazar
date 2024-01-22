@@ -52,7 +52,7 @@ const Product = (props) => {
       }
   };
   return (
-    <div className="h-24 flex flex-col mb-3 justify-center w-4/5 rounded-lg overflow-hidden bg-gradient-to-tl from-slate-100 to-gray-100  border border-green-300">
+    <div className="h-24 flex flex-col mb-3 justify-center w-full md:w-4/5 rounded-lg overflow-hidden bg-gradient-to-tl from-slate-100 to-gray-100  border border-green-300">
       <div className="h-full  flex  backdrop-blur-lg">
         <div className="w-1/5 flex h-full  justify-center items-center">
           <img
