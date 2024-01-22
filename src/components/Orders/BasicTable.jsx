@@ -78,12 +78,12 @@ const BasicTable = () => {
     <div className=" flex flex-col gap-1 h-fit">
       {orders.map((item, index) => {
         return (
-          <div className=" w-11/12 h-60 border-l-4 px-9 rounded-md bg-slate-50 flex flex-col overflow-hidden   transition-all ease-linear duration-100 ">
+          <div className=" w-full ms:w-11/12 h-fit md:h-60 border-l-4 px-9 rounded-md bg-slate-50 flex flex-col overflow-hidden   transition-all ease-linear duration-100 ">
             <div className=" h-1/6 flex w-full  items-center font-sans">
               <div className=" rounded-full bg-green-600 h-2 w-2 mr-2"></div>
               {item.Status}
             </div>
-            <div className="flex h-5/6">
+            <div className="flex h-5/6 flex-col md:flex-row">
               <div className=" h-full w-3/6 flex flex-wrap">
                 <input type="text" value={item._id} hidden />
                 <div className=" h-4/5 w-5/6 bg-slate-50 shadow-sm flex items-center justify-start px-3 rounded-lg">
@@ -97,12 +97,12 @@ const BasicTable = () => {
                       );
                     }
                   })}
-                  <div className="h-full py-10 px-5 font-semibold hidden md:flex ">
+                  <div className="h-full py-10 px-5 font-semibold flex ">
                     {item.items.length == 1 && item.items[0].product.title}
                   </div>
                 </div>
               </div>
-              <div className=" w-2/5 h-full text-sm md:text-xl font-semibold flex flex-col justify-between pb-10 items-start">
+              <div className=" w-full md:w-2/5 h-full text-sm md:text-xl font-semibold flex flex-col justify-between pb-10 items-start">
                 Will be Arrive at {shippingDates[index]}
                 <div className="flex gap-2">
                   <React.Fragment>
@@ -129,7 +129,7 @@ const BasicTable = () => {
                           {currentOrder.items &&
                             currentOrder.items.map((item) => {
                               return (
-                                <div className=" w-full md:w-1/3 h-36 border-b border-t flex">
+                                <div className=" w-full  md:w-1/3 h-36 border-b border-t flex">
                                   <img
                                     src={`${process.env.REACT_APP_BACKEND_API_URL}/products/${item.product.image}`}
                                     alt=""
@@ -152,7 +152,6 @@ const BasicTable = () => {
                       </div>
                       <div className=" h-fit p-5 px-8 ">
                         <h1 className=" font-bold text-xl">Order Status</h1>
-
 
                         <div className=" w-full h-fit md:h-44  mt-5 flex flex-col-reverse md:flex-row pr-10">
                           <div className=" w-full h-full hidden md:flex items-center justify-center flex-col ">
@@ -186,7 +185,6 @@ const BasicTable = () => {
                           </div>
                         </div>
 
-
                         <div className=" w-full flex justify-end p-10">
                           <div
                             className=" font-semibold text-sm cursor-pointer hover:text-green-600"
@@ -201,19 +199,8 @@ const BasicTable = () => {
                       </div>
                     </Dialog>
                   </React.Fragment>
-
-                  {item.items.length == 1 && item.Status == "delivered" && (
-                    <button
-                      className=" text-sm border-green-300 hover:bg-green-300 border-2 rounded-md px-3  py-2"
-                      onClick={() => {
-                        showReview(item.items[0].product);
-                      }}
-                    >
-                      Submit Review
-                    </button>
-                  )}
                 </div>
-                <div className=" text-sm  md:flex ">
+                <div className=" text-sm w-full flex justify-between md:justify-start mt-4 ">
                   <button
                     className=" text-sm border-none  w-fit  hover:text-green-600 transition-all duration-75 ease-linear rounded-md md:px-3  md:py-2"
                     onClick={() => {
@@ -222,17 +209,28 @@ const BasicTable = () => {
                   >
                     View Detail
                   </button>
-                  <div className=" text-base">
+
+                  <button
+                    className=" text-sm hover:text-green-500   rounded-md md:px-2  md:py-1"
+                    onClick={() => {
+                      handleInvoice(item._id);
+                    }}
+                  >
+                    Generate invoice
+                  </button>
+                </div>
+                {item.items.length == 1 && item.Status == "delivered" && (
+                  <div className=" w-full flex justify-end">
                     <button
-                      className=" text-sm hover:text-green-500   rounded-md md:px-2  md:py-1"
+                      className=" text-sm rounded-md px-3 py-2 hover:text-green-600"
                       onClick={() => {
-                        handleInvoice(item._id);
+                        showReview(item.items[0].product);
                       }}
                     >
-                      Generate invoice
+                      Submit Review
                     </button>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>
