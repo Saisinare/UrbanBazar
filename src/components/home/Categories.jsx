@@ -15,7 +15,7 @@ const Categories = () => {
         <div className="font-semibold font-sans text-3xl py-5 pl-3 text-green-900">
           Categories
           </div>
-          <div className="flex">
+          <div className="flex w-100 sm:h-fit sm:flex-wrap  overflow-x-scroll">
           {items.map((item) => {
             return <Category title={item.title} imgurl={item.imgurl} />;
           })}

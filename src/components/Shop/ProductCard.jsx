@@ -62,7 +62,7 @@ const ProductCard = (props) => {
   return (
     <>
       <div
-        className={`h-fit p-1 w-1/5 flex  transition-all ease-in-out duration-500 overflow-hidden `}
+        className={`h-fit p-1 md:w-1/5 sm:w-full flex  transition-all ease-in-out duration-500 overflow-hidden `}
       >
         <div
           className="rounded-xl bg-cover bg-no-repeat "

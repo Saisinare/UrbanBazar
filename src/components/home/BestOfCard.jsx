@@ -30,12 +30,12 @@ const BestOfCard = (props) => {
 
   return (
     <>
-      <div class={`w-full p-2  h-16 flex justify-start items-center pl-4 `}>
+      <div class={`w-full p-2  h-16 flex justify-start  items-center pl-4 `}>
         <h1 className="font-semibolsd font-sans text-2xl text-black ">
           Best Of {props.title}
         </h1>
       </div>
-      <div class="w-full p-2 mb-2 h-auto flex justify-center ">
+      <div class="w-full p-2 mb-2 h-auto md:flex justify-center ">
         {products.map((product) => {
           return (
             <ProductCard
