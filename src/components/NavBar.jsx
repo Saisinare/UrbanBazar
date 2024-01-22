@@ -87,7 +87,7 @@ const NavBar = () => {
       <nav className="sticky z-20 top-1  border-gray-200 px-5 py-1  backdrop-blur-2xl rounded-lg bg-white/70 m-2 ml-3">
         <div className="flex flex-wrap items-center justify-between ">
           <div className="flex items-center ">
-            <Link to="/" className="flex items-center" onClick={ ()=>{setmenu(!menu)}}>
+            <Link to="/" className="flex items-center" onClick={ ()=>{setmenu(false)}}>
               <span className="text-2xl font-semibold  text-black p-3  border-gray-500 my-2">
                 UrbanBazar
               </span>
