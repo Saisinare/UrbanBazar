@@ -48,7 +48,7 @@ const HambergerMenu = (props) => {
         </div>
       </div>
 
-      <Link to={"/cart"}>
+      <Link to={"/cart"}  onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
           <i class="fa-solid fa-cart-shopping"></i>
@@ -57,7 +57,7 @@ const HambergerMenu = (props) => {
         </div>
       </Link>
 
-      <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`}>
+      <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`} onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
             <i className=" fa  fa-shopping-bag"></i>
@@ -66,7 +66,7 @@ const HambergerMenu = (props) => {
         </div>
       </Link>
 
-      <Link to={`${userstate.SellerMode ? "seller/products" : "/orders"}`}>
+      <Link to={`${userstate.SellerMode ? "seller/products" : "/orders"}`} onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
             <i class="fa-solid fa-box"></i>
@@ -77,7 +77,7 @@ const HambergerMenu = (props) => {
 
       {userstate.SellerMode && (
         <Link to={`/seller/addproduct`}>
-          <div className=" w-full h-20 border-b flex justify-start items-center">
+          <div className=" w-full h-20 border-b flex justify-start items-center" onClick={ ()=>{props.setmenu(!props.menu)}}>
             <div className=" w-1/12">
               <i class="fa-solid fa-plus"></i>
             </div>
@@ -85,7 +85,7 @@ const HambergerMenu = (props) => {
           </div>
         </Link>
       )}
-      <Link to={"/profile"}>
+      <Link to={"/profile"} onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
             <i class="fa-solid fa-user"></i>
@@ -94,7 +94,7 @@ const HambergerMenu = (props) => {
         </div>
       </Link>
 
-      <div className=" w-full h-20 border-b flex justify-start items-center">
+      <div className=" w-full h-20 border-b flex justify-start items-center" onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-1/12" onClick={handleLogout}>
           <i class="fa-solid fa-right-from-bracket"></i>
         </div>
