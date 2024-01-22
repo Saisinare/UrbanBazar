@@ -12,10 +12,10 @@ const Categories = () => {
   return (
     <>
       <div class=" w-100 h-auto p-2 flex flex-col justify-center">
-        <div className="font-semibold font-sans text-3xl py-5 pl-3 text-green-900">
+        <div className="font-semibold font-sans text-lg md:text-3xl py-5 pl-3 text-green-900">
           Categories
           </div>
-          <div className="sm:h-fit overflow-x-scroll flex md:w-100 md:flex-nowrap md:overflow-hidden ">
+          <div className="sm:h-fit overflow-x-scroll flex-wrap flex md:w-100 md:flex-nowrap md:overflow-hidden ">
           {items.map((item) => {
             return <Category title={item.title} imgurl={item.imgurl} />;
           })}
