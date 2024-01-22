@@ -48,6 +48,15 @@ const HambergerMenu = (props) => {
         </div>
       </div>
 
+      <Link to={"/cart"}>
+        <div className=" w-full h-20 border-b flex justify-start items-center">
+          <div className=" w-1/12">
+          <i class="fa-solid fa-cart-shopping"></i>
+          </div>
+          <div>My Cart</div>
+        </div>
+      </Link>
+
       <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">

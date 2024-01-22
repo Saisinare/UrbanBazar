@@ -189,7 +189,7 @@ const NavBar = () => {
                 {!userstate.SellerMode && (
                   <Link
                     to={"/cart"}
-                    className="flex  justify-center items-center font-semibold pr-4  transition-all duration-200 ease-in mx-2 border  border-green-500 text-md rounded-xl hover:border-black hover:text-green-500 " 
+                    className="hidden md:flex   justify-center items-center font-semibold pr-4  transition-all duration-200 ease-in mx-2 border  border-green-500 text-md rounded-xl hover:border-black hover:text-green-500 " 
                   >
                     <img
                       className=" mr-1 h-8  cursor-pointer rounded-lg scale-75 bg-green-500 p-1.5"
