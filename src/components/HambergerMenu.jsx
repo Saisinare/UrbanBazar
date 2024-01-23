@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { setLogin, setSellerMode } from "../redux/slice/user";
 import { setlogin } from "../redux/slice/login";
 import Cookies from "js-cookie";
+import axios from "axios";
 
 const HambergerMenu = (props) => {
   const userstate = useSelector((state) => state.user);
@@ -18,7 +19,25 @@ const HambergerMenu = (props) => {
       navigate("/");
     }
   };
+  const [searchResultState, setsearchResultState] = useState(false);
+  const [searchResult, setsearchResult] = useState([]);
+  const [input, setinput] = useState("");
+  const handleSearch = (e) => {
+    setsearchResultState(true);
+    setinput(e.target.value);
 
+    axios
+      .get(
+        `${process.env.REACT_APP_BACKEND_API_URL}/search?keyword=${e.target.value}`
+      )
+      .then((products) => {
+        setsearchResult(products.data.products);
+        console.log(products.data.products);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const handleLogout = () => {
     Cookies.remove("login");
     Cookies.remove("token");
@@ -32,6 +51,39 @@ const HambergerMenu = (props) => {
         props.menu ? " ml-0 opacity-100" : "-ml-96 opacity-0 "
       } `}
     >
+      <div className=" w-full h-20 border-b flex justify-between items-center ">
+        <div className=" w-full">
+          <input
+            type="text"
+            className=" w-full h-1/2 rounded-lg border-none shadow bg-slate-50"
+            placeholder="What are you looking for?"
+            onChange={handleSearch}
+            value={input}
+          />
+          <i className=" fa-solid fa-search relative -ml-8"></i>
+          <i
+            className=" fa-solid fa-close relative -ml-10"
+            onClick={() => {
+              setinput("");
+              setsearchResult([]);
+              setsearchResultState(false);
+            }}
+          ></i>
+        </div>
+      </div>
+      <div
+        className={` w-full h-full bg-white fixed z-50 ${
+          searchResultState ? "flex" : "hidden"
+        } flex-col `}
+      >
+        {searchResult.map((result) => {
+          return (
+            <div className=" w-full h-10 flex items-center border-b">
+              {result.title}
+            </div>
+          );
+        })}
+      </div>
       <div className=" w-full h-20 border-b flex justify-between items-center ">
         <div className=" w-fit">Seller Mode</div>
         <div>
@@ -48,34 +100,70 @@ const HambergerMenu = (props) => {
         </div>
       </div>
 
-      <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/cart"}`}  onClick={ ()=>{props.setmenu(!props.menu)}}>
+      <Link
+        to={`${userstate.SellerMode ? "seller/dashboard" : "/cart"}`}
+        onClick={() => {
+          props.setmenu(!props.menu);
+        }}
+      >
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
-          <i class={`${userstate.SellerMode ? "fa-solid fa-gauge" : "fa-solid fa-cart-shopping"}`}></i>
+            <i
+              class={`${
+                userstate.SellerMode
+                  ? "fa-solid fa-gauge"
+                  : "fa-solid fa-cart-shopping"
+              }`}
+            ></i>
           </div>
           <div>{`${userstate.SellerMode ? "Dashboard" : "My Cart"}`}</div>
         </div>
       </Link>
 
-      <Link to={`${userstate.SellerMode ? "seller/products" : "/shop"}`} onClick={ ()=>{props.setmenu(!props.menu)}}>
+      <Link
+        to={`${userstate.SellerMode ? "seller/products" : "/shop"}`}
+        onClick={() => {
+          props.setmenu(!props.menu);
+        }}
+      >
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
-            <i className={`${userstate.SellerMode ? "fa-brands fa-product-hunt" : "fa-solid fa-shopping-bag"}`}></i>
+            <i
+              className={`${
+                userstate.SellerMode
+                  ? "fa-brands fa-product-hunt"
+                  : "fa-solid fa-shopping-bag"
+              }`}
+            ></i>
           </div>
           <div>{`${userstate.SellerMode ? "My Products" : "Shop"}`}</div>
         </div>
       </Link>
 
-      <Link to={`${userstate.SellerMode ? "/seller/addproduct" : "/orders"}`} onClick={ ()=>{props.setmenu(!props.menu)}}>
+      <Link
+        to={`${userstate.SellerMode ? "/seller/addproduct" : "/orders"}`}
+        onClick={() => {
+          props.setmenu(!props.menu);
+        }}
+      >
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
-            <i class={`${userstate.SellerMode ? "fa-solid fa-plus" : "fa-solid fa-box"}`}></i>
+            <i
+              class={`${
+                userstate.SellerMode ? "fa-solid fa-plus" : "fa-solid fa-box"
+              }`}
+            ></i>
           </div>
           <div>{`${userstate.SellerMode ? "Add Product" : "My Orders"}`}</div>
         </div>
       </Link>
 
-      <Link to={"/profile"} onClick={ ()=>{props.setmenu(!props.menu)}}>
+      <Link
+        to={"/profile"}
+        onClick={() => {
+          props.setmenu(!props.menu);
+        }}
+      >
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
             <i class="fa-solid fa-user"></i>
@@ -84,7 +172,12 @@ const HambergerMenu = (props) => {
         </div>
       </Link>
 
-      <div className=" w-full h-20 border-b flex justify-start items-center" onClick={ ()=>{props.setmenu(!props.menu)}}>
+      <div
+        className=" w-full h-20 border-b flex justify-start items-center"
+        onClick={() => {
+          props.setmenu(!props.menu);
+        }}
+      >
         <div className=" w-1/12" onClick={handleLogout}>
           <i class="fa-solid fa-right-from-bracket"></i>
         </div>
