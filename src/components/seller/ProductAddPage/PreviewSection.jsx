@@ -20,12 +20,12 @@ const PreviewSection = (props) => {
             {props.price} &#8377;
           </div>
           <div className="w-full justify-center flex items-center ">
-            <button className="btn btn-sm h-9 mb-1 w-11/12 rounded-xl bg-green-900 text-gray-100 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm ">
+            <button className="btn btn-sm h-9 mb-1 w-full md:w-11/12 rounded-xl bg-green-500 text-gray-500 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm">
               Buy Now
             </button>
           </div>
           <div className="w-full justify-center flex items-center ">
-            <button className="btn btn-sm py-1 w-11/12 rounded-xl border-2 border-black text-black bg-transparent hover:text-white hover:bg-gray-900 transition-all duration-500 ease-in-out font-semibold text-sm">
+            <button className="btn btn-sm py-1 w-11/12 rounded-xl border border-black text-black bg-transparent hover:text-white hover:bg-gray-900 transition-all duration-500 ease-in-out font-semibold text-sm">
               Add To Cart
             </button>
           </div>
