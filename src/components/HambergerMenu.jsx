@@ -48,43 +48,33 @@ const HambergerMenu = (props) => {
         </div>
       </div>
 
-      <Link to={"/cart"}  onClick={ ()=>{props.setmenu(!props.menu)}}>
+      <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/cart"}`}  onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
-          <i class="fa-solid fa-cart-shopping"></i>
+          <i class={`${userstate.SellerMode ? "fa-solid fa-gauge" : "fa-solid fa-cart-shopping"}`}></i>
           </div>
-          <div>My Cart</div>
+          <div>{`${userstate.SellerMode ? "Dashboard" : "My Cart"}`}</div>
         </div>
       </Link>
 
-      <Link to={`${userstate.SellerMode ? "seller/dashboard" : "/shop"}`} onClick={ ()=>{props.setmenu(!props.menu)}}>
+      <Link to={`${userstate.SellerMode ? "seller/products" : "/shop"}`} onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
-            <i className=" fa  fa-shopping-bag"></i>
+            <i className={`${userstate.SellerMode ? "fa-brands fa-product-hunt" : "fa-solid fa-shopping-bag"}`}></i>
           </div>
-          <div>Shop</div>
+          <div>{`${userstate.SellerMode ? "My Products" : "Shop"}`}</div>
         </div>
       </Link>
 
-      <Link to={`${userstate.SellerMode ? "seller/products" : "/orders"}`} onClick={ ()=>{props.setmenu(!props.menu)}}>
+      <Link to={`${userstate.SellerMode ? "/seller/addproduct" : "/orders"}`} onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
-            <i class="fa-solid fa-box"></i>
+            <i class={`${userstate.SellerMode ? "fa-solid fa-plus" : "fa-solid fa-box"}`}></i>
           </div>
-          <div>My Orders</div>
+          <div>{`${userstate.SellerMode ? "Add Product" : "My Orders"}`}</div>
         </div>
       </Link>
 
-      {userstate.SellerMode && (
-        <Link to={`/seller/addproduct`}>
-          <div className=" w-full h-20 border-b flex justify-start items-center" onClick={ ()=>{props.setmenu(!props.menu)}}>
-            <div className=" w-1/12">
-              <i class="fa-solid fa-plus"></i>
-            </div>
-            <div>Add Product</div>
-          </div>
-        </Link>
-      )}
       <Link to={"/profile"} onClick={ ()=>{props.setmenu(!props.menu)}}>
         <div className=" w-full h-20 border-b flex justify-start items-center">
           <div className=" w-1/12">
