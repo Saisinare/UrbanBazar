@@ -78,9 +78,18 @@ const HambergerMenu = (props) => {
       >
         {searchResult.map((result) => {
           return (
-            <div className=" w-full h-10 flex items-center border-b">
-              {result.title}
-            </div>
+            <Link
+              to={`product/${result._id}`}
+              state={{ id: result._id }}
+              onClick={() => {
+                props.setmenu(false);
+                setsearchResultState(false);
+              }}
+            >
+              <div className=" w-full h-10 flex items-center border-b">
+                {result.title}
+              </div>
+            </Link>
           );
         })}
       </div>
