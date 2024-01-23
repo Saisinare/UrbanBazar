@@ -15,7 +15,7 @@ const Addproduct = (props) => {
   const [preimage, setpreimage] = useState(intitalvale)
   return (
     <>
-      <div className="h-fit p-6 px-20 pt-6 bg-gradient-to-r from-slate-100 to-gray-100 flex">
+      <div className="h-fit px-0  md:p-6 md:px-20 pt-6 bg-gradient-to-r from-slate-100 to-gray-100 flex flex-col-reverse md:flex-row ">
         <AddProductForm
           setfile={setfile}
           settitle={settitle}

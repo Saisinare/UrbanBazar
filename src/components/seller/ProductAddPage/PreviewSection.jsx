@@ -6,7 +6,7 @@ const PreviewSection = (props) => {
     console.log(props.preimage)
   },[])
   return (
-    <div className="w-1/3 h-fit  flex items-center py-3 pb-10 rounded-lg justify-center flex-col bg-gray-200 top-24 bottom-30 sticky transition-all duration-300 ease-in-out">
+    <div className=" w-full md:w-1/3 h-fit  flex items-center py-3 pb-10 rounded-lg justify-center flex-col bg-gray-200 md:top-24 bottom-30 md:sticky transition-all duration-300 ease-in-out">
       <h1 className="text-xl font-semibold pb-5">Card Preview </h1>
       <div className=" h- p-1  w-3/4 flex hover:p-0 transition-all ease-in-out duration-500 overflow-hidden ">
         <div className=" h-full w-full bg-white rounded-xl overflow-hidden  pb-3 ">

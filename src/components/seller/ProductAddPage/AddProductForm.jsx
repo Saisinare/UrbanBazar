@@ -111,15 +111,15 @@ const AddProductForm = (props) => {
     }
   }, []);
   return (
-    <div className=" w-2/3 ">
+    <div className=" w-full pl-10 md:px-0 md:w-2/3 ">
       <div className=" h-16 w-64  border-gray-300 flex items-end pb-2">
         <h1 className="font-bold text-2xl">Add Product</h1>
       </div>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
-        <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
+        <div className="form-field pt-2 w-5/6 border-b py-5 flex flex-col md:flex-row justify-between">
           <label className="font-semibold text-black" htmlFor="title">
             Product Name
-            <p className="pt-2  text-sm text-gray-400">
+            <p className="md:pt-2  text-sm text-gray-400">
               Identification For Product
             </p>
           </label>
@@ -129,7 +129,7 @@ const AddProductForm = (props) => {
             onChange={handleChange}
             type="text"
             name="title"
-            className="border-none h-10 shadow rounded-lg w-3/6 text-sm font-semibold text-gray-500 outline-none bg-white/80 backdrop-blur-2xl"
+            className="border-none h-10 shadow rounded-lg w-full md:w-3/6 text-sm font-semibold text-gray-500 outline-none bg-white/80 backdrop-blur-2xl"
           />
         </div>
         <div className="form-field pt-2 w-5/6 border-b py-5">
@@ -162,22 +162,22 @@ const AddProductForm = (props) => {
             className="border-none rounded-lg outline-none shadow  backdrop-blur-2xl text-sm p-2 w-60 h-fit bg-white "
           />
         </div>
-        <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
+        <div className="form-field pt-2 w-5/6 border-b py-5 flex flex-col md:flex-row justify-between">
           <label className="font-semibold text-black" htmlFor="price">
             Price
-            <p className="pt-2  text-sm text-gray-400">For Purchasing</p>
+            <p className="md:pt-2  text-sm text-gray-400">For Purchasing</p>
           </label>
           <div>
             <input
               onChange={handleChange}
               type="text"
               name="price"
-              className="border-none shadow rounded-lg outline-none font-semibold  backdrop-blur-2xl text-sm px-1 py-1 h-10 text-gray-500"
+              className="border-none shadow w-4/5 md:w-auto rounded-lg outline-none font-semibold  backdrop-blur-2xl text-sm px-1 py-1 h-10 text-gray-500"
             />
             <span className="pl-3 font-semibold">INR</span>
           </div>
         </div>
-        <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-start">
+        <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-start flex-col md:flex-row">
           <div className="form-field pt-2 w-1/3 py-5">
             <label className="font-semibold text-black" htmlFor="category">
               Category
@@ -220,7 +220,7 @@ const AddProductForm = (props) => {
             </select>
           </div>
         </div>
-        <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between">
+        <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between  flex-col md:flex-row">
           <label className="font-semibold text-black" htmlFor="brand">
             Brand
             <p className="pt-2  text-sm text-gray-400">For Ranking</p>
@@ -230,10 +230,10 @@ const AddProductForm = (props) => {
             onChange={handleChange}
             type="text"
             name="brand"
-            className="border-none shadow rounded-lg outline-none  w-2/5 backdrop-blur-2xl text-sm p-2 font-semibold text-gray-500 h-10"
+            className="border-none shadow rounded-lg outline-none w-full md:w-2/5 backdrop-blur-2xl text-sm p-2 font-semibold text-gray-500 h-10 "
           />
         </div>
-        <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between ">
+        <div className="form-field pt-2 w-5/6 border-b py-5 flex justify-between  flex-col md:flex-row ">
           <label
             className="font-semibold text-black"
             htmlFor="product_quantity"
@@ -248,13 +248,13 @@ const AddProductForm = (props) => {
             onChange={handleChange}
             type="number"
             name="product_quantity"
-            className="border-none shadow h-10  outline-none w-2/5 rounded-lg  backdrop-blur-2xl text-sm p-2 font-semibold text-gray-500"
+            className="border-none shadow h-10  outline-none w-full md:w-2/5 rounded-lg  backdrop-blur-2xl text-sm p-2 font-semibold text-gray-500"
           />
         </div>
-        <div className="form-field pt-2 w-5/6  py-5 flex justify-end ">
+        <div className="form-field pt-2 w-5/6  py-5 flex md:justify-end ">
           <button
             type="submit"
-            className="btn border bg-gradient-to-t from-black to-slate-900 text-gray-100 text-sm rounded-xl font-semibold p-3 px-5"
+            className="btn btn-sm h-9 mb-1 w-full md:w-1/5 rounded-xl bg-green-500 text-gray-500 hover:bg-gray-900 transition-all duration-300 ease-in-out font-semibold text-sm"
           >
             Add New Product
           </button>
